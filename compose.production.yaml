@@ -1,4 +1,4 @@
-name: haris-payroll-development
+name: haris-payroll-production
 
 services:
   postgres:
@@ -7,10 +7,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-haris_payroll}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-    ports:
-      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_production_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 3s
@@ -18,23 +16,20 @@ services:
       retries: 20
     restart: unless-stopped
     networks:
-      - app_network
+      - production_network
 
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     environment:
-      NODE_ENV: development
+      NODE_ENV: production
       ELYSIA_HOST: 0.0.0.0
       ELYSIA_PORT: 3000
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-haris_payroll}
     depends_on:
       postgres:
         condition: service_healthy
-    volumes:
-      - ./backend:/app
-      - backend_node_modules:/app/node_modules
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/ >/dev/null || exit 1"]
       interval: 5s
@@ -43,22 +38,19 @@ services:
       start_period: 10s
     restart: unless-stopped
     networks:
-      - app_network
+      - production_network
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     environment:
-      NODE_ENV: development
+      NODE_ENV: production
       HOSTNAME: 0.0.0.0
       PORT: 3000
-      WATCHPACK_POLLING: "true"
-      CHOKIDAR_USEPOLLING: "true"
-    volumes:
-      - ./frontend:/app
-      - frontend_node_modules:/app/node_modules
-      - frontend_next_cache:/app/.next
+    depends_on:
+      backend:
+        condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/ >/dev/null || exit 1"]
       interval: 5s
@@ -67,7 +59,7 @@ services:
       start_period: 10s
     restart: unless-stopped
     networks:
-      - app_network
+      - production_network
 
   gateway:
     image: nginx:1.27-alpine
@@ -87,15 +79,12 @@ services:
       retries: 10
     restart: unless-stopped
     networks:
-      - app_network
+      - production_network
 
 volumes:
-  postgres_data:
-  backend_node_modules:
-  frontend_node_modules:
-  frontend_next_cache:
+  postgres_production_data:
 
 networks:
-  app_network:
-    name: haris_payroll_network
+  production_network:
+    name: haris_payroll_production_network
     driver: bridge
