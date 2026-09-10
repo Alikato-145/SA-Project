@@ -1,0 +1,6 @@
+[submodule "SA-Project-Backend"]
+	path = SA-Project-Backend
+	url = https://github.com/Alikato-145/SA-Project-Backend.git
+[submodule "SA-Project-Frontend"]
+	path = SA-Project-Frontend
+	url = https://github.com/Alikato-145/SA-Project-Frontend.git
