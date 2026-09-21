@@ -19,7 +19,7 @@ different contributors after their listed dependencies are complete.
 **Purpose**: Establish the versioned artifacts and safe configuration inputs needed
 by all implementation work.
 
-- [ ] T001 [P] Restore the canonical 36-table, 22-enum PostgreSQL model with documented relationship and enforcement notes in `haris-payroll-postgresql.dbml`
+- [X] T001 [P] Restore the canonical 36-table, 22-enum PostgreSQL model with documented relationship and enforcement notes in `haris-payroll-postgresql.dbml`
 - [X] T002 [P] Add production-only variable placeholders and ignore the real secret file in `.env.production.example` and `.gitignore`
 
 ---
@@ -29,11 +29,11 @@ by all implementation work.
 **Purpose**: Establish one PostgreSQL schema, runtime, migration history, and test
 baseline. No user story work begins until this phase is complete.
 
-- [ ] T004 Replace `mysql2` with `pg` and add `@types/pg` while retaining the existing Drizzle versions in `backend/package.json` and `backend/bun.lock`
-- [ ] T005 [P] Switch the canonical schema output to PostgreSQL migration history in `backend/drizzle.config.ts`
-- [ ] T006 Add PostgreSQL-only URL validation that does not expose credentials in `backend/src/core/config/env.config.ts` and `backend/src/core/config/config.db.ts`
-- [ ] T007 Create one pooled Drizzle `node-postgres` client with graceful shutdown ownership in `backend/src/core/db/client.ts`
-- [ ] T008 Convert shared schema helpers and define all 22 named PostgreSQL enums in `backend/src/db/schema.columns.ts` and `backend/src/db/schema.enums.ts`; use `bigint` identity PKs/FKs, `date` strings, `timestamptz` events, `numeric(12,2)` money, and `numeric(8,2)` day/hour values
+- [X] T004 Replace `mysql2` with `pg` and add `@types/pg` while retaining the existing Drizzle versions in `backend/package.json` and `backend/bun.lock`
+- [X] T005 [P] Switch the canonical schema output to PostgreSQL migration history in `backend/drizzle.config.ts`
+- [X] T006 Add PostgreSQL-only URL validation that does not expose credentials in `backend/src/core/config/env.config.ts` and `backend/src/core/config/config.db.ts`
+- [X] T007 Create one pooled Drizzle `node-postgres` client with graceful shutdown ownership in `backend/src/core/db/client.ts`
+- [X] T008 Convert shared schema helpers and define all 22 named PostgreSQL enums in `backend/src/db/schema.columns.ts` and `backend/src/db/schema.enums.ts`; use `bigint` identity PKs/FKs, `date` strings, `timestamptz` events, `numeric(12,2)` money, and `numeric(8,2)` day/hour values
 - [ ] T009 [P] Convert organization and access schemas from MySQL to PostgreSQL in `backend/src/features/shop/shop.schema.ts`, `backend/src/features/branch/branch.schema.ts`, `backend/src/features/department/department.schema.ts`, `backend/src/features/position/position.schema.ts`, `backend/src/features/role/role.schema.ts`, and `backend/src/features/user-account/user-account.schema.ts`
 - [ ] T010 [P] Convert employee, assignment, bank-account, weekly-holiday, schedule, holiday-calendar, and attendance schemas in `backend/src/features/employee/employee.schema.ts`, `backend/src/features/employment-assignment/employment-assignment.schema.ts`, `backend/src/features/employee-bank-account/employee-bank-account.schema.ts`, `backend/src/features/employee-weekly-holiday/employee-weekly-holiday.schema.ts`, `backend/src/features/branch-schedule/branch-schedule.schema.ts`, `backend/src/features/holiday-calendar/holiday-calendar.schema.ts`, and `backend/src/features/attendance/attendance.schema.ts`
 - [ ] T011 [P] Convert leave and overtime schemas in `backend/src/features/leave/leave.schema.ts` and `backend/src/features/overtime/overtime.schema.ts`
