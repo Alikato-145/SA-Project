@@ -8,7 +8,8 @@ Docker volumes so they are not mixed with host files.
 
 ```bash
 cp .env.example .env
-docker compose up --build
+docker compose up --build -d
+docker compose ps
 ```
 
 Changes under `frontend/` and `backend/src/` reload automatically. Polling is
@@ -26,7 +27,9 @@ Only the gateway is publicly exposed. PostgreSQL is additionally bound to
 machines. The frontend and backend communicate over the private
 `haris_payroll_network` Docker network.
 
-The backend applies pending Drizzle migrations automatically before starting.
+The backend applies pending PostgreSQL Drizzle migrations automatically before
+starting. Do not point `DATABASE_URL` at MySQL: legacy MySQL volumes are not
+read, changed, or removed by this stack.
 
 ```bash
 docker compose down       # stop containers, preserve database data
@@ -52,4 +55,13 @@ same HTTP port.
 ```bash
 docker compose -f compose.production.yaml up --build -d
 docker compose -f compose.production.yaml down
+```
+
+Create the untracked production environment file first. Production requires
+explicit PostgreSQL credentials, a complete `DATABASE_URL`, and `HTTP_PORT`;
+it has no development-secret fallbacks.
+
+```bash
+cp .env.production.example .env.production
+docker compose --env-file .env.production -f compose.production.yaml up --build -d
 ```

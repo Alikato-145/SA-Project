@@ -1,0 +1,596 @@
+// Canonical PostgreSQL logical model for Haris Payroll.
+// Executable protections are documented in the note below and live in the
+// reviewed Drizzle migration; DBML cannot express PostgreSQL triggers/exclusions.
+
+Enum account_status { active locked disabled }
+Enum advance_status { pending approved rejected deducted cancelled }
+Enum approval_action_type { submitted forwarded approved rejected overridden type_changed cancelled }
+Enum debt_transaction_kind { charge adjustment reversal }
+Enum email_delivery_status { pending sent failed }
+Enum employee_status { active inactive suspended terminated }
+Enum employment_type { full_time part_time temporary }
+Enum installment_status { scheduled deducted waived cancelled }
+Enum leave_request_status { draft pending approved rejected cancelled }
+Enum loan_status { active closed cancelled }
+Enum overtime_status { pending approved rejected cancelled }
+Enum overtime_type { rest_day hourly public_holiday }
+Enum payroll_adjustment_status { pending approved rejected applied }
+Enum payroll_item_direction { earning deduction }
+Enum payroll_item_type { base_salary welfare overtime_rest_day overtime_hourly overtime_public_holiday absence lateness sick_unpaid social_security advance loan_installment debt adjustment other }
+Enum payroll_period_status { draft previewed locked }
+Enum payroll_record_status { draft calculated locked }
+Enum payslip_status { generated voided }
+Enum quota_type { fixed by_seniority none }
+Enum role_scope { self department branch all }
+Enum time_entry_source { manual import biometric }
+Enum work_day_status { present late absent leave weekly_holiday public_holiday }
+
+Table shops {
+  id bigint [pk, increment]
+  code varchar(30) [not null, unique]
+  name varchar(150) [not null]
+  is_active boolean [not null, default: true]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table branches {
+  id bigint [pk, increment]
+  shop_id bigint [not null]
+  code varchar(30) [not null]
+  name varchar(150) [not null]
+  address text
+  timezone varchar(50) [not null, default: 'Asia/Bangkok']
+  is_active boolean [not null, default: true]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (shop_id, code) [unique] }
+}
+
+Table departments {
+  id bigint [pk, increment]
+  branch_id bigint [not null]
+  code varchar(30) [not null]
+  name varchar(100) [not null]
+  is_active boolean [not null, default: true]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (branch_id, code) [unique] }
+}
+
+Table positions {
+  id bigint [pk, increment]
+  shop_id bigint [not null]
+  code varchar(30) [not null]
+  name varchar(100) [not null]
+  is_active boolean [not null, default: true]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (shop_id, code) [unique] }
+}
+
+Table employees {
+  id bigint [pk, increment]
+  employee_code varchar(30) [not null, unique]
+  national_id varchar(20) [unique]
+  passport_id varchar(30) [unique]
+  first_name varchar(100) [not null]
+  last_name varchar(100) [not null]
+  phone varchar(30)
+  personal_email varchar(255)
+  address text
+  hire_date date [not null]
+  status employee_status [not null, default: 'active']
+  terminated_at date
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table user_accounts {
+  id bigint [pk, increment]
+  employee_id bigint [unique]
+  username varchar(100) [not null, unique]
+  password_hash text [not null]
+  status account_status [not null, default: 'active']
+  failed_login_attempts smallint [not null, default: 0]
+  locked_until timestamptz
+  last_login_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table roles {
+  id bigint [pk, increment]
+  code varchar(30) [not null, unique, note: 'EMPLOYEE, SUPERVISOR, BRANCH_MANAGER, HR, OWNER']
+  name varchar(100) [not null]
+  scope role_scope [not null]
+  is_active boolean [not null, default: true]
+}
+
+Table user_account_roles {
+  id bigint [pk, increment]
+  user_account_id bigint [not null]
+  role_id bigint [not null]
+  branch_id bigint
+  department_id bigint
+  granted_by_user_account_id bigint
+  granted_at timestamptz [not null]
+  indexes { (user_account_id, role_id, branch_id, department_id) [unique] }
+}
+
+Table employment_assignments {
+  id bigint [pk, increment]
+  employee_id bigint [not null]
+  branch_id bigint [not null]
+  department_id bigint [not null]
+  position_id bigint [not null]
+  employment_type employment_type [not null]
+  base_salary numeric(12,2) [not null]
+  welfare_amount numeric(12,2) [not null, default: 0]
+  effective_from date [not null]
+  effective_to date
+  is_primary boolean [not null, default: true]
+  created_by_user_account_id bigint
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table employee_bank_accounts {
+  id bigint [pk, increment]
+  employee_id bigint [not null]
+  bank_code varchar(20) [not null]
+  bank_name varchar(100) [not null]
+  account_holder_name varchar(200) [not null]
+  account_number_ciphertext text [not null, note: 'Encrypted account number; never plaintext']
+  account_number_last4 varchar(4) [not null]
+  is_primary boolean [not null, default: false]
+  is_active boolean [not null, default: true]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table employee_weekly_holidays {
+  id bigint [pk, increment]
+  employee_id bigint [not null]
+  weekday smallint [not null, note: '0=Sunday through 6=Saturday']
+  effective_from date [not null]
+  effective_to date
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table branch_schedules {
+  id bigint [pk, increment]
+  branch_id bigint [not null]
+  work_start_time time [not null]
+  standard_close_time time [not null, default: '21:00:00']
+  late_grace_minutes smallint [not null, default: 0]
+  effective_from date [not null]
+  effective_to date
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table branch_schedule_overrides {
+  id bigint [pk, increment]
+  branch_id bigint [not null]
+  schedule_date date [not null]
+  work_start_time time
+  close_time time
+  is_closed boolean [not null, default: false]
+  reason varchar(255)
+  created_by_user_account_id bigint
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (branch_id, schedule_date) [unique] }
+}
+
+Table holiday_calendars {
+  id bigint [pk, increment]
+  shop_id bigint [not null]
+  holiday_date date [not null]
+  name varchar(150) [not null]
+  is_active boolean [not null, default: true]
+  created_by_user_account_id bigint
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (shop_id, holiday_date) [unique] }
+}
+
+Table work_day_records {
+  id bigint [pk, increment]
+  employee_id bigint [not null]
+  branch_id bigint [not null, note: 'Historical branch snapshot for this date']
+  work_date date [not null]
+  clock_in_at timestamptz
+  clock_out_at timestamptz
+  status work_day_status [not null]
+  late_minutes integer [not null, default: 0]
+  is_deductible boolean [not null, default: false]
+  entry_source time_entry_source [not null, default: 'manual']
+  created_by_user_account_id bigint
+  note text
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (employee_id, work_date) [unique] }
+}
+
+Table leave_types {
+  id bigint [pk, increment]
+  code varchar(30) [not null, unique]
+  name_th varchar(100) [not null]
+  quota_type quota_type [not null, default: 'none']
+  quota_days numeric(8,2)
+  is_deductible boolean [not null, default: false]
+  requires_document boolean [not null, default: false]
+  allow_exceed boolean [not null, default: false]
+  is_active boolean [not null, default: true]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table leave_requests {
+  id bigint [pk, increment]
+  employee_id bigint [not null]
+  original_leave_type_id bigint [not null]
+  final_leave_type_id bigint
+  start_date date [not null]
+  end_date date [not null]
+  requested_days numeric(8,2) [not null]
+  reason text
+  status leave_request_status [not null, default: 'draft']
+  is_retroactive boolean [not null, default: false]
+  submitted_by_user_account_id bigint [not null]
+  submitted_at timestamptz
+  decided_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table leave_request_days {
+  id bigint [pk, increment]
+  leave_request_id bigint [not null]
+  work_day_record_id bigint
+  leave_type_id bigint [not null]
+  leave_date date [not null]
+  day_amount numeric(8,2) [not null]
+  is_paid boolean [not null]
+  is_deductible boolean [not null]
+  quota_consumed numeric(8,2) [not null, default: 0]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (leave_request_id, leave_date) [unique] }
+}
+
+Table leave_quotas {
+  id bigint [pk, increment]
+  employee_id bigint [not null]
+  leave_type_id bigint [not null]
+  quota_year smallint [not null]
+  entitled_days numeric(8,2) [not null]
+  used_days numeric(8,2) [not null, default: 0]
+  last_recalculated_at timestamptz
+  frozen_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (employee_id, leave_type_id, quota_year) [unique] }
+}
+
+Table leave_approval_actions {
+  id bigint [pk, increment]
+  leave_request_id bigint [not null]
+  actor_user_account_id bigint [not null]
+  action approval_action_type [not null]
+  from_leave_type_id bigint
+  to_leave_type_id bigint
+  remark text
+  acted_at timestamptz [not null]
+}
+
+Table overtime_records {
+  id bigint [pk, increment]
+  employee_id bigint [not null]
+  work_day_record_id bigint
+  overtime_date date [not null]
+  overtime_type overtime_type [not null]
+  hours numeric(8,2) [not null, default: 0]
+  day_units numeric(8,2) [not null, default: 0]
+  reason text
+  status overtime_status [not null, default: 'pending']
+  requested_by_user_account_id bigint [not null]
+  submitted_at timestamptz
+  decided_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (employee_id, overtime_date) [unique] }
+}
+
+Table overtime_approval_actions {
+  id bigint [pk, increment]
+  overtime_record_id bigint [not null]
+  actor_user_account_id bigint [not null]
+  action approval_action_type [not null]
+  remark text
+  acted_at timestamptz [not null]
+}
+
+Table advance_requests {
+  id bigint [pk, increment]
+  employee_id bigint [not null]
+  request_month date [not null, note: 'First day of requested payroll month']
+  amount numeric(12,2) [not null]
+  status advance_status [not null, default: 'pending']
+  requested_by_user_account_id bigint [not null]
+  requested_at timestamptz [not null]
+  decided_by_user_account_id bigint
+  decided_at timestamptz
+  decision_note text
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table loans {
+  id bigint [pk, increment]
+  employee_id bigint [not null]
+  principal_amount numeric(12,2) [not null]
+  reason text
+  installment_count smallint [not null]
+  status loan_status [not null, default: 'active']
+  approved_by_user_account_id bigint
+  approved_at timestamptz
+  closed_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table loan_installments {
+  id bigint [pk, increment]
+  loan_id bigint [not null]
+  installment_no smallint [not null]
+  due_period_start date [not null]
+  amount numeric(12,2) [not null]
+  status installment_status [not null, default: 'scheduled']
+  deducted_at timestamptz
+  payroll_record_id bigint
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (loan_id, installment_no) [unique] }
+}
+
+Table debt_types {
+  id bigint [pk, increment]
+  code varchar(30) [not null, unique]
+  name_th varchar(100) [not null]
+  description text
+  is_active boolean [not null, default: true]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table debt_transactions {
+  id bigint [pk, increment]
+  employee_id bigint [not null]
+  debt_type_id bigint [not null]
+  transaction_kind debt_transaction_kind [not null, default: 'charge']
+  transaction_date date [not null]
+  description text [not null]
+  amount numeric(12,2) [not null, note: 'Positive amount; kind determines effect']
+  original_transaction_id bigint
+  recorded_by_user_account_id bigint [not null]
+  settled_in_payroll_record_id bigint
+  settled_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table payroll_configurations {
+  id bigint [pk, increment]
+  shop_id bigint [not null]
+  branch_id bigint
+  config_key varchar(50) [not null, note: 'LATE_RATE, ABSENCE_RATE, OT_HOURLY_RATE, SOCIAL_SECURITY_RATE, SOCIAL_SECURITY_CAP, STANDARD_WORK_DAYS']
+  numeric_value numeric(14,4) [not null]
+  unit varchar(30) [not null]
+  effective_from date [not null]
+  effective_to date
+  created_by_user_account_id bigint [not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table payroll_periods {
+  id bigint [pk, increment]
+  shop_id bigint [not null]
+  period_year smallint [not null]
+  period_month smallint [not null]
+  start_date date [not null]
+  end_date date [not null]
+  status payroll_period_status [not null, default: 'draft']
+  created_by_user_account_id bigint [not null]
+  previewed_at timestamptz
+  locked_by_user_account_id bigint
+  locked_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (shop_id, period_year, period_month) [unique] }
+}
+
+Table payroll_records {
+  id bigint [pk, increment]
+  payroll_period_id bigint [not null]
+  employee_id bigint [not null]
+  employment_assignment_id bigint [not null]
+  status payroll_record_status [not null, default: 'draft']
+  base_salary_snapshot numeric(12,2) [not null]
+  welfare_snapshot numeric(12,2) [not null]
+  total_earnings numeric(12,2) [not null, default: 0]
+  total_deductions numeric(12,2) [not null, default: 0]
+  net_pay numeric(12,2) [not null, default: 0]
+  calculated_at timestamptz
+  calculated_by_user_account_id bigint
+  locked_at timestamptz
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (payroll_period_id, employee_id) [unique] }
+}
+
+Table payroll_items {
+  id bigint [pk, increment]
+  payroll_record_id bigint [not null]
+  item_type payroll_item_type [not null]
+  direction payroll_item_direction [not null]
+  description varchar(255) [not null]
+  quantity numeric(10,2)
+  rate numeric(14,4)
+  amount numeric(12,2) [not null]
+  payroll_configuration_id bigint
+  source_table varchar(80)
+  source_id bigint
+  occurred_on date
+  created_at timestamptz [not null]
+}
+
+Table payroll_adjustments {
+  id bigint [pk, increment]
+  original_payroll_record_id bigint [not null]
+  applied_payroll_period_id bigint [not null]
+  direction payroll_item_direction [not null]
+  amount numeric(12,2) [not null]
+  reason text [not null]
+  status payroll_adjustment_status [not null, default: 'pending']
+  requested_by_user_account_id bigint [not null]
+  requested_at timestamptz [not null]
+  approved_by_user_account_id bigint
+  approved_at timestamptz
+  applied_payroll_item_id bigint
+}
+
+Table payslips {
+  id bigint [pk, increment]
+  payroll_record_id bigint [not null, unique]
+  file_storage_key text [not null]
+  file_sha256 varchar(64) [not null]
+  status payslip_status [not null, default: 'generated']
+  generated_at timestamptz [not null]
+  generated_by_user_account_id bigint
+  voided_at timestamptz
+  voided_by_user_account_id bigint
+}
+
+Table email_delivery_logs {
+  id bigint [pk, increment]
+  payslip_id bigint [not null]
+  recipient_email varchar(255) [not null]
+  status email_delivery_status [not null, default: 'pending']
+  provider_message_id varchar(255)
+  attempted_at timestamptz [not null]
+  sent_at timestamptz
+  error_message text
+}
+
+Table attachments {
+  id bigint [pk, increment]
+  employee_id bigint
+  leave_request_id bigint
+  file_name varchar(255) [not null]
+  storage_key text [not null]
+  mime_type varchar(100) [not null]
+  file_size_bytes bigint [not null]
+  file_sha256 varchar(64) [not null]
+  uploaded_by_user_account_id bigint [not null]
+  uploaded_at timestamptz [not null]
+}
+
+Table audit_logs {
+  id bigint [pk, increment]
+  actor_user_account_id bigint
+  action varchar(80) [not null]
+  table_name varchar(100) [not null]
+  record_id varchar(100) [not null]
+  old_data jsonb
+  new_data jsonb
+  reason text
+  occurred_at timestamptz [not null]
+  request_id varchar(100)
+}
+
+Ref: branches.shop_id > shops.id
+Ref: departments.branch_id > branches.id
+Ref: positions.shop_id > shops.id
+Ref: user_accounts.employee_id - employees.id
+Ref: user_account_roles.user_account_id > user_accounts.id
+Ref: user_account_roles.role_id > roles.id
+Ref: user_account_roles.branch_id > branches.id
+Ref: user_account_roles.department_id > departments.id
+Ref: user_account_roles.granted_by_user_account_id > user_accounts.id
+Ref: employment_assignments.employee_id > employees.id
+Ref: employment_assignments.branch_id > branches.id
+Ref: employment_assignments.department_id > departments.id
+Ref: employment_assignments.position_id > positions.id
+Ref: employment_assignments.created_by_user_account_id > user_accounts.id
+Ref: employee_bank_accounts.employee_id > employees.id
+Ref: employee_weekly_holidays.employee_id > employees.id
+Ref: branch_schedules.branch_id > branches.id
+Ref: branch_schedule_overrides.branch_id > branches.id
+Ref: branch_schedule_overrides.created_by_user_account_id > user_accounts.id
+Ref: holiday_calendars.shop_id > shops.id
+Ref: holiday_calendars.created_by_user_account_id > user_accounts.id
+Ref: work_day_records.employee_id > employees.id
+Ref: work_day_records.branch_id > branches.id
+Ref: work_day_records.created_by_user_account_id > user_accounts.id
+Ref: leave_requests.employee_id > employees.id
+Ref: leave_requests.original_leave_type_id > leave_types.id
+Ref: leave_requests.final_leave_type_id > leave_types.id
+Ref: leave_requests.submitted_by_user_account_id > user_accounts.id
+Ref: leave_request_days.leave_request_id > leave_requests.id
+Ref: leave_request_days.work_day_record_id > work_day_records.id
+Ref: leave_request_days.leave_type_id > leave_types.id
+Ref: leave_quotas.employee_id > employees.id
+Ref: leave_quotas.leave_type_id > leave_types.id
+Ref: leave_approval_actions.leave_request_id > leave_requests.id
+Ref: leave_approval_actions.actor_user_account_id > user_accounts.id
+Ref: leave_approval_actions.from_leave_type_id > leave_types.id
+Ref: leave_approval_actions.to_leave_type_id > leave_types.id
+Ref: overtime_records.employee_id > employees.id
+Ref: overtime_records.work_day_record_id > work_day_records.id
+Ref: overtime_records.requested_by_user_account_id > user_accounts.id
+Ref: overtime_approval_actions.overtime_record_id > overtime_records.id
+Ref: overtime_approval_actions.actor_user_account_id > user_accounts.id
+Ref: advance_requests.employee_id > employees.id
+Ref: advance_requests.requested_by_user_account_id > user_accounts.id
+Ref: advance_requests.decided_by_user_account_id > user_accounts.id
+Ref: loans.employee_id > employees.id
+Ref: loans.approved_by_user_account_id > user_accounts.id
+Ref: loan_installments.loan_id > loans.id
+Ref: loan_installments.payroll_record_id > payroll_records.id
+Ref: debt_transactions.employee_id > employees.id
+Ref: debt_transactions.debt_type_id > debt_types.id
+Ref: debt_transactions.original_transaction_id > debt_transactions.id
+Ref: debt_transactions.recorded_by_user_account_id > user_accounts.id
+Ref: debt_transactions.settled_in_payroll_record_id > payroll_records.id
+Ref: payroll_configurations.shop_id > shops.id
+Ref: payroll_configurations.branch_id > branches.id
+Ref: payroll_configurations.created_by_user_account_id > user_accounts.id
+Ref: payroll_periods.shop_id > shops.id
+Ref: payroll_periods.created_by_user_account_id > user_accounts.id
+Ref: payroll_periods.locked_by_user_account_id > user_accounts.id
+Ref: payroll_records.payroll_period_id > payroll_periods.id
+Ref: payroll_records.employee_id > employees.id
+Ref: payroll_records.employment_assignment_id > employment_assignments.id
+Ref: payroll_records.calculated_by_user_account_id > user_accounts.id
+Ref: payroll_items.payroll_record_id > payroll_records.id
+Ref: payroll_items.payroll_configuration_id > payroll_configurations.id
+Ref: payroll_adjustments.original_payroll_record_id > payroll_records.id
+Ref: payroll_adjustments.applied_payroll_period_id > payroll_periods.id
+Ref: payroll_adjustments.requested_by_user_account_id > user_accounts.id
+Ref: payroll_adjustments.approved_by_user_account_id > user_accounts.id
+Ref: payroll_adjustments.applied_payroll_item_id > payroll_items.id
+Ref: payslips.payroll_record_id > payroll_records.id
+Ref: payslips.generated_by_user_account_id > user_accounts.id
+Ref: payslips.voided_by_user_account_id > user_accounts.id
+Ref: email_delivery_logs.payslip_id > payslips.id
+Ref: attachments.employee_id > employees.id
+Ref: attachments.leave_request_id > leave_requests.id
+Ref: attachments.uploaded_by_user_account_id > user_accounts.id
+Ref: audit_logs.actor_user_account_id > user_accounts.id
+
+Note: '''PostgreSQL migration enforcement: active primary bank account is a partial unique index; effective ranges for employment_assignments, employee_weekly_holidays, branch_schedules, and payroll_configurations use exclusion constraints; approved leave dates use an exclusion constraint; user_account_roles and employment_assignments use validation triggers; audit_logs, leave_approval_actions, overtime_approval_actions, and debt_transactions are append-only; locked payroll values reject direct mutation. Attachment ownership is exactly one of employee_id or leave_request_id. The migration also carries check constraints and comments that DBML cannot encode.''' 
