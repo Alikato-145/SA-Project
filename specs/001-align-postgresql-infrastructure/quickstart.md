@@ -100,7 +100,7 @@ than relying on counts alone:
 
 ```bash
 cd backend
-DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:55432/haris_payroll \
+TEST_DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:55432/haris_payroll \
   bun test src/core/db/database.integration.test.ts
 ```
 

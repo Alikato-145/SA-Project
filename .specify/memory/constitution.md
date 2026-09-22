@@ -1,12 +1,12 @@
 <!--
 Sync Impact Report
-- Version change: template → 1.0.0
-- Modified principles: none; initial adoption
+- Version change: 1.0.0 → 1.0.1
+- Modified principle: IV, confirmed PostgreSQL baseline (clarification only)
 - Added sections: Core Principles, Domain-Specific Constraints,
   Development Workflow and Quality Gates, Governance
 - Removed sections: none
-- Follow-up TODOs: Resolve and record the single supported database dialect before
-  implementing further schema, migrations, or database-backed features.
+- 2026-09-22 clarification: PostgreSQL 16 is the confirmed sprint database;
+  feature schemas and backend/drizzle/ are frozen under the schema owner.
 -->
 
 # Haris Payroll Constitution
@@ -47,9 +47,10 @@ The supplied PostgreSQL DBML and ORM reference define the intended domain model;
 the Drizzle schema is the executable schema and application contracts MUST remain
 aligned with both. Persistence fields use `snake_case`, plural table names,
 `bigint` surrogate IDs, `date` business dates, timezone-aware event timestamps,
-and exact decimals for money. Before any schema or migration expansion, the owner
-MUST resolve and document one supported database dialect; no feature may rely on a
-conflicting PostgreSQL/MySQL migration path. API errors MUST expose stable public
+and exact decimals for money. PostgreSQL 16 is the confirmed database for the
+two-week sprint. Feature-owned Drizzle schemas and `backend/drizzle/` are the canonical, frozen baseline; schema
+changes require coordination with the schema owner. No feature may use a
+conflicting database dialect or migration path. API errors MUST expose stable public
 codes and messages without leaking internals.
 
 ### V. Focused Verification and Minimal Change
@@ -105,4 +106,4 @@ principle removals or redefinitions require a MAJOR version bump; new principles
 or materially expanded requirements require MINOR; clarifications require PATCH.
 Every review and implementation plan MUST include a constitution compliance check.
 
-**Version**: 1.0.0 | **Ratified**: 2026-09-21 | **Last Amended**: 2026-09-21
+**Version**: 1.0.1 | **Ratified**: 2026-09-21 | **Last Amended**: 2026-09-22

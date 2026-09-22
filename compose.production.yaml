@@ -86,5 +86,4 @@ volumes:
 
 networks:
   production_network:
-    name: haris_payroll_production_network
     driver: bridge

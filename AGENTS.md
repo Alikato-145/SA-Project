@@ -23,8 +23,7 @@ update a submodule pointer unless the task explicitly requires it.
 
 ## Source of truth for the data model
 
-The project’s planned PostgreSQL model is defined by these supplied reference
-artifacts:
+The logical data model is defined by these supplied reference artifacts:
 
 - `haris-payroll-postgresql.dbml` — tables, enums, references, and logical
   constraints.
@@ -33,10 +32,11 @@ artifacts:
 - `2026-09-10-haris-payroll-dbml-design.md` — design decisions and critical
   constraints.
 
-Do not casually rename, merge, or omit entities from that model. The Drizzle
-schema is maintained separately; treat it as the executable schema and keep
-application changes aligned with it. Discuss any schema mismatch with the
-owner of that work before changing migrations or generated types.
+PostgreSQL 16 is the only supported application database, as confirmed by the
+two-week sprint plan and the infrastructure specification. The feature-owned
+Drizzle files are the executable schema; preserve the DBML’s tables, foreign
+keys, indexes, checks, and business meaning. Schema and migrations are frozen
+during the sprint. Report mismatches to the schema owner before changing them.
 
 ## Domain map
 
@@ -56,7 +56,8 @@ an employee record.
 
 Use `snake_case` for database/API persistence fields and plural table names.
 IDs are surrogate `bigint` primary keys. Store business dates as `date`, event
-times as timezone-aware timestamps, and money as exact decimals—not floats.
+times as PostgreSQL timezone-aware timestamps, and money as exact decimals—not
+floats.
 
 ## Non-negotiable business rules
 
@@ -112,8 +113,8 @@ account details.
 
 ## Implementation expectations
 
-- Keep business rules and authorization in backend services/routes, not only in
-  UI validation.
+- Keep business rules and authorization in backend services, not in routes or
+  only in UI validation.
 - Use database transactions for multi-step approval, quota, deduction, payroll,
   and lock operations.
 - Use explicit decimal handling for money; define rounding once in the payroll
@@ -136,36 +137,54 @@ that mixes unrelated domains and makes feature ownership unclear.
 backend/src/
 ├── app.ts                         # Elysia composition only
 ├── index.ts                       # process startup only
+├── db/
+│   ├── schema.ts                  # exports feature schemas for Drizzle Kit
+│   ├── schema.columns.ts          # shared PostgreSQL column helpers
+│   └── schema.enums.ts            # shared named PostgreSQL enums
 ├── core/                          # shared infrastructure, no business features
 │   ├── config/
-│   ├── db/
+│   ├── db/                        # client and transaction infrastructure
 │   ├── errors/
 │   ├── middleware/
 │   └── auth/
 ├── shared/                        # small, domain-neutral utilities/types only
 └── features/
-    ├── employees/
+    ├── employee/
     │   ├── employee.routes.ts
     │   ├── employee.controller.ts
     │   ├── employee.service.ts
     │   ├── employee.repository.ts
     │   ├── employee.mapper.ts
     │   ├── employee.dto.ts
-    │   └── employee.schema.ts
+    │   └── employee.schema.ts      # owns the employees table
+    ├── position/
+    │   └── position.schema.ts      # owns the positions table
+    ├── branch/
+    │   └── branch.schema.ts        # owns the branches table
+    ├── department/
+    │   └── department.schema.ts    # owns the departments table
     ├── attendance/
     ├── leave/
     ├── overtime/
-    ├── advances/
-    ├── loans/
-    ├── debts/
+    ├── advance/
+    ├── loan/
+    ├── debt/
     ├── payroll/
     └── reports/
 ```
 
+Create one singularly named directory for each concrete feature. Do not group
+independent entities into broad folders such as `organization/`, `identity/`,
+or `finance/`: shops, branches, departments, positions, employees, advances,
+loans, and debts each own a feature directory. Closely coupled child tables
+may remain with their parent workflow—for example leave days/quotas/approval
+actions under `leave`, installments under `loan`, and payroll items/adjustments
+under `payroll`.
+
 Use a singular, feature-prefixed filename (`employee.service.ts`) so imports
-remain unambiguous. Split a feature into subfolders only when it has enough
-code to improve readability, for example `payroll/calculation/` or
-`leave/approval/`; retain the same layer boundaries inside it.
+remain unambiguous. Every feature owns its Drizzle schema file beside its
+route/controller/service/repository files. `src/db/schema.ts` is an export-only
+aggregation entry point; never define tables or Drizzle `relations()` there.
 
 ### Permitted dependency flow
 
@@ -211,10 +230,9 @@ look identical to an API response.
 - Use a unit-of-work/transaction helper from `core/db` when one use case spans
   multiple repositories. The service owns the transaction, so approval and
   payroll operations remain atomic.
-- Keep Drizzle schema and migrations in a clearly named database location
-  decided with the schema owner (for example `backend/src/core/db/schema/` and
-  `backend/drizzle/`). Repositories import the schema; controllers and routes
-  do not.
+- Keep each Drizzle table in its owning feature’s `*.schema.ts`. Repositories
+  import feature schemas directly; controllers and routes do not. Keep
+  migrations under `backend/drizzle/`.
 
 ### Naming and error handling
 
@@ -240,9 +258,11 @@ cd frontend && bun run build
 cd backend && bun run dev
 ```
 
-The backend currently has no usable automated test script. Add appropriate test
-commands as testing is introduced; do not treat the placeholder `bun test`/
-`npm test` command as a passing check.
+The backend has a real Bun test suite. Run `bun run typecheck` and `bun test`
+from `backend/`; database catalog checks require a migrated PostgreSQL database
+and an explicit `TEST_DATABASE_URL` pointing to a disposable database. Every
+sprint package adds a focused runnable check for its important business rules. See `docs/sprint-readiness.md` for setup
+and baseline validation.
 
 ## Change discipline
 

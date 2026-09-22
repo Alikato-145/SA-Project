@@ -2,6 +2,28 @@
 
 เป้าหมายคือ demo ที่เดิน flow ครบภายใน 10 วันทำงาน ไม่ใช่ production-ready release
 
+## Before Day 1 — Readiness gate
+
+Follow [sprint-readiness.md](sprint-readiness.md) first. All developers must start
+from the same reviewed PostgreSQL baseline, install locked dependencies, and pass
+the package checks. Do not branch from an older MySQL `main` or `develop` checkout.
+The sprint's ten days begin after this gate, not during infrastructure repair.
+
+- Person C coordinates schema exceptions and shared integration files; A/B report
+  mismatches before changing the frozen schema or migrations.
+- On Day 1, A and C agree on authenticated actor, role scope, public error DTO,
+  ID serialization, date/decimal representations, and transaction ownership.
+- A supplies the minimal organization/employee service contracts and disposable
+  fixtures on Day 1 so B1 and C2 can develop before A3 is complete.
+- B and C agree on attendance, approved leave/OT, and finance input contracts on
+  Day 1. C2 uses those fixtures until B3's real finance integration on Day 7.
+- Day 5 verifies the minimal employee/attendance backend flow; A3's remaining
+  history cases finish on Day 6. Day 8 verifies the integrated payroll/payslip
+  backend; the complete UI flow is verified after B4 on Day 9.
+- Required audit writes remain in each owning package. A owns initial account/role
+  provisioning; C owns the repeatable demo fixture entry point, release checklist,
+  and shared local attachment adapter if a package needs uploads.
+
 ## กติกากลาง
 
 - PostgreSQL schema และ migration ถือว่า freeze ระหว่าง sprint; หากพบ schema mismatch ให้เปิด issue และให้ schema owner แก้คนเดียว
@@ -175,6 +197,8 @@ Backend:
 cd backend
 bun run typecheck
 bun test
+# Against a disposable, migrated PostgreSQL database:
+TEST_DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:55433/haris_payroll bun test
 ```
 
 Frontend:
@@ -209,11 +233,12 @@ Backend example:
 cd backend
 git switch main
 git pull
-git switch -c feature/a1-auth-foundation
+# Only use main once the coordinator has merged the readiness baseline there.
+git switch -c codex/a1-auth-foundation
 # implement and test
 git add src package.json bun.lock
 git commit -m "feat(auth): add authentication foundation"
-git push -u origin feature/a1-auth-foundation
+git push -u origin codex/a1-auth-foundation
 ```
 
 Frontend example:
@@ -222,11 +247,12 @@ Frontend example:
 cd frontend
 git switch main
 git pull
-git switch -c feature/a4-employee-ui
+# Only use main once the coordinator has merged the readiness baseline there.
+git switch -c codex/a4-employee-ui
 # implement, lint, and build
 git add app components lib
 git commit -m "feat(employees): add employee management UI"
-git push -u origin feature/a4-employee-ui
+git push -u origin codex/a4-employee-ui
 ```
 
 Do not update root submodule pointers from a feature branch. After backend/frontend
