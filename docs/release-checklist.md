@@ -10,7 +10,7 @@ Person C coordinates this checklist. Infrastructure evidence is in
 - [x] Backend typecheck/database tests, frontend lint and production image build.
 - [x] Schema parity and migration idempotence.
 - [x] Commit preparation changes and record exact submodule versions on the publication branch.
-- [ ] Team reviews/merges preparation branches and confirms the shared sprint base.
+- [x] Owner authorized merging the preparation baseline into all three `main` branches (2026-09-22).
 
 ## Demo freeze — Day 10
 

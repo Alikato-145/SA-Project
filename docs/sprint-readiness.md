@@ -8,22 +8,22 @@ payroll, and business UI features remain the sprint packages' responsibility.
 
 - Backend base: `f3e5862` (PostgreSQL); frontend base: `d17b768` (standalone image).
 - Preparation commits: backend `e9dc03f`, frontend `87d34da`.
-- All three repositories use the `codex/sprint-readiness` publication branch.
-  The root branch records these exact submodule commits for reproducible checkout.
-- Original `develop`/`main` branches remain unchanged. These preparation branches
-  still need team review and merging before they become the shared sprint base.
-- Publishing preparation does not start A1, B1, or C1; sprint feature work is paused.
+- The owner authorized merging the preparation baseline into `main` in all three
+  repositories on 2026-09-22. Root `main` records the exact submodule commits above.
+- The `codex/sprint-readiness` branches remain available for reference; `develop`
+  is unchanged. New sprint branches can start from the updated `main` baseline.
+- Merging preparation does not start A1, B1, or C1; sprint feature work is paused.
 - Another auth commit exists on the locally known backend `origin/develop`.
   Person A should review it for A1 reuse; it is outside this tested baseline.
 
-Do not run a blanket submodule update over uncommitted work. To check this preparation branch in a fresh clone:
+Do not run a blanket submodule update over uncommitted work. To use the merged baseline in a fresh clone:
 
 ```bash
-git clone --branch codex/sprint-readiness --recurse-submodules \
+git clone --branch main --recurse-submodules \
   https://github.com/Alikato-145/SA-Project.git
 ```
 
-Existing clean clones can select the published root branch and run
+Existing clean clones can pull root `main` and run
 `git submodule update --init --recursive` to use its recorded versions.
 
 ## Development setup
