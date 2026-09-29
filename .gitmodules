@@ -1,8 +1,8 @@
 [submodule "backend"]
 	path = backend
 	url = https://github.com/Alikato-145/SA-Project-Backend.git
-	branch = main
+	branch = develop
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/Alikato-145/SA-Project-Frontend.git
-	branch = main
+	branch = develop
