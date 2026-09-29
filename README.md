@@ -5,6 +5,12 @@ Start with [sprint readiness](docs/sprint-readiness.md), then follow the
 PostgreSQL 16 is the supported database. The schema and migrations are frozen
 during feature work; report discrepancies to the sprint schema coordinator.
 
+Current handoff documents:
+
+- [System completion tasks](specs/012-system-completion/tasks.md)
+- [Role-based web user guide](docs/user-guide-by-role.md)
+- [Release checklist](docs/release-checklist.md)
+
 For an existing clone, first inspect `git status` in the root and both submodules.
 A leading `+` from `git submodule status` means that checkout differs from the
 root-recorded baseline. Preserve local work before synchronizing submodules.
