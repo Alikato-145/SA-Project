@@ -27,4 +27,27 @@
 
 ## Validation record
 
-Pending implementation and final 360px/1280px review.
+Validated on 2026-09-30 for the mounted Audit workflow and current merged
+application baseline:
+
+- Backend `bun run typecheck` and the database-independent suite passed: 417
+  tests passed, 27 database-gated tests skipped, 0 failed.
+- A disposable PostgreSQL 16 stack passed the full suite with 426 passed, 18
+  explicitly gated tests skipped, and 0 failed. The process-isolated Person A
+  runner passed all 9 files (53 tests), and the seeded Person B attendance,
+  leave, and overtime database constraints passed 12 tests with 0 failures.
+- Frontend passed 33 tests, ESLint, and the production build; the build emitted
+  21 routes including `/audit`.
+- Development and production Compose files both passed `docker compose config
+  --quiet`; production now receives the required auth and bank-encryption
+  environment variables explicitly.
+- Web Interface Guidelines review covered every frontend file changed for the
+  Audit workflow. Non-auth filter autocomplete/spellcheck and identifier
+  translation handling were remediated; no unresolved finding remains in this
+  change set.
+- Impeccable detector returned no findings. Browser checks at desktop and
+  360px confirmed the real authenticated Audit page, contained table overflow,
+  readable filters/states, and no page-level horizontal overflow (360/360).
+
+The complete credential-free cross-route and all-role walkthrough remains
+pending under T029; this record does not claim that broader manual pass.

@@ -78,10 +78,10 @@
 
 ## Phase 8: Polish and validation
 
-- [ ] T028 Run the Web Interface Guidelines audit against every changed frontend file and document remediated findings in `specs/011-thai-low-tech-ux/route-audit.md`.
+- [X] T028 Run the Web Interface Guidelines audit against every changed frontend file and document remediated findings in `specs/011-thai-low-tech-ux/route-audit.md`.
 - [ ] T029 Run the UI/UX responsive and role checklist from `specs/011-thai-low-tech-ux/quickstart.md` and record credential-free results in `specs/011-thai-low-tech-ux/route-audit.md`.
-- [ ] T030 Run backend typecheck and focused tests plus frontend tests, lint, and production build; record commands and results in `specs/011-thai-low-tech-ux/route-audit.md`.
-- [ ] T031 Run the Impeccable detector on all changed frontend UI files and resolve findings before handoff.
+- [X] T030 Run backend typecheck and focused tests plus frontend tests, lint, and production build; record commands and results in `specs/011-thai-low-tech-ux/route-audit.md`.
+- [X] T031 Run the Impeccable detector on all changed frontend UI files and resolve findings before handoff.
 
 ## Dependencies & Execution Order
 

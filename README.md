@@ -70,8 +70,9 @@ Stop the development stack before starting production because both bind the
 same HTTP port.
 
 Create the untracked production environment file first. Production requires
-explicit PostgreSQL credentials, a complete `DATABASE_URL`, and `HTTP_PORT`;
-it has no development-secret fallbacks.
+explicit PostgreSQL credentials, a complete `DATABASE_URL`, `HTTP_PORT`, exact
+allowed browser origins, a unique JWT secret, and a versioned AES-256-GCM
+bank-account keyring; it has no development-secret fallbacks.
 
 ```bash
 cp .env.production.example .env.production
