@@ -47,3 +47,13 @@ Set DATABASE_URL and TEST_DATABASE_URL to the same dedicated migrated PostgreSQL
 All eight files passed independently. Enabling both DB flags in one full-suite Bun process produced 429 pass, 3 skip, 10 fail because per-file afterAll hooks call closeDatabase() on a shared module-level pool. A two-file reproduction (audit then shop) failed with `Cannot use a pool after calling end on the pool`; running each file in a separate process passed. This is a test-harness lifecycle limitation, not a demonstrated production database failure. Keep DB-gated CI jobs process-isolated until the shared pool lifecycle is redesigned.
 
 The disposable database container was stopped and removed after verification.
+
+## Repeatable Person A DB runner
+
+Backend commit f70785e adds a guarded command that runs those eight files plus the A5 login/history journey in separate Bun processes. Against a dedicated migrated PostgreSQL 16 database, all nine files passed (53 tests, 0 failures). Set test-safe auth and bank-encryption values from backend/.env.example as well:
+
+    cd backend
+    export DATABASE_URL=postgresql://postgres:your-test-password@127.0.0.1:55435/haris_person_a_test
+    PERSON_A_DISPOSABLE_DB=1 TEST_DATABASE_URL="$DATABASE_URL" bun run test:person-a:db
+
+The command refuses to start without the explicit disposable-DB flag or when the two database URLs differ. It does not run the three Person B tests that need their own fixture IDs.
