@@ -12,7 +12,7 @@ Database-gated tests need a dedicated TEST_DATABASE_URL. Already-running shared 
 - Backend typecheck: passed on A5 branch.
 - A5 focused matrix/audit/payroll tests: 19 passed, 0 failed.
 - Backend suite without TEST_DATABASE_URL: 416 passed, 26 skipped, 0 failed.
-- Backend suite with dedicated PostgreSQL 16 and migrated schema: 426 passed, 18 skipped, 0 failed. The remaining 18 require additional fixture IDs or environment prerequisites; they are not reported as passed.
+- Backend suite with dedicated PostgreSQL 16 and migrated schema: 426 passed, 18 skipped, 0 failed. Most skips require explicit integration flags; three Person B tests require seeded fixture IDs.
 - Frontend on develop: 31 tests passed; lint passed; production build passed (20 static pages generated).
 - A5 database-gated owner journey: real login, cookie, /auth/me, employee list/detail, and two-assignment cross-branch history passed; unauthenticated detail returned 401. This is an in-process HTTP integration test, not a browser UI test.
 - B5 database-gated two-branch operations → payroll lock journey passed after removing its non-portable /private/tmp credential file write. A pg@9 deprecation warning about concurrent client queries remains and is outside this A5 fix.
@@ -28,5 +28,22 @@ Database-gated tests need a dedicated TEST_DATABASE_URL. Already-running shared 
 
 - The backend login → employee → history path and the B5 operations → payroll lock path are green on an isolated test database. A4 frontend adapters, route access tests, lint, and build are green.
 - A human/browser demo of the complete UI and deployment rehearsal remain Person C release activities; this A5 package does not claim they ran.
-- Eighteen database tests still intentionally skip without their feature-specific fixture IDs or flags. The disposable A5 PostgreSQL container was used solely for this verification and should be stopped/removed after checks.
-- No schema, migration, or public API change was made. Root submodule pointers and unrelated dirty root files were not staged.
+- A1/A2 DB-gated suites were later run separately on another disposable PostgreSQL 16 instance: eight test files, 52 tests passed, 0 failed. The remaining three skipped tests belong to Person B and need fixture IDs.
+- No schema, migration, or public API change was made. Root submodule pointers were later synchronized in commit 384c9b6; unrelated root work remains preserved in a named stash.
+
+## Expanded A1/A2 database verification (2026-09-29)
+
+Set DATABASE_URL and TEST_DATABASE_URL to the same dedicated migrated PostgreSQL database, with A2_DATABASE_INTEGRATION=1 and DATABASE_INTEGRATION=1. Run each file in its own Bun process:
+
+    src/features/audit/audit.integration.test.ts
+    src/features/branch/branch.write.test.ts
+    src/features/department/department.repository.integration.test.ts
+    src/features/department/department.write.test.ts
+    src/features/position/position.read.test.ts
+    src/features/position/position.write.test.ts
+    src/features/shop/shop.write.integration.test.ts
+    src/features/organization/organization.history.test.ts
+
+All eight files passed independently. Enabling both DB flags in one full-suite Bun process produced 429 pass, 3 skip, 10 fail because per-file afterAll hooks call closeDatabase() on a shared module-level pool. A two-file reproduction (audit then shop) failed with `Cannot use a pool after calling end on the pool`; running each file in a separate process passed. This is a test-harness lifecycle limitation, not a demonstrated production database failure. Keep DB-gated CI jobs process-isolated until the shared pool lifecycle is redesigned.
+
+The disposable database container was stopped and removed after verification.
