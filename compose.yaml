@@ -29,6 +29,7 @@ services:
       ELYSIA_HOST: 0.0.0.0
       ELYSIA_PORT: 3000
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-haris_payroll}
+      AUTH_ALLOWED_ORIGINS: ${AUTH_ALLOWED_ORIGINS:-http://localhost,http://localhost:3000}
     depends_on:
       postgres:
         condition: service_healthy
