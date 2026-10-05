@@ -4,7 +4,7 @@
 
 **Last updated**: 2026-10-05
 
-**Branches**: root, `backend/`, and `frontend/` use `develop`
+**Branches**: baseline uses `develop`; T028 is implemented on root and frontend branch `person-c`
 
 **Purpose**: Close the remaining product, UX, verification, and operational gaps
 before Haris Payroll is treated as complete for real users.
@@ -117,7 +117,7 @@ domain codes.
 - [ ] T026 Refine Account, Organization, Employee, and Payroll administration
   pages from UX tasks T017–T021, including consequences and recovery paths.
 - [ ] T027 Complete public-error and role-visibility coverage from UX task T023.
-- [ ] T028 Finish Login and nested HR state/responsive work from UX tasks
+- [X] T028 Finish Login and nested HR state/responsive work from UX tasks
   T024 and T026. After login, redirect each role to its first permitted workspace
   or `/dashboard` instead of sending every account to `/payroll`.
 - [ ] T029 Apply shared Thai domain/status/date/money labels everywhere from UX

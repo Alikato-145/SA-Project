@@ -64,9 +64,9 @@
 
 **Independent Test**: Review login plus every dashboard route at 360px and 1280px; confirm no page-level horizontal overflow, visible focus, and a clear recovery route for denied/error states.
 
-- [ ] T024 [US4] Refine Thai login labels, help, validation recovery, password-manager semantics, and narrow-screen layout in `frontend/app/login/page.tsx`, `frontend/app/login/login.module.css`, and `frontend/features/identity-hr/auth/login-form.tsx`.
+- [X] T024 [US4] Refine Thai login labels, help, validation recovery, password-manager semantics, and narrow-screen layout in `frontend/app/login/page.tsx`, `frontend/app/login/login.module.css`, and `frontend/features/identity-hr/auth/login-form.tsx`.
 - [X] T025 [US4] Refine forbidden, loading, error, and nested-layout copy and recovery links in `frontend/app/(dashboard)/dashboard/forbidden/page.tsx`, `frontend/app/(dashboard)/dashboard/loading.tsx`, `frontend/app/(dashboard)/dashboard/error.tsx`, `frontend/app/(dashboard)/payroll/loading.tsx`, `frontend/app/(dashboard)/payroll/error.tsx`, `frontend/app/(dashboard)/settings/loading.tsx`, and `frontend/app/(dashboard)/settings/error.tsx`.
-- [ ] T026 [US4] Ensure nested HR preview and request-state screens use clear Thai current/illustrative-data language, semantic feedback, and responsive overflow handling in `frontend/features/identity-hr/ui/preview-frame.tsx`, `frontend/features/identity-hr/ui/request-states.tsx`, `frontend/features/identity-hr/ui/primitives.tsx`, and `frontend/features/identity-hr/ui/identity-hr.module.css`.
+- [X] T026 [US4] Ensure nested HR preview and request-state screens use clear Thai current/illustrative-data language, semantic feedback, and responsive overflow handling in `frontend/features/identity-hr/ui/preview-frame.tsx`, `frontend/features/identity-hr/ui/request-states.tsx`, `frontend/features/identity-hr/ui/primitives.tsx`, and `frontend/features/identity-hr/ui/identity-hr.module.css`.
 
 ## Phase 7: User Story 5 - Domain vocabulary and final-state clarity (Priority: P2)
 

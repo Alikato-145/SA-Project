@@ -51,3 +51,18 @@ application baseline:
 
 The complete credential-free cross-route and all-role walkthrough remains
 pending under T029; this record does not claim that broader manual pass.
+
+## T028 validation: 2026-10-05
+
+- Login now uses the authenticated actor returned by the login request to send
+  Employee to Leave, Supervisor and Branch Manager to Attendance, HR to
+  Payroll, and Owner to Settings. Multi-role accounts use the highest-responsibility
+  matching role; missing or unknown roles fall back to Dashboard.
+- Focused route-policy tests passed 4/4, including every role, multi-role
+  priority, and the safe fallback. The full frontend suite passed 35 tests with
+  0 failures; ESLint and the Next.js production build also passed.
+- Browser checks at 360px and 1280px confirmed the updated Thai login copy,
+  visible labelled controls, responsive stacking, and no page-level horizontal
+  overflow (`scrollWidth` matched the viewport at both widths).
+- Nested HR panels, contained tables, tabs, and feedback messages now constrain
+  long content inside their workspace instead of widening the page.
