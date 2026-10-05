@@ -26,11 +26,11 @@
 
 **Independent Test**: Sign in as an Employee and verify Leave, Overtime, Payslips, dashboard, and denied routes do not expose an employee selector or unavailable mutation action.
 
-- [ ] T007 [US1] Extend self-versus-management employee context handling in `frontend/components/employee-picker.tsx` and `frontend/lib/auth/auth-api.ts` without widening API authority.
+- [X] T007 [US1] Extend self-versus-management employee context handling in `frontend/components/employee-picker.tsx` and `frontend/lib/auth/auth-api.ts` without widening API authority.
 - [X] T008 [US1] Refine employee Leave flow, edit flow, Thai status labels, and self-only context in `frontend/app/(dashboard)/leave/page.tsx`.
 - [X] T009 [US1] Refine employee Overtime flow, Thai status labels, self-only context, and approved/rejected feedback in `frontend/app/(dashboard)/overtime/page.tsx`.
 - [X] T010 [US1] Refine employee Payslip reading, empty state, final-state explanation, and Thai vocabulary in `frontend/app/(dashboard)/payslips/page.tsx`.
-- [ ] T011 [US1] Add role-context and self-service regression checks in `frontend/lib/auth/route-access.test.ts` and `frontend/lib/payslip/payslip-api.test.ts`.
+- [X] T011 [US1] Add role-context and self-service regression checks in `frontend/lib/auth/route-access.test.ts` and `frontend/lib/payslip/payslip-api.test.ts`.
 
 ## Phase 4: User Story 2 - Scoped daily operations are clear (Priority: P1)
 

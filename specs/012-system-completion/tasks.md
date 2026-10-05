@@ -110,7 +110,7 @@ for any in-scope daily workflow.
 **Goal**: Users can complete their work without knowing internal IDs or English
 domain codes.
 
-- [ ] T024 Complete self-versus-management employee context and regression tests
+- [X] T024 Complete self-versus-management employee context and regression tests
   from `specs/011-thai-low-tech-ux/tasks.md` T007 and T011.
 - [ ] T025 Complete management Leave/OT decision guidance and server-scope
   regression tests from UX tasks T013–T015.

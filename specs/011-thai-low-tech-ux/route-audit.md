@@ -66,3 +66,17 @@ pending under T029; this record does not claim that broader manual pass.
   overflow (`scrollWidth` matched the viewport at both widths).
 - Nested HR panels, contained tables, tabs, and feedback messages now constrain
   long content inside their workspace instead of widening the page.
+
+## T024 self-service validation: 2026-10-05
+
+- Employee context now resolves centrally to self-service, management, or a
+  missing employee link. Leave and OT render a searchable employee picker only
+  for management roles; Employee sees a read-only own name and employee code.
+- Accounts without a linked employee now receive Thai setup guidance instead
+  of an indefinite loading label. The backend remains the authority for every
+  employee list and mutation scope.
+- Regression coverage proves the context modes, picker visibility, Employee
+  route matrix, own-only `/payslips/mine` request, and shared operation
+  permissions. The full frontend suite passed 39 tests with 0 failures, ESLint
+  passed, and the Next.js production build completed all 21 static-generation
+  entries plus the listed dynamic routes.
