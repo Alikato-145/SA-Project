@@ -2,6 +2,8 @@
 
 **Baseline date**: 2026-09-30
 
+**Last updated**: 2026-10-05
+
 **Branches**: root, `backend/`, and `frontend/` use `develop`
 
 **Purpose**: Close the remaining product, UX, verification, and operational gaps
@@ -84,8 +86,10 @@ employee-to-payslip flow without manual database edits.
   redacted audit data, and retention of historical metadata. Replace the current
   Documents placeholder and enforce required leave evidence when applicable.
 - [ ] T020 Let Employee open a detailed own payslip through the web UI and expose
-  a safe printable/downloadable representation. Preserve cross-employee denial
-  and voided-payslip behavior.
+  the versioned PDF produced by T064 as a safe printable/downloadable document
+  in `frontend/app/(dashboard)/payslips/page.tsx` and
+  `frontend/lib/payslip/payslip-api.ts`. Preserve cross-employee denial and
+  voided-payslip behavior.
 - [ ] T021 Replace operational raw-ID inputs with named, scoped selectors where
   data already exists: Attendance branch, Finance debt type, Payroll record and
   target period, Payslip/payroll record, and Reports payroll period. Keep IDs as
@@ -190,20 +194,113 @@ completion plan unless the owner promotes them:
 - [ ] T056 Native mobile applications; the current responsive web application is
   the supported client.
 
+## Phase 8 — P1 Addendum: Reconcile SA-report use cases
+
+**Why these IDs are appended**: The SA report was expanded after T001–T056 were
+published. Existing IDs remain stable because the role guide and handoff notes
+already reference them. Execute T057–T065 after T015–T023 and before the P2
+production phase.
+
+### Leave and overtime configuration
+
+- [ ] T057 Add Owner/HR leave-type administration in
+  `backend/src/features/leave/leave.repository.ts`,
+  `backend/src/features/leave/leave.service.ts`,
+  `backend/src/features/leave/leave.controller.ts`,
+  `backend/src/features/leave/leave.routes.ts`, and
+  `frontend/app/(dashboard)/leave/page.tsx`. Support list/create/update and
+  deactivate instead of hard delete; reject duplicate codes/names, preserve
+  types referenced by historical requests, audit every mutation, and add
+  focused authorization/history tests.
+- [ ] T058 Resolve whether OT types remain the three fixed business values
+  (`hourly`, `rest_day`, `public_holiday`) or become configurable. Record the
+  product/schema-owner decision in
+  `specs/012-system-completion/ot-type-decision.md`; if fixed, correct the SA
+  report to describe selecting rather than administering a type. If dynamic,
+  approve the data-model and migration change before editing
+  `backend/src/db/schema.enums.ts`, `backend/src/features/overtime/`, or the
+  frozen migration.
+- [ ] T059 Add a pending-only OT correction flow in
+  `backend/src/features/overtime/overtime.repository.ts`,
+  `backend/src/features/overtime/overtime.service.ts`,
+  `backend/src/features/overtime/overtime.controller.ts`,
+  `backend/src/features/overtime/overtime.routes.ts`, and
+  `frontend/app/(dashboard)/overtime/page.tsx`. Permit correction only before a
+  final decision and before payroll lock; append the old/new type and values to
+  approval/audit history and cover out-of-scope, decided, and locked cases.
+
+### Payroll disbursement and confirmation
+
+- [ ] T060 Define and obtain schema-owner approval for an append-only payroll
+  disbursement model and API contract in
+  `specs/012-system-completion/payroll-disbursement-design.md`. It must separate
+  `locked` from `paid`, support `cash` and `bank_transfer`, record prepared/paid/
+  failed/reversed transitions with actor, timestamp, amount, reference, and
+  reason, prevent totals above the locked net pay, and never rewrite a payroll
+  record. Do not edit schema or migrations before this gate is approved.
+- [ ] T061 After T060 approval, implement cash-payment recording and reversal in
+  `backend/src/features/payroll-disbursement/payroll-disbursement.schema.ts`,
+  `backend/src/features/payroll-disbursement/payroll-disbursement.repository.ts`,
+  `backend/src/features/payroll-disbursement/payroll-disbursement.service.ts`,
+  `backend/src/features/payroll-disbursement/payroll-disbursement.controller.ts`,
+  `backend/src/features/payroll-disbursement/payroll-disbursement.routes.ts`,
+  `backend/src/db/schema.ts`, the approved `backend/drizzle/` migration, and
+  `frontend/app/(dashboard)/payroll/page.tsx`. Require HR/Owner authorization,
+  employee and locked-record confirmation, payment evidence/reference, an
+  idempotency rule, append-only audit, and tests for duplicate, overpayment,
+  reversal, wrong scope, and unlocked payroll.
+- [ ] T062 After T060 approval, implement bank-transfer batch preparation,
+  exported-row reconciliation, and paid/failed confirmation in
+  `backend/src/features/payroll-disbursement/payroll-disbursement.repository.ts`,
+  `backend/src/features/payroll-disbursement/payroll-disbursement.service.ts`,
+  `backend/src/features/payroll-disbursement/payroll-disbursement.controller.ts`,
+  `backend/src/features/payroll-disbursement/payroll-disbursement.routes.ts`,
+  `backend/src/features/reports/report.service.ts`, and
+  `frontend/app/(dashboard)/reports/page.tsx`.
+  Reconcile each result to one locked payroll record, keep retry history, prove
+  totals against the CSV, and do not imply that export alone means payment.
+  Direct submission to a bank remains deferred under T055.
+- [ ] T063 Decide whether actual social-security submission/payment confirmation
+  is in scope and record the decision in
+  `specs/012-system-completion/social-security-submission-decision.md`. If it is
+  in scope, define an auditable submission/acknowledgement workflow after the
+  existing CSV export; otherwise update the SA report and user guide to state
+  that Haris Payroll ends at validated export.
+
+### Payslip and invoice documents
+
+- [ ] T064 Generate an immutable, versioned PDF payslip from one locked payroll
+  record in `backend/src/features/payslip/payslip.document.service.ts`, persist
+  authorized storage references and SHA-256/size/MIME metadata through
+  `backend/src/features/payslip/payslip.repository.ts` and
+  `backend/src/features/payslip/payslip.schema.ts`, expose own-only and HR/Owner
+  download endpoints in `backend/src/features/payslip/payslip.routes.ts`, and
+  add cross-employee, voided, tampered-file, duplicate, and redaction tests in
+  `backend/src/features/payslip/payslip.service.test.ts` and
+  `backend/src/features/payslip/payslip.routes.test.ts`. T020 consumes this
+  endpoint in the Employee web UI.
+- [ ] T065 Decide whether “ใบแจ้งหนี้รายบุคคล” in the SA use case is a real
+  payroll document or terminology that should be corrected to payslip. Record
+  the decision in `specs/012-system-completion/invoice-decision.md`; if it is a
+  separate document, specify owner, recipient, fields, lifecycle, authorization,
+  retention, and delivery before adding schema, API, or UI work.
+
 ## Dependency order
 
 ```text
 Demo fixture
   → role matrix and complete journey
-  → missing web functions
+  → missing web functions + SA-report addendum (T057–T065)
   → Thai UX and browser regression
   → production operations/security
   → role sign-off and release approval
 ```
 
 T019 depends on an approved attachment storage and retention policy. T044 depends
-on a selected mail provider. T052–T056 must not be started without explicit scope
-approval.
+on a selected mail provider. T020 depends on the PDF endpoint from T064. T059
+depends on the fixed-versus-configurable decision in T058. T061–T062 depend on
+the approved disbursement design in T060. T052–T056 must not be started without
+explicit scope approval.
 
 ## Definition of complete
 
