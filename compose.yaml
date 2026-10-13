@@ -29,7 +29,13 @@ services:
       ELYSIA_HOST: 0.0.0.0
       ELYSIA_PORT: 3000
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-haris_payroll}
-      AUTH_ALLOWED_ORIGINS: ${AUTH_ALLOWED_ORIGINS:-http://localhost,http://localhost:3000}
+      AUTH_JWT_SECRET: ${AUTH_JWT_SECRET:-development-only-jwt-secret-change-before-sharing}
+      AUTH_ALLOWED_ORIGINS: ${AUTH_ALLOWED_ORIGINS:-http://localhost:${HTTP_PORT:-80},http://localhost:3000}
+      AUTH_SESSION_TTL_SECONDS: ${AUTH_SESSION_TTL_SECONDS:-28800}
+      AUTH_MAX_FAILED_ATTEMPTS: ${AUTH_MAX_FAILED_ATTEMPTS:-5}
+      AUTH_LOCK_DURATION_SECONDS: ${AUTH_LOCK_DURATION_SECONDS:-900}
+      EMPLOYEE_BANK_ENCRYPTION_KEY_VERSION: ${EMPLOYEE_BANK_ENCRYPTION_KEY_VERSION:-v1}
+      EMPLOYEE_BANK_ENCRYPTION_KEYS: '${EMPLOYEE_BANK_ENCRYPTION_KEYS:-{"v1":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="}}'
     depends_on:
       postgres:
         condition: service_healthy
@@ -52,6 +58,7 @@ services:
       dockerfile: Dockerfile.dev
     environment:
       NODE_ENV: development
+      BACKEND_ORIGIN: http://backend:3000
       HOSTNAME: 0.0.0.0
       PORT: 3000
       WATCHPACK_POLLING: "true"

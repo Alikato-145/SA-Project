@@ -27,16 +27,22 @@ directories are bind-mounted, while dependencies and the Next.js cache use
 Docker volumes so they are not mixed with host files.
 
 ```bash
-cp .env.example .env
-docker compose up --build -d
+docker compose up --build -d --wait
 docker compose ps
 ```
+
+Run these commands from the root repository; there is no need to start Bun or
+Compose separately in either submodule. Compose starts PostgreSQL, migrates the
+database, and runs the backend, frontend, and gateway. Development defaults work
+without environment files. To customize ports or secrets, create root `.env`
+with `test -f .env || cp .env.example .env`; Docker does not require
+`backend/.env` or `frontend/.env`.
 
 Changes under `frontend/` and `backend/src/` reload automatically. Polling is
 enabled for Next.js so file changes are detected through Docker Desktop bind
 mounts on Windows and macOS as well as Linux.
 
-After all health checks pass:
+After all health checks pass (replace the port if `HTTP_PORT` is customized):
 
 - Frontend: <http://localhost>
 - Backend: <http://localhost/api>
@@ -50,6 +56,22 @@ Compose project network. Networks and volumes are isolated by project name.
 The backend applies pending PostgreSQL Drizzle migrations automatically before
 starting. Do not point `DATABASE_URL` at MySQL: legacy MySQL volumes are not
 read, changed, or removed by this stack.
+
+For a fresh development database, create demo accounts and reference data once:
+
+```bash
+docker compose exec backend bun run db:seed
+```
+
+View application logs from the root with `docker compose logs -f backend frontend`.
+
+If migration fails with `ENOTFOUND` for `postgres`, check the Compose network
+attachments. Recreate the stack to restore container networking while keeping
+database volumes:
+
+```bash
+docker compose up -d --force-recreate --wait
+```
 
 ```bash
 docker compose down       # stop containers, preserve database data

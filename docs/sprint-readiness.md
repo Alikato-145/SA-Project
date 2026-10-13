@@ -31,11 +31,13 @@ Existing clean clones can pull root `main` and run
 Requires Bun 1.3.x and Docker with Compose v2. Initial image/package downloads and
 the starter's Google Fonts require network access during builds.
 
+Bun on the host is only needed for running package commands outside Docker.
+The root Compose stack includes its own runtime and development environment defaults.
+
 From the repository root:
 
 ```bash
 test -f .env || cp .env.example .env
-test -f backend/.env || cp backend/.env.example backend/.env
 docker compose up --build -d --wait
 docker compose ps
 ```
