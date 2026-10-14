@@ -1,0 +1,15 @@
+services:
+  backend:
+    environment:
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+      SMTP_SECURE: "false"
+      SMTP_FROM: payroll@example.test
+      SMTP_USER: ""
+      SMTP_PASSWORD: ""
+  mailpit:
+    image: axllent/mailpit:v1.27.4
+    ports:
+      - "127.0.0.1:${VERIFY_MAIL_PORT:-18025}:8025"
+    networks:
+      - app_network

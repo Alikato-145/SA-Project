@@ -86,7 +86,9 @@ floats.
   deductions.
 - Loans are deducted by installment; food debt is transaction-based and its
   history is never reset or deleted.
-- Social-security deductions use base salary only, excluding welfare.
+- Social-security deductions use summed daily base-salary earnings in the period,
+  excluding welfare, OT and adjustments (confirmed 14 October 2026). Do not
+  substitute the contracted monthly salary when daily earnings differ.
 - A payroll record is unique per employee per period. Locking a period requires
   complete attendance, no pending approvals, non-negative net pay, and a
   snapshot of all values used. Never edit locked payroll values; use a tracked

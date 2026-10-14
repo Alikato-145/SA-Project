@@ -36,14 +36,22 @@ services:
       AUTH_LOCK_DURATION_SECONDS: ${AUTH_LOCK_DURATION_SECONDS:-900}
       EMPLOYEE_BANK_ENCRYPTION_KEY_VERSION: ${EMPLOYEE_BANK_ENCRYPTION_KEY_VERSION:-v1}
       EMPLOYEE_BANK_ENCRYPTION_KEYS: '${EMPLOYEE_BANK_ENCRYPTION_KEYS:-{"v1":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="}}'
+      DOCUMENT_STORAGE_PATH: /var/lib/haris/documents
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-}
     depends_on:
       postgres:
         condition: service_healthy
     volumes:
       - ./backend:/app
       - backend_node_modules:/app/node_modules
+      - backend_documents:/var/lib/haris/documents
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/ >/dev/null || exit 1"]
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/health/ready >/dev/null || exit 1"]
       interval: 5s
       timeout: 3s
       retries: 20
@@ -78,7 +86,7 @@ services:
       - app_network
 
   gateway:
-    image: nginx:1.27-alpine
+    image: nginx:stable-alpine
     ports:
       - "${HTTP_PORT:-80}:80"
     volumes:
@@ -100,6 +108,7 @@ services:
 volumes:
   postgres_data:
   backend_node_modules:
+  backend_documents:
   frontend_node_modules:
   frontend_next_cache:
 

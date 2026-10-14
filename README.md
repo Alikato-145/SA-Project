@@ -7,6 +7,7 @@ during feature work; report discrepancies to the sprint schema coordinator.
 
 Current handoff documents:
 
+- [Detailed Thai user manual for first-time users](docs/user-manual.md)
 - [System completion tasks](specs/012-system-completion/tasks.md)
 - [Role-based web user guide](docs/user-guide-by-role.md)
 - [Release checklist](docs/release-checklist.md)
