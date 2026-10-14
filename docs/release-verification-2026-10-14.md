@@ -7,7 +7,7 @@ are deliberate; Mailpit proves local delivery only. All verification data is syn
 ## Published source revisions
 
 - Backend `develop`: `4feea540537fcddb5a75b129533a5fbc64cd3072`.
-- Frontend `person-c`: `2ff3b5529e50053e105cdf43551bd5265173b8c2`.
+- Frontend `person-c`: `03795156d140bf9ac4c9b306df3db1a1e67fcdfc`.
 - Root publication branch: `person-c`; read its exact revision with `git rev-parse HEAD`.
   Its gitlinks must match the two SHAs above. Submodules are published first.
 
