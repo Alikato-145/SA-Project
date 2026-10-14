@@ -40,6 +40,7 @@ jobs:
             frontend/test-results-webkit
           retention-days: 7
       - run: docker build -f frontend/Dockerfile frontend
+      - run: docker build -f backend/Dockerfile backend
       - name: Container diagnostics
         if: failure()
         run: docker compose --env-file .env.example -p haris-payroll-verify -f compose.yaml -f compose.verify.yaml logs --tail 100

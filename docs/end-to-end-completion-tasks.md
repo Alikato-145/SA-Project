@@ -42,7 +42,7 @@ Schema/migrations frozen; checklist นี้ไม่ใช่การอน�
 
 ## 1. เปิดระบบใหม่และเตรียมองค์กร
 
-### [ ] FLOW-004 — Fresh-clone/root Compose และ bootstrap Owner [VERIFY · P0]
+### [x] FLOW-004 — Fresh-clone/root Compose และ bootstrap Owner [VERIFY · P0]
 - **มีแล้ว:** Root Compose, development defaults, migration startup และ seed
 - **ตรวจ:** Clone พร้อม submodules, env setup, build/up/wait, migrate ซ้ำ, provision Owner, restart และ volume persistence; ตรวจ config production แยกจาก development
 - **ผ่านเมื่อ:** เริ่มจาก database ว่างด้วยคู่มือได้, Owner login ได้, ไม่มีการ reset ข้อมูลโดยไม่ตั้งใจ; root ไม่พึ่ง host Bun เพื่อรัน stack

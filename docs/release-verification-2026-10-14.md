@@ -7,7 +7,7 @@ are deliberate; Mailpit proves local delivery only. All verification data is syn
 ## Published source revisions
 
 - Backend `develop`: `4feea540537fcddb5a75b129533a5fbc64cd3072`.
-- Frontend `person-c`: `03795156d140bf9ac4c9b306df3db1a1e67fcdfc`.
+- Frontend `person-c`: `2d799485cf1766a54fffc875ac09b2ebe2773f82`.
 - Root publication branch: `person-c`; read its exact revision with `git rev-parse HEAD`.
   Its gitlinks must match the two SHAs above. Submodules are published first.
 
@@ -43,8 +43,8 @@ Browser artifacts use separate Chromium, WebKit and production report directorie
 
 | Image suffix under haris-payroll-production-rehearsal | Image ID | Remaining High/Critical CVE IDs |
 |---|---|---:|
-| backend | sha256:390a7584b1c65675d4f93c1592ef68093a9e3ef8f6b88d9112d922845bfd560a | 0 |
-| frontend | sha256:664d6f864f61b382729acf2117b32e99f9bb822bc4eea23e8d068b7324da2345 | 0 |
+| backend | sha256:4d6a64fa80f3c9cf7d004e8183f16310497d3bb5b3e5951e23814d080e1c1754 | 0 |
+| frontend | sha256:eb7b6e70c9e87a468886bcfc8599a4e81e61fe375d62a6fca0e5acb54992baee | 0 |
 | gateway | sha256:deba113f7e6370d5d9b3f41a4e99df907d2160eefffa2f4ed4a584d7d0a2782a | 3 |
 | postgres | sha256:ae27a531071f501861161b7e816ed10891ff203ef4811566ad1ce3f050536ac9 | 34 |
 
@@ -56,7 +56,22 @@ Details and unresolved vendor findings: security-verification-2026-10-14.md.
 
 ## External acceptance gates
 
-Remote CI and published clean-checkout results are recorded after publication.
+Published clean checkout at root `51d25a3739c526dc43abd623f47d773186c6c9d9`:
+recursive submodule clone/update succeeded; clean Git state; root Compose built
+and all four services became healthy at HTTP 18085/PG 55442. Seeded only this new
+disposable database using the guarded release fixture, then five login/role/persisted-
+payroll browser cases passed. The first login check before fixture setup correctly
+failed because an empty database has no demo accounts; root Compose does not seed
+accounts automatically. README documents the explicit development seed step.
+Log: `/private/tmp/haris-published-clean-checkout-20261014.log`.
+
+GitHub Actions run for this code revision: [Verify payroll](https://github.com/Alikato-145/SA-Project/actions/runs/38575681226).
+This initial run passed all 477 backend checks, 45 frontend checks and 21 Chromium
+cases but failed WebKit role recovery due to overlapping navigation after reload.
+The auth guard now cancels stale requests; the browser waits for the granted role
+to appear in navigation before opening leave. Updated local Chromium 21/WebKit 3,
+lint/typecheck/unit checks and rebuilt production TLS passed. A new remote run
+will verify the correction on Linux.
 Real provider TLS/monitoring/off-host retention and RPO/RTO, external SMTP recipient
 verification, and signed five-role UAT remain operator/human responsibilities.
 See uat-checklist.md. This publication does not claim 100% production acceptance

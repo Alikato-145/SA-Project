@@ -15,6 +15,8 @@ is not production deployment or human UAT sign-off.
 - Browser coverage includes organization create/edit/search, duplicate codes,
   20-row pagination, child-first archival, onboarding, scoped account grants,
   no-role recovery, password change/disable and concurrent employee linkage.
+- Role recovery cancels stale auth requests and waits for a hydrated granted-role
+  navigation in E2E; this fixes the WebKit Linux CI reload/navigation race.
 - Five-role live scope matrix: employee, supervisor, branch manager, HR and owner;
   own/department/branch/all queries and bank authorization across three employees.
 - Supervisor UI approves three days with a corrected leave type; four-day decision
@@ -57,7 +59,7 @@ as actual forms; passing them does not imply every action has been exercised via
 |---|---|
 | 001–002 | Scope and deterministic disposable fixtures established |
 | 003 | Local full verification and push/PR CI implemented; remote CI result must be recorded separately |
-| 004–005 | Root/production bootstrap and organization lifecycle verified; published clean-checkout rehearsal follows publication |
+| 004–005 | Root/production bootstrap and organization lifecycle verified; published clean checkout is healthy and five baseline browser cases passed |
 | 006–009 | Schedule/holiday/config successors and combined dated readiness implemented and checked |
 | 010–015 | Onboarding/account lifecycle/linkage, named scopes/no-role recovery and five-role authorization checked |
 | 016–023 | Employment history, bank/documents, weekly holidays, attendance clocks/calendar/corrections and lock guards checked |
@@ -80,7 +82,7 @@ as actual forms; passing them does not imply every action has been exercised via
 2. Configure the real HTTPS host, protected production secrets, provider monitoring
    and encrypted off-host backup destination/retention; agree RPO/RTO.
 3. Replace mock SMTP settings and test a specifically authorized external recipient.
-4. Obtain successful remote CI and clean-checkout verification at the published refs.
+4. Obtain the final remote CI result; published clean-checkout verification passed.
 5. Have representatives of all five roles run the UAT checklist and sign acceptance.
 
 Social security policy was confirmed by the user: summed daily base earnings,
