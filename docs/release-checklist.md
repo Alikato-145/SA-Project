@@ -26,7 +26,7 @@ Person C coordinates this checklist. Infrastructure evidence is in
 - [x] Payslip access is scoped; mock delivery attempts logged individually.
 - [x] Bank-transfer and social-security CSV exports match locked payroll.
 - [x] Repeatable fixtures demonstrate the complete UI/API flow.
-- [ ] Final lint, typecheck, tests, build and deployment rehearsal recorded below.
+- [x] Final lint, typecheck, tests, build and local deployment rehearsal recorded below.
 
 ## Final evidence
 
@@ -35,3 +35,5 @@ and the person accepting the demo. Infrastructure readiness does not check off
 unimplemented feature behavior.
 
 Latest publication evidence: [release-verification-2026-10-14.md](release-verification-2026-10-14.md). Human acceptance and production provider configuration remain separate gates.
+
+Corrected application source passed [Linux CI run 38577475119](https://github.com/Alikato-145/SA-Project/actions/runs/38577475119): full root verification, WebKit role recovery and both production image builds. This does not sign off real hosting or the unresolved vendor image findings.

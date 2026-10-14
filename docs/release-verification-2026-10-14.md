@@ -70,8 +70,11 @@ This initial run passed all 477 backend checks, 45 frontend checks and 21 Chromi
 cases but failed WebKit role recovery due to overlapping navigation after reload.
 The auth guard now cancels stale requests; the browser waits for the granted role
 to appear in navigation before opening leave. Updated local Chromium 21/WebKit 3,
-lint/typecheck/unit checks and rebuilt production TLS passed. A new remote run
-will verify the correction on Linux.
+lint/typecheck/unit checks and rebuilt production TLS passed. The corrected code revision `b3dbdf51c2484009058ecb9599074e7c89b76787` passed
+[GitHub Actions run 38577475119](https://github.com/Alikato-145/SA-Project/actions/runs/38577475119):
+root verification, all three WebKit Linux cases and both frontend/backend production
+image builds succeeded. Subsequent documentation-only publication does not change
+these submodule revisions or application behavior.
 Real provider TLS/monitoring/off-host retention and RPO/RTO, external SMTP recipient
 verification, and signed five-role UAT remain operator/human responsibilities.
 See uat-checklist.md. This publication does not claim 100% production acceptance

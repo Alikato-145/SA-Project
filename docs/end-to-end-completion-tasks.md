@@ -34,7 +34,7 @@ Schema/migrations frozen; checklist นี้ไม่ใช่การอน�
 - **ผ่านเมื่อ:** มีทั้งข้อมูลพร้อมคำนวณและข้อมูลผิดเงื่อนไข; dates คงที่, ไม่พึ่งวันที่เครื่อง; ไม่มีข้อมูลส่วนบุคคลจริงหรือแก้ database ผู้ใช้
 - **ขึ้นกับ:** FLOW-001; ใช้ schema/API ปัจจุบัน ไม่รอ browser UI ครบ
 
-### [ ] FLOW-003 — คำสั่งตรวจและ CI ที่รัน checks ครบ [BUILD · P0]
+### [x] FLOW-003 — คำสั่งตรวจและ CI ที่รัน checks ครบ [BUILD · P0]
 - **ขาด:** `bun test` ปกติ skip database gates; ไม่มี browser E2E pipeline ที่พิสูจน์ทุก flow
 - **ทำ:** Disposable PostgreSQL + migrations/fixtures + isolated DB test processes, frontend tests/lint/typecheck/build; เตรียม browser runner ให้ tasks หลังใช้
 - **ผ่านเมื่อ:** Clean checkout รันซ้ำได้, expected DB checks ไม่ skip, exit code ล้มเมื่อ failure และเก็บ test artifacts
@@ -105,13 +105,13 @@ Schema/migrations frozen; checklist นี้ไม่ใช่การอน�
 - **ผ่านเมื่อ:** No-role, no-employee, multiple-role และ unsupported path ไม่พาเข้าทางตัน; ไม่ grant default privileges เพื่อแก้อาการ
 - **ขึ้นกับ:** FLOW-012
 
-### [ ] FLOW-014 — รหัสชั่วคราวและการดูแลบัญชี [FIX/VERIFY · P1]
+### [x] FLOW-014 — รหัสชั่วคราวและการดูแลบัญชี [FIX/VERIFY · P1]
 - **มีแล้ว:** Login/logout, lockout, reset/unlock/disable, password change บางส่วนใน working tree
 - **ตรวจ/ทำ:** Clear password-change prompt/policy, reset/revocation, session expiry, account disable/unlock reasons, temporary password display once; เปลี่ยน role ระหว่าง session
 - **ผ่านเมื่อ:** Lifecycle ใช้ผ่านเว็บได้, ไม่แสดง/log secrets ซ้ำ, session/disabled account behavior ตรง policy; เปลี่ยนรหัสไม่กระทบ account อื่น
 - **ขึ้นกับ:** FLOW-012, FLOW-013
 
-### [ ] FLOW-015 — สิทธิ์หน้า/เมนู/API ทั้ง 5 roles [VERIFY · P0]
+### [x] FLOW-015 — สิทธิ์หน้า/เมนู/API ทั้ง 5 roles [VERIFY · P0]
 - **ยังไม่พิสูจน์ครบ:** มี policy/helpers/tests แต่ไม่ใช่ live route matrix ทุก workflow
 - **ตรวจ:** Own employee, department, branch, all-scope; allowed+denied cases, URL/API โดยตรง, roles inactive/revoked และ multiple grants
 - **ผ่านเมื่อ:** UI ไม่ชวนทำ action ที่ไม่มีสิทธิ์; backend deny ได้อิสระจาก UI และไม่ leak sensitive fields
@@ -125,7 +125,7 @@ Schema/migrations frozen; checklist นี้ไม่ใช่การอน�
 - **ผ่านเมื่อ:** ปิด row เดิม+สร้าง row ใหม่, compensation history ไม่ถูกเขียนทับ, payroll แบ่งวันที่ใช้ค่าถูก, termination ไม่ลบ history
 - **ขึ้นกับ:** FLOW-010, FLOW-015
 
-### [ ] FLOW-017 — บัญชีธนาคารพนักงาน [VERIFY · P1]
+### [x] FLOW-017 — บัญชีธนาคารพนักงาน [VERIFY · P1]
 - **มีแล้ว:** Encrypted bank-account API/UI
 - **ตรวจ:** Add/edit/make-primary/deactivate/replacement, absence of primary, masks และ access; bank export แสดงตามสิทธิ์ที่จำเป็น
 - **ผ่านเมื่อ:** Primary ไม่ขัดกัน, ไม่มี full account ใน ordinary responses/logs, export อ่านข้อมูลถูกและแจ้ง bank data ที่ขาด
@@ -229,7 +229,7 @@ Schema/migrations frozen; checklist นี้ไม่ใช่การอน�
 - **ผ่านเมื่อ:** Employee ขอของตัวเองได้และเข้าของคนอื่นไม่ได้ทั้ง UI/API; ไม่มี admin actions หลุดมา
 - **ขึ้นกับ:** FLOW-015, FLOW-016
 
-### [ ] FLOW-033 — Advance eligibility และ approval [VERIFY · P0]
+### [x] FLOW-033 — Advance eligibility และ approval [VERIFY · P0]
 - **มีแล้ว:** Eligibility/projection/approval logic และ focused tests
 - **ตรวจ:** วันที่ 19/20, worked days 19/20, ไม่เกินครึ่ง base salary, projected net pay ไม่ติดลบ, pending duplicates, rejection note, lock/projection integration
 - **ผ่านเมื่อ:** Boundary ทุกคู่มี deterministic fixture; UI บอกเหตุผลชัด, concurrent approve ไม่เกิน cap, final payroll ใช้ approved advance ถูก
@@ -357,7 +357,7 @@ Schema/migrations frozen; checklist นี้ไม่ใช่การอน�
 
 ## 11. Audit และการตรวจย้อนหลัง
 
-### [ ] FLOW-053 — Audit viewer และครบทุก sensitive action [VERIFY · P1]
+### [x] FLOW-053 — Audit viewer และครบทุก sensitive action [VERIFY · P1]
 - **มีแล้ว:** Audit APIs/viewer, append-only/redaction checks
 - **ตรวจ:** Search/filter/actor/target/time/request ID, role changes/reset, employment/bank, approval/correction, finance, preview/lock/adjustment, payslip/export และ payment ถ้า in-scope
 - **ผ่านเมื่อ:** หา incident ผ่านเว็บได้, success/failure/rollback มี trace ตาม policy, ไม่มี passwords/tokens/full bank details; update/delete audit ถูก deny
@@ -365,19 +365,19 @@ Schema/migrations frozen; checklist นี้ไม่ใช่การอน�
 
 ## 12. เดินทุก flow ผ่าน browser
 
-### [ ] FLOW-054 — Browser authorization matrix และ account journeys [BUILD · P0]
+### [x] FLOW-054 — Browser authorization matrix และ account journeys [BUILD · P0]
 - **ขาดจริง:** Tests ปัจจุบันไม่ใช่ live browser journey ของทุก role
 - **ทำ:** Login/logout/landing/change password/session expiry/role change/no-role + route/action allow/deny ทั้ง 5 roles รวม direct API requests
 - **ผ่านเมื่อ:** ใช้ FLOW-002 fixture, tests rerun ได้, backend deny ข้าม employee/department/branch; screenshots/traces เมื่อ fail
 - **ขึ้นกับ:** FLOW-003, FLOW-014, FLOW-015
 
-### [ ] FLOW-055 — Browser journey ตั้งแต่ตั้งร้านจนถึง export [BUILD · P0]
+### [x] FLOW-055 — Browser journey ตั้งแต่ตั้งร้านจนถึง export [BUILD · P0]
 - **ขาด:** ยังไม่มีหลักฐานปิดงานจาก fresh state ผ่าน UI โดยไม่ใช้ SQL เติมข้อมูลระหว่างทาง
 - **ทำ:** Organization → onboarding/grants → schedule/config → attendance → leave/OT → finance → preview/blocker recovery → lock → adjustment → payslip/export; payment เพิ่มเฉพาะ approved scope
 - **ผ่านเมื่อ:** Owner/HR/Manager/Supervisor/Employee ทำหน้าที่จริงครบ, cross-role effects ตรง, refresh/relogin ไม่เสีย state, expected totals ยืนยันด้วย golden fixture
 - **ขึ้นกับ:** FLOW-005–047 ตาม flow; ใช้ FLOW-048–052 เฉพาะที่อนุมัติ
 
-### [ ] FLOW-056 — Failure paths, contract/pagination และ mobile/a11y [BUILD/FIX · P1]
+### [x] FLOW-056 — Failure paths, contract/pagination และ mobile/a11y [BUILD/FIX · P1]
 - **ขาด:** Happy-path/API tests ไม่พิสูจน์ UI recovery และ selector behaviors ทั้งระบบ
 - **ทำ:** Network/server errors, partial list loads, empty vs unauthorized, pagination/envelopes, double submit/stale requests, 360px/1280px, Safari month field, keyboard/focus/error announcements
 - **ผ่านเมื่อ:** ผู้ใช้แก้/ลองใหม่โดยไม่เดา IDs, ไม่มี stale state ส่งข้อมูลผิด, sensitive actions ไม่เกิดซ้ำ, form/status copy ชัด; regressions มี runnable checks
@@ -439,3 +439,7 @@ history/transactions ถูกต้อง, runnable checks ตามควา�
 เอกสารประกอบ: `docs/release-readiness-audit-2026-10-13.md`,
 `specs/012-system-completion/tasks.md`, `docs/release-checklist.md`
 FLOW IDs เป็น task breakdown ใหม่ตาม journey ไม่แทน/เปลี่ยนเลข Txxx เดิมโดยอัตโนมัติ
+
+## ผลหลังเผยแพร่ 14 ตุลาคม 2026
+
+Implementation/automated verification ของ FLOW-001–045 และ 047–056 ผ่านตามหลักฐานใน `release-verification-2026-10-14.md` (049–050 ไม่ applicable) รวม WebKit Linux CI หลังแก้ auth navigation race. FLOW-046 ยังรอผู้รับบัญชีตรวจ format CSV จริงใน UAT; FLOW-057–060 ยังมี off-host/provider policy, vendor CVE review, hosting/alerts และ human sign-off ตาม `uat-checklist.md`. ไม่ถือว่าการ push คือ deploy หรือยอมรับ CVE.

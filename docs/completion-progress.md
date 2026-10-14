@@ -58,7 +58,7 @@ as actual forms; passing them does not imply every action has been exercised via
 | Tasks | Current status |
 |---|---|
 | 001–002 | Scope and deterministic disposable fixtures established |
-| 003 | Local full verification and push/PR CI implemented; remote CI result must be recorded separately |
+| 003 | Local and remote GitHub CI passed, including WebKit Linux and both production builds |
 | 004–005 | Root/production bootstrap and organization lifecycle verified; published clean checkout is healthy and five baseline browser cases passed |
 | 006–009 | Schedule/holiday/config successors and combined dated readiness implemented and checked |
 | 010–015 | Onboarding/account lifecycle/linkage, named scopes/no-role recovery and five-role authorization checked |
@@ -82,7 +82,7 @@ as actual forms; passing them does not imply every action has been exercised via
 2. Configure the real HTTPS host, protected production secrets, provider monitoring
    and encrypted off-host backup destination/retention; agree RPO/RTO.
 3. Replace mock SMTP settings and test a specifically authorized external recipient.
-4. Obtain the final remote CI result; published clean-checkout verification passed.
+4. Remote CI and published clean-checkout verification passed; retain their evidence with the release.
 5. Have representatives of all five roles run the UAT checklist and sign acceptance.
 
 Social security policy was confirmed by the user: summed daily base earnings,
