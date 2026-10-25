@@ -535,6 +535,8 @@ Relationships:
 - unique `(employee_id, request_month)` — เดือนละครั้ง
 - `request_month` ต้องเก็บเป็นวันแรกของเดือน
 - `amount`, `status`
+- `reason` — nullable เฉพาะข้อมูลเดิม; คำขอใหม่บังคับเหตุผลที่ trim แล้วไม่ว่าง ยาวไม่เกิน 1,000 ตัวอักษร
+- การปฏิเสธคำขอใหม่ต้องมี `decision_note` ที่ trim แล้วไม่ว่าง ยาวไม่เกิน 1,000 ตัวอักษร; ไม่เติมเหตุผลย้อนหลังให้ข้อมูลเก่า
 - `requested_by_user_account_id`
 - `decided_by_user_account_id`, `decided_at`, `decision_note`
 

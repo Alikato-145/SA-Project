@@ -146,6 +146,15 @@ result alone does not establish acceptance of this catalog.
   A quota-bearing type requires an existing unfrozen quota even when
   `allow_exceed` permits excess; only `quota_type=none` needs no quota row.
 
+- UC12 new advance requests require a trimmed nonblank reason, and rejection
+  requires a nonblank decision note, both bounded to 1,000 input characters
+  at service/API/UI boundaries. Migration `0006_advance_reason` adds only a
+  nullable `advance_requests.reason` for legacy preservation; existing NULL
+  reasons remain NULL and display as unrecorded. Root reviewed logical and
+  executable parity and verified unchanged historic fingerprints before/after
+  applying only to the disposable verification database. Eligibility, loan
+  policy and locked payroll facts remain unchanged.
+
 ## Authorization and data safety
 
 Apply role scope server-side—never rely on hidden frontend controls:

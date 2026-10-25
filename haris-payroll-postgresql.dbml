@@ -336,6 +336,7 @@ Table advance_requests {
   employee_id bigint [not null]
   request_month date [not null, note: 'First day of requested payroll month']
   amount numeric(12,2) [not null]
+  reason text [note: 'New requests require a trimmed nonblank reason up to 1000 characters; legacy rows may remain NULL']
   status advance_status [not null, default: 'pending']
   requested_by_user_account_id bigint [not null]
   requested_at timestamptz [not null]
