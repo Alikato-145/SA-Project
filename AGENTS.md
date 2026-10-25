@@ -123,6 +123,29 @@ floats.
   `docs/superpowers/specs/2026-10-25-use-case-delivery-design.md`. Existing schema
   freeze and schema-owner coordination still apply before migrations.
 
+## Current 20-use-case alignment 26 October 2026
+
+The current academic catalog contains 20 use cases and differs from the earlier
+16-case delivery diagram. Use the binding design at
+`docs/superpowers/specs/2026-10-26-use-case-20-alignment-design.md` and progress
+at `docs/superpowers/use-case-20-alignment-progress.md`; the earlier 49-browser
+result alone does not establish acceptance of this catalog.
+
+- UC07 supports own ordinary manual attendance for an active EMPLOYEE/self
+  grant. The attendance service owns this narrow permission; shared employee
+  `manage` authorization remains staff-only. Validate the dated assignment
+  branch, schedule-derived lateness/deduction, and immutable locked inputs.
+  Self correction requires a new meaningful reason and an OLD manual ordinary
+  row; approved leave, imported rows and holiday exceptions retain staff and
+  approval workflows. Independent Task 1 review and focused real-system
+  verification passed; full 20-case actor UAT remains pending.
+
+- UC08 checks every affected year's quota before submitting or editing a
+  pending request under the existing employee transaction lock. Submission
+  does not reserve or consume entitlement; approval rechecks and consumes it.
+  A quota-bearing type requires an existing unfrozen quota even when
+  `allow_exceed` permits excess; only `quota_type=none` needs no quota row.
+
 ## Authorization and data safety
 
 Apply role scope server-side—never rely on hidden frontend controls:
