@@ -97,6 +97,32 @@ floats.
   logged individually. Enforce authorization so one employee cannot view or
   receive another employee’s payslip.
 
+## Confirmed delivery extensions 25 October 2026
+
+- Accounting staff use the existing `HR` grant for this delivery; do not add an
+  `ACCOUNTING` role merely to match the actor label in the report.
+- PromptPay support uses the employee's registered recipient phone
+  number as the primary identifier, separate from the contact phone. Preserve
+  that recipient and the amount as payment snapshots; generating/scanning a QR
+  does not prove a payment succeeded. Recipient registration and effective
+  membership/earned-base payroll snapshots, exclusive branch payment groups,
+  immutable prepared payment destinations and phone QR generation are implemented.
+  Manual payout confirmation/cancellation, append-only payment history and
+  exact branch paid/outstanding summaries are implemented. Salary-payable PDF
+  summaries and frozen bank/earned-base exports are implemented; payslip/email
+  regression is verified, including scoped staff own-only access. Automated
+  single-role Login/UC1–16 browser UAT and final scoped review passed on the
+  disposable verification stack; see
+  `docs/superpowers/reports/14-delivery-summary.md`. This does not certify real
+  bank settlement or external email delivery.
+- The creditor summary means salary payable by the restaurant to employees,
+  both in aggregate and per employee. It shares locked-payroll source data with
+  individual payslips; it is not an employee loan/debt summary and payslips must
+  not be reconstructed by parsing the summary PDF.
+- The approved business direction and pending schema delta are recorded in
+  `docs/superpowers/specs/2026-10-25-use-case-delivery-design.md`. Existing schema
+  freeze and schema-owner coordination still apply before migrations.
+
 ## Authorization and data safety
 
 Apply role scope server-side—never rely on hidden frontend controls:

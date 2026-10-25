@@ -84,3 +84,34 @@
 ## Intended output
 
 ไฟล์ `haris-payroll-postgresql.dbml` ไฟล์เดียวที่ dbdiagram.io import ได้ พร้อม enums, tables, indexes, references และ notes สำหรับกฎที่ DBML บังคับโดยตรงไม่ได้
+
+
+## 25 October 2026 AUTH-01 delivery extension
+
+User-authorized delivery completion adds persistent current-session logout revocation. Migration `0001_auth_session_revocation` adds `revoked_session_tokens` without rewriting historical business data. Keep fingerprints only and expiry indexing; no in-memory-only blacklist. This technical table may be omitted from the business-focused presentation ERD while remaining in the full DBML and executable schema.
+
+## Delivery extension 25 October 2026 current-period adjustments
+
+`payroll_adjustments.employee_id` is required (employees FK RESTRICT/CASCADE), backfilled from the original payroll record before NOT NULL. Original record is nullable for a current-period request. Existing corrections retain locked-origin/later-target/same-shop rules and must match the direct employee. New requests always specify an unlocked target period and valid employee assignment; legacy origin-linked target-null rows remain unchanged. A database origin-or-target CHECK prevents origin-free targetless rows, and a target/employee/status index supports payroll inputs/readiness. Pending current adjustments block lock; approved items enter preview once and are linked to the applied item only on lock. Exact decimal amounts and approval/audit history are preserved.
+
+This resolves the earlier DBML target-NOT-NULL versus nullable executable schema mismatch without rewriting old target values: the logical reference now explicitly documents the legacy nullable exception. The existing approved correction workflow remains supported. Migration0002 adds/backfills the employee field; no table or enum additions.
+
+## Delivery extension 25 October 2026 employee loan requests
+
+The loan feature owns `loan_requests` with `loan_request_status` pending/approved/rejected, direct employee and requester references, immutable requested principal/count/reason, decision actor/time/note and unique nullable loan linkage. Four foreign keys use RESTRICT/CASCADE. PostgreSQL enforces positive numeric(12,2) principal,1–5 installments, nonempty reason and consistent decision metadata; rejected requests require a note and cannot link a loan. Pending requests cannot contain decision/loan metadata. Existing loans/installments are unchanged.
+
+EMPLOYEE may submit/read own requests; HR/OWNER decide. Approval creates the loan and its installment schedule and links it to the request atomically, with row lock and shared payroll-input serialization; duplicate decisions cannot create another loan. Approver selects the first unlocked due month. Requested principal/count are not silently altered. Migration0003 only adds this enum/table/indexes/constraints; no historical loan values are rewritten.
+
+## Delivery extension 25 October 2026 destinations and social-security snapshots
+
+Employees have payment_method cash/transfer (new defaultcash) and nullable canonical10-digit promptpay_phone, separate from contact phone. Migration0004 initializes existing active-primary-bank employees as transfer, otherscash; recipients remainNULL until explicitly registered. DB phone constraint accepts only0[689] plus8digits. Assignment membership defaultsTRUE for existing all-member payroll behavior and changes through effective-dated successor history.
+
+Payroll records add required is_social_security_member_snapshot defaultTRUE and nullable/nonnegative social_security_base_snapshot. New calculations persist covered daily base earnings, excluding welfare/OT/adjustments. Legacy earned-base staysNULL; reports must derive a fallback from frozen base_salary items, never current monthly salary or0. No old locked payroll rows are updated, and the immutable trigger remains intact. Root pre/post fingerprints of135lockedrecords (excludingonlynewcolumns) and8919items matched exactly on disposable migration. Payment preparation will freeze recipient/amount separately in Task7; generating/scanningQR never marks paid.
+
+## Delivery extension 25 October 2026 prepared payment snapshots
+
+Payroll owns `payroll_payments` and prepared/paid/cancelled status. Required record/branch/channel/positive exact amount/preparer/time, nullable bank FK/phone and complete bank snapshot tuple; encrypted account envelope already embeds key version. Six RESTRICT/CASCADE foreign keys retain source/actor records. A partial UNIQUE index permits only one prepared/paid payment per payroll record while keeping cancelled history; DBML documents this PostgreSQL-only uniqueness rather than incorrectly making all historical record references unique.
+
+Checks enforce canonical phone, complete-or-absent bank tuple, cash without destination, a usable transfer destination and consistent status/decision actor/time/reason. Migration0005 trigger enforces full locked net and frozen assignment branch, member-bank/nonmember-phone transfer requirements, immutable snapshot/preparation fields, no deletes and only prepared→paid/cancelled transitions. Idempotent APIs must return existing rows without a no-op UPDATE. Task7 exposes preparation/groups/QR; Task8 adds lifecycle endpoints, so schema presence does not imply paid confirmation UI is complete.
+
+Root pre/post migration fingerprints matched138locked payroll records and9150items on disposable verificationDB; no historical results changed. Generation/scanning QR never confirms payment or triggers a bank transfer.

@@ -38,6 +38,7 @@ jobs:
             frontend/test-results
             frontend/playwright-report-webkit
             frontend/test-results-webkit
+            docs/superpowers/reports/full-uat-evidence
           retention-days: 7
       - run: docker build -f frontend/Dockerfile frontend
       - run: docker build -f backend/Dockerfile backend

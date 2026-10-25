@@ -23,5 +23,5 @@ compose exec -T frontend sh -ec '
 printf 'Verification stack is ready at http://localhost:%s; it uses its own database and volumes.\n' "$HTTP_PORT"
 if [ "${VERIFY_BROWSER:-1}" = 1 ]; then
   command -v bun >/dev/null || { echo 'Install Bun and Playwright Chromium to run browser verification.' >&2; exit 1; }
-  (cd frontend && E2E_BASE_URL="http://localhost:$HTTP_PORT" bun run test:e2e)
+  sh scripts/full-uat.sh
 fi
