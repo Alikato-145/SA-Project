@@ -1,6 +1,6 @@
 # Current20 Use Case Alignment Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Match the current20UC report with working role-scoped web journeys, synchronized academic artifacts, real disposable-system evidence and develop integration.
 **Architecture:** Minimal vertical extensions in existing attendance/leave/advance services and UI; schema-owner-reviewed nullable reason migration for legacy preservation; synchronize existing20-ID report rather than discard workflows. One writer per task and independent review gates.
@@ -28,35 +28,41 @@
 
 Files: owning attendance runtime/service/DTO/controller/routes/repository/tests as necessary; frontend attendance page and route policy, existing sharedemployeecontext; focused E2E + evidence report16.
 
-- [ ] Read nearestAGENTS and relevantNext16docs. Inspect currentstaffattendance UI/API/audit/lockedguards and rolecontext; reproduce employee denied with focusedRED.
-- [ ] Permit validselfgrant own manual create/correct with meaningful reason and datedbranchvalidation at backendowninglayer; forbid leave/provenance/otherperson/lockedrows. Reusecurrentstaffworkflow; do not loosen sharedmanage acrossfeatures.
-- [ ] Expose employee owncontext UI, hide arbitrarypicker/branchadministration; assert actualsubmit/correct/reload/audit and negative directAPI cases in disposableDB/browser.
-- [ ] Run covering tests+types; write reports/16-uc07-self-attendance.md and taskreport with exactRED/GREEN/evidence. Freeze for independent spec+qualityreview before checkpointcommit.
+- [x] Read nearestAGENTS and relevantNext16docs. Inspect currentstaffattendance UI/API/audit/lockedguards and rolecontext; reproduce employee denied with focusedRED.
+- [x] Permit validselfgrant own manual create/correct with meaningful reason and datedbranchvalidation at backendowninglayer; forbid leave/provenance/otherperson/lockedrows. Reusecurrentstaffworkflow; do not loosen sharedmanage acrossfeatures.
+- [x] Expose employee owncontext UI, hide arbitrarypicker/branchadministration; assert actualsubmit/correct/reload/audit and negative directAPI cases in disposableDB/browser.
+- [x] Run covering tests+types; write reports/16-uc07-self-attendance.md and taskreport with exactRED/GREEN/evidence. Freeze for independent spec+qualityreview before checkpointcommit.
 
 ### Task 2: UC08 quota precheck
 
 Files: leave.service.ts/repository contract only if needed, focusedservice/realDBtests and E2E; report17.
 
-- [ ] RED tests for insufficient/missing/frozen/peryear quota during submit/edit with zero persistedrequest/day/action; include nonequota and explicitallowExceed behavior.
-- [ ] Implement read/validate under existing employee lock+transaction; do not reserve/consumequota atsubmit; retainapprovalrecheck+consumption and typecorrection rules. Use exactday arithmetic and coherenterrors.
-- [ ] RealemployeeUI rejection+validsubmission/reload plus unchangedapprovalboundary; test crossyear/editrollback and concurrentappropriateguards.
-- [ ] Focusedchecks/types/report17-uc08-quota-precheck.md, freeze/taskreview/checkpoint.
+- [x] RED tests for insufficient/missing/frozen/peryear quota during submit/edit with zero persistedrequest/day/action; include nonequota and explicitallowExceed behavior.
+- [x] Implement read/validate under existing employee lock+transaction; do not reserve/consumequota atsubmit; retainapprovalrecheck+consumption and typecorrection rules. Use exactday arithmetic and coherenterrors.
+- [x] RealemployeeUI rejection+validsubmission/reload plus unchangedapprovalboundary; test crossyear/editrollback and concurrentappropriateguards.
+- [x] Focusedchecks/types/report17-uc08-quota-precheck.md, freeze/taskreview/checkpoint.
 
 ### Task 3: UC12 advance reason and rejection note
 
 Files: advance schema/DTO/service/runtime/repository/controller/routes/UI/tests; migration0006/meta; DBML/ORM/design root refs; report18.
 
-- [ ] RED nonblankbounded reason/note service+API+UI persistence tests. Existing loan behavior preserved.
-- [ ] Generate nullablelegacy advance_requests.reason migration only; notifyrootowner. Root reviews SQL/meta/logicalparity and existinghistorypreservation before applyingonlyverifyDB. Do not drop/reseedhistory.
-- [ ] Require new reasons and rejectionnotes atservice/requestboundary andform; showlegacylabel forNULL; reason survives employee/HRreload; rejectedadvance has saveddecisionnote. Update existingfixtures/callers/tests to realrequiredcontract, not fabricatehistoricdata.
-- [ ] Realbrowser employee request→HR/OWNERdecision with eligibleactualdate and directdenials; rollback/duplicate/money/thresholdguards. Focusedchecks/types/report18-uc12-advance-reasons.md, freeze/taskreview/checkpoint.
+- [x] RED nonblankbounded reason/note service+API+UI persistence tests. Existing loan behavior preserved.
+- [x] Generate nullablelegacy advance_requests.reason migration only; notifyrootowner. Root reviews SQL/meta/logicalparity and existinghistorypreservation before applyingonlyverifyDB. Do not drop/reseedhistory.
+- [x] Require new reasons and rejectionnotes atservice/requestboundary andform; showlegacylabel forNULL; reason survives employee/HRreload; rejectedadvance has saveddecisionnote. Update existingfixtures/callers/tests to realrequiredcontract, not fabricatehistoricdata.
+- [x] Realbrowser employee request→HR/OWNERdecision with eligibleactualdate and directdenials; rollback/duplicate/money/thresholdguards. Focusedchecks/types/report18-uc12-advance-reasons.md, freeze/taskreview/checkpoint.
 
 ### Task 4: Canonical20 documentation and fullactor UAT
 
 Files: currentdocs/sa-report README/catalog/CRUD/query/ERD/sequence/collaboration/generator/DOCX/PDF onlyasneeded; userbackupsource preserved; newcanonical20actor matrix/crosswalk; focusedmissingE2E; report19.
 
-- [ ] Reconcile all20goal/actor/action/alternative withactualcode; UC04managerownbranchsubset, UC08allowExceedexception, UC12newreasons, UC17generation-vsownread, UC18paymentlifecycle+reports, UC19scopedread-vsfinancialexports. Retain20IDs, no arbitraryrenumbering.
-- [ ] Add actualactorUI gaps in tests: HRandOWNER administration (org/accounts/config/leaveadmin/schedules/debt/audit), employeemanualtime/leave/OT/finance, supervisor/managerworkscope+approvals, payroll/reports/payslips/payment, allroleworkspace. Seedfreshguardedfixtures beforemoduleload; paceauth; retainnegativechecks.
-- [ ] Update fullschema/model to39tables/currentactualFKenumcounts and advance reason, CRUD/query references; regenerate affecteddiagrams andreportusingdocuments/PDFskills. Renderandinspectpages/tables/figures, no placeholders replacinguserdata. Publishonlyrelatedartifacts, preserveunrelatedPPTX.
-- [ ] Runbackendtypes+fullmigrateddisposabletests; frontendunit/lint/types/build; oneentireunfilteredbrowser1worker0retries withallfixturepaths. Freezeapplication/scripts untilcommandexit; preservefailedlogs without selectivepassrollups. VerifylocalSMTPattachments/QR/PDFCSV/own-scope asbefore.
-- [ ] Writecanonical20actorcoverage/report19 plusfinalsummaryreport20, independenttaskreview thenwholebranchreview against fixedinitialbases. Oneboundedfinalfixwave/scopedrereview perSDD. Commitreviewedchanges, FFmergedevelop/pushall3repos andverifyremoteSHAs. Reportlimitations/remotestatushonestly. KeepautomationPAUSED.
+- [x] Reconcile all20goal/actor/action/alternative withactualcode; UC04managerownbranchsubset, UC08allowExceedexception, UC12newreasons, UC17generation-vsownread, UC18paymentlifecycle+reports, UC19scopedread-vsfinancialexports. Retain20IDs, no arbitraryrenumbering.
+- [x] Add actualactorUI gaps in tests: HRandOWNER administration (org/accounts/config/leaveadmin/schedules/debt/audit), employeemanualtime/leave/OT/finance, supervisor/managerworkscope+approvals, payroll/reports/payslips/payment, allroleworkspace. Seedfreshguardedfixtures beforemoduleload; paceauth; retainnegativechecks.
+- [x] Update fullschema/model to39tables/currentactualFKenumcounts and advance reason, CRUD/query references; regenerate affecteddiagrams andreportusingdocuments/PDFskills. Renderandinspectpages/tables/figures, no placeholders replacinguserdata. Publishonlyrelatedartifacts, preserveunrelatedPPTX.
+- [x] Runbackendtypes+fullmigrateddisposabletests; frontendunit/lint/types/build; oneentireunfilteredbrowser1worker0retries withallfixturepaths. Freezeapplication/scripts untilcommandexit; preservefailedlogs without selectivepassrollups. VerifylocalSMTPattachments/QR/PDFCSV/own-scope asbefore.
+- [x] Writecanonical20actorcoverage/report19 plusfinalsummaryreport20, independenttaskreview thenwholebranchreview against fixedinitialbases. Oneboundedfinalfixwave/scopedrereview perSDD. Commitreviewedchanges, FFmergedevelop/pushall3repos andverifyremoteSHAs. Reportlimitations/remotestatushonestly. KeepautomationPAUSED.
+
+
+### Task 5: Beginner UI user README added by user
+
+- [x] Create docs/user-guide/README.md covering all canonical20 IDs with roles, prerequisites, exact UI clicks/fields/buttons, result checks, common blockers and next steps; separate subflows and startup dependency checklist. Preserve technical rootREADME and add a link.
+- [x] Verify against actual UI/E2E/canonicalcatalog, no fabricatedcontrols or policies; documentation-only checks, then independentreview before finalintegration.

@@ -1,0 +1,310 @@
+[
+  {
+    "screen": "S01",
+    "route": "/login",
+    "role": "ทุกบทบาท",
+    "useCases": [
+      "UC01"
+    ],
+    "image": "evidence/ui/login.png"
+  },
+  {
+    "screen": "S02",
+    "route": "/dashboard",
+    "role": "OWNER",
+    "useCases": [
+      "UC19"
+    ],
+    "image": "evidence/ui/owner-dashboard.png"
+  },
+  {
+    "screen": "S03",
+    "route": "/organization",
+    "role": "OWNER",
+    "useCases": [
+      "UC02"
+    ],
+    "image": "evidence/ui/owner-organization.png"
+  },
+  {
+    "screen": "S04",
+    "route": "/employees",
+    "role": "OWNER",
+    "useCases": [
+      "UC04"
+    ],
+    "image": "evidence/ui/owner-employees.png"
+  },
+  {
+    "screen": "S05",
+    "route": "/employees/new",
+    "role": "OWNER",
+    "useCases": [
+      "UC04"
+    ],
+    "image": "evidence/ui/owner-employees-new.png"
+  },
+  {
+    "screen": "S06",
+    "route": "/accounts",
+    "role": "OWNER",
+    "useCases": [
+      "UC03"
+    ],
+    "image": "evidence/ui/owner-accounts.png"
+  },
+  {
+    "screen": "S07",
+    "route": "/accounts/new",
+    "role": "OWNER",
+    "useCases": [
+      "UC03"
+    ],
+    "image": "evidence/ui/owner-accounts-new.png"
+  },
+  {
+    "screen": "S08",
+    "route": "/attendance",
+    "role": "OWNER",
+    "useCases": [
+      "UC07"
+    ],
+    "image": "evidence/ui/owner-attendance.png"
+  },
+  {
+    "screen": "S09",
+    "route": "/leave",
+    "role": "OWNER",
+    "useCases": [
+      "UC06",
+      "UC08",
+      "UC09"
+    ],
+    "image": "evidence/ui/owner-leave.png"
+  },
+  {
+    "screen": "S10",
+    "route": "/overtime",
+    "role": "OWNER",
+    "useCases": [
+      "UC10",
+      "UC11"
+    ],
+    "image": "evidence/ui/owner-overtime.png"
+  },
+  {
+    "screen": "S11",
+    "route": "/finance",
+    "role": "OWNER",
+    "useCases": [
+      "UC12",
+      "UC13"
+    ],
+    "image": "evidence/ui/owner-finance.png"
+  },
+  {
+    "screen": "S12",
+    "route": "/schedules",
+    "role": "OWNER",
+    "useCases": [
+      "UC05"
+    ],
+    "image": "evidence/ui/owner-schedules.png"
+  },
+  {
+    "screen": "S13",
+    "route": "/payroll",
+    "role": "OWNER",
+    "useCases": [
+      "UC14",
+      "UC15",
+      "UC16"
+    ],
+    "image": "evidence/ui/owner-payroll.png"
+  },
+  {
+    "screen": "S14",
+    "route": "/payslips",
+    "role": "OWNER",
+    "useCases": [
+      "UC17"
+    ],
+    "image": "evidence/ui/owner-payslips.png"
+  },
+  {
+    "screen": "S15",
+    "route": "/reports",
+    "role": "OWNER",
+    "useCases": [
+      "UC18",
+      "UC19"
+    ],
+    "image": "evidence/ui/owner-reports.png"
+  },
+  {
+    "screen": "S16",
+    "route": "/audit",
+    "role": "OWNER",
+    "useCases": [
+      "UC20"
+    ],
+    "image": "evidence/ui/owner-audit.png"
+  },
+  {
+    "screen": "S17",
+    "route": "/settings",
+    "role": "OWNER",
+    "useCases": [
+      "UC02",
+      "UC03",
+      "UC06"
+    ],
+    "image": "evidence/ui/owner-settings.png"
+  },
+  {
+    "screen": "S18",
+    "route": "/employees/237",
+    "role": "OWNER",
+    "useCases": [
+      "UC04"
+    ],
+    "image": "evidence/ui/owner-employees-237.png"
+  },
+  {
+    "screen": "S19",
+    "route": "/employees/237/employment",
+    "role": "OWNER",
+    "useCases": [
+      "UC04"
+    ],
+    "image": "evidence/ui/owner-employees-237-employment.png"
+  },
+  {
+    "screen": "S20",
+    "route": "/employees/237/bank",
+    "role": "OWNER",
+    "useCases": [
+      "UC04"
+    ],
+    "image": "evidence/ui/owner-employees-237-bank.png"
+  },
+  {
+    "screen": "S21",
+    "route": "/employees/237/documents",
+    "role": "OWNER",
+    "useCases": [
+      "UC04"
+    ],
+    "image": "evidence/ui/owner-employees-237-documents.png"
+  },
+  {
+    "screen": "S22",
+    "route": "/employees/237/weekly-holidays",
+    "role": "OWNER",
+    "useCases": [
+      "UC04"
+    ],
+    "image": "evidence/ui/owner-employees-237-weekly-holidays.png"
+  },
+  {
+    "screen": "S23",
+    "route": "/leave",
+    "role": "employee",
+    "useCases": [
+      "UC08"
+    ],
+    "image": "evidence/ui/landing-employee.png"
+  },
+  {
+    "screen": "S24",
+    "route": "/finance",
+    "role": "employee",
+    "useCases": [
+      "UC12"
+    ],
+    "image": "evidence/ui/employee-finance.png"
+  },
+  {
+    "screen": "S25",
+    "route": "/leave",
+    "role": "employee",
+    "useCases": [
+      "UC08"
+    ],
+    "image": "evidence/ui/employee-leave.png"
+  },
+  {
+    "screen": "S26",
+    "route": "/overtime",
+    "role": "employee",
+    "useCases": [
+      "UC10"
+    ],
+    "image": "evidence/ui/employee-overtime.png"
+  },
+  {
+    "screen": "S27",
+    "route": "/payslips",
+    "role": "employee",
+    "useCases": [
+      "UC17"
+    ],
+    "image": "evidence/ui/employee-payslips.png"
+  },
+  {
+    "screen": "S28",
+    "route": "/attendance",
+    "role": "supervisor",
+    "useCases": [
+      "UC07"
+    ],
+    "image": "evidence/ui/landing-supervisor.png"
+  },
+  {
+    "screen": "S29",
+    "route": "/dashboard",
+    "role": "supervisor",
+    "useCases": [
+      "UC19"
+    ],
+    "image": "evidence/ui/supervisor-dashboard.png"
+  },
+  {
+    "screen": "S30",
+    "route": "/attendance",
+    "role": "branch_manager",
+    "useCases": [
+      "UC07"
+    ],
+    "image": "evidence/ui/landing-branch_manager.png"
+  },
+  {
+    "screen": "S31",
+    "route": "/dashboard",
+    "role": "branch_manager",
+    "useCases": [
+      "UC19"
+    ],
+    "image": "evidence/ui/branch_manager-dashboard.png"
+  },
+  {
+    "screen": "S32",
+    "route": "/payroll",
+    "role": "hr",
+    "useCases": [
+      "UC14",
+      "UC15",
+      "UC16"
+    ],
+    "image": "evidence/ui/landing-hr.png"
+  },
+  {
+    "screen": "S33",
+    "route": "/dashboard",
+    "role": "hr",
+    "useCases": [
+      "UC19"
+    ],
+    "image": "evidence/ui/hr-dashboard.png"
+  }
+]

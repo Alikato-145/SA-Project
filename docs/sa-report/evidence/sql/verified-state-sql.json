@@ -1,0 +1,50 @@
+{
+  "boundary": "SQL-only demonstration; new synthetic rows rolled back; not service acceptance or external email",
+  "entries": [
+    {
+      "id": "S001",
+      "name": "LeaveRequest.pending → rejected",
+      "source": "leave.repository.ts / decide (same Drizzle statement)",
+      "sql": "update \"leave_requests\" set \"final_leave_type_id\" = $1, \"status\" = $2, \"decided_at\" = $3, \"updated_at\" = $4 where \"leave_requests\".\"id\" = $5 returning \"id\", \"employee_id\", \"original_leave_type_id\", \"final_leave_type_id\", \"start_date\", \"end_date\", \"requested_days\", \"reason\", \"status\", \"is_retroactive\", \"submitted_by_user_account_id\", \"submitted_at\", \"decided_at\", \"created_at\", \"updated_at\"",
+      "params": [
+        null,
+        "rejected",
+        "2026-10-14T19:30:03.797Z",
+        "2026-10-14T19:30:03.797Z",
+        133
+      ],
+      "verified": true,
+      "resultCount": 1
+    },
+    {
+      "id": "S002",
+      "name": "OvertimeRecord.pending → rejected",
+      "source": "overtime.repository.ts / decide (same Drizzle statement)",
+      "sql": "update \"overtime_records\" set \"status\" = $1, \"decided_at\" = $2, \"updated_at\" = $3 where \"overtime_records\".\"id\" = $4 returning \"id\", \"employee_id\", \"work_day_record_id\", \"overtime_date\", \"overtime_type\", \"hours\", \"day_units\", \"reason\", \"status\", \"requested_by_user_account_id\", \"submitted_at\", \"decided_at\", \"created_at\", \"updated_at\"",
+      "params": [
+        "rejected",
+        "2026-10-14T19:30:03.801Z",
+        "2026-10-14T19:30:03.801Z",
+        200
+      ],
+      "verified": true,
+      "resultCount": 1
+    },
+    {
+      "id": "S003",
+      "name": "EmailDeliveryLog.pending → failed",
+      "source": "payslip.repository.ts / finishDelivery (same Drizzle statement)",
+      "sql": "update \"email_delivery_logs\" set \"status\" = $1, \"provider_message_id\" = $2, \"sent_at\" = $3, \"error_message\" = $4 where (\"email_delivery_logs\".\"id\" = $5 and \"email_delivery_logs\".\"status\" = $6) returning \"id\", \"payslip_id\", \"recipient_email\", \"status\", \"provider_message_id\", \"attempted_at\", \"sent_at\", \"error_message\"",
+      "params": [
+        "failed",
+        null,
+        null,
+        "SMTP ไม่รับข้อความหรือการเชื่อมต่อล้มเหลว ตรวจ configuration และลองส่งใหม่",
+        32,
+        "pending"
+      ],
+      "verified": true,
+      "resultCount": 1
+    }
+  ]
+}

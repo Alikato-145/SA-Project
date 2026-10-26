@@ -1,0 +1,18 @@
+# Independent review — current20 beginner UI guide
+
+## Verdict
+
+- **SPEC: FAIL.** The guide matches all 20 canonical IDs and names, but a required UC08/UC09 evidence path is missing, so a novice cannot complete approval for a leave type configured to require a document.
+- **QUALITY: Changes requested.** Fix the three bounded documentation findings below. No product defect or new browser result is claimed by this review.
+
+## Findings, ordered by severity
+
+1. **P1 — Required leave attachment flow is absent.** [Guide line 125](../../user-guide/README.md#uc08-ยื่นคำขอลา) moves from submission straight to pending status, and line 134 tells the approver to inspect evidence without saying how the employee attaches it. A type may be marked **ต้องแนบเอกสารก่อนอนุมัติ** in UC06; the backend rejects approval without an attachment (`backend/src/features/leave/leave.service.ts:104–106`). The actual request card has **เอกสารประกอบ** → **ไฟล์เอกสาร** → **แนบเอกสาร**, accepts PDF/PNG/JPEG up to 5 MB, and shows the saved file (`frontend/app/(dashboard)/leave/page.tsx:105`, `frontend/components/attachment-panel.tsx:32–45`). Add a numbered step after submitting/reloading UC08 to attach the file to that specific request and verify it appears before UC09 approval. Add the missing-document recovery in UC09. The document is attached to the leave request, not the employee's general document tab.
+2. **P2 — First-demo checklist has an impossible dependency order.** [Guide line 298](../../user-guide/README.md#เช็กลิสต์สาธิตครั้งแรก) asks UC03 to link an employee account and self grant, then line 299 creates the employee in UC04. The account UI blocks a self grant until an employee is linked (`frontend/features/identity-hr/accounts/account-live.tsx:615,694–695`), and the guide's own UC03 prerequisite at line 51 states the employee must exist. Move employee creation before account linking/self grant, or split the initial administrative account from the subsequent employee account step.
+3. **P2 — UC06 omits the wage deduction policy control.** [Guide line 106](../../user-guide/README.md#uc06-กำหนดนโยบายเงินเดือนและการลา) lists the type fields and optional switches but skips the visible **หักค่าจ้าง** checkbox (`frontend/components/leave-administration.tsx:53–63`). A novice configuring a deductible leave type would save the default non-deductible policy, affecting later payroll. Include this control and tell the reader to set it according to the approved leave policy; preserve the distinction between ordinary approved paid leave and unpaid excess.
+
+## Checks and scope
+
+- Compared the guide with `docs/sa-report/evidence/use-case-catalog.json`: **20 headings, 20 unique IDs, exact IDs/names/order**. Root `README.md` adds only the guide link in its diff; the technical README remains intact.
+- Read the Task 5 brief/report, binding current20 design, actor matrix and final UAT report. Spot-checked actual frontend source and existing E2E journeys for login/navigation, organization/accounts/employees, schedules/configuration, attendance, leave/OT, advance/loan/debt/adjustments, payroll, payslips, payments, reports and audit. The guide's critical UC07 dated self-attendance, UC08 quota timing, UC12 reason/eligibility, UC13 locked adjustments, UC17 own-only payslips and UC18 snapshot/payment/QR/report rules otherwise agree with the checked implementation.
+- This is a read-only document review. Existing final 69/69 browser evidence is acknowledged, not rerun; no database, browser or product tests were run. The older `docs/user-guide-by-role.md` payment wording is already known to be stale; root owns the prominent supersession pointer and it is outside these Task 5 findings.

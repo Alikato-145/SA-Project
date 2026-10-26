@@ -1,0 +1,1300 @@
+[
+  {
+    "name": "AccountsPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/accounts/page.tsx",
+    "attributes": [],
+    "methods": [
+      "AccountsPage"
+    ]
+  },
+  {
+    "name": "AdvanceController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/advance/advance.controller.ts",
+    "attributes": [
+      "service: Pick<AdvanceService"
+    ],
+    "methods": [
+      "approve",
+      "constructor",
+      "list",
+      "reject",
+      "submit"
+    ]
+  },
+  {
+    "name": "AdvanceRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/advance/advance.repository.ts",
+    "attributes": [],
+    "methods": [
+      "decide",
+      "findApprovedForMonth",
+      "findById",
+      "insert",
+      "listByEmployee"
+    ]
+  },
+  {
+    "name": "AdvanceService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/advance/advance.service.ts",
+    "attributes": [
+      "repository: AdvanceRepository",
+      "access: AdvanceAccess",
+      "eligibility: AdvanceEligibility",
+      "projection: AdvanceProjection",
+      "today: ("
+    ],
+    "methods": [
+      "approveAdvance",
+      "assertCanDecide",
+      "assertCanRead",
+      "assertCanRequest",
+      "constructor",
+      "findApprovedForPayroll",
+      "getBaseSalary",
+      "getWorkedDays",
+      "listRequests",
+      "netPayAfterAdvance",
+      "rejectAdvance",
+      "submitAdvance"
+    ]
+  },
+  {
+    "name": "AttachmentController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/attachment/attachment.controller.ts",
+    "attributes": [
+      "injected service"
+    ],
+    "methods": [
+      "download",
+      "list",
+      "upload"
+    ]
+  },
+  {
+    "name": "AttachmentRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/attachment/attachment.repository.ts",
+    "attributes": [],
+    "methods": [
+      "find",
+      "insert",
+      "list"
+    ]
+  },
+  {
+    "name": "AttachmentService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/attachment/attachment.service.ts",
+    "attributes": [
+      "injected dependencies"
+    ],
+    "methods": [
+      "databaseId",
+      "download",
+      "list",
+      "upload"
+    ]
+  },
+  {
+    "name": "AttendanceController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/attendance/attendance.controller.ts",
+    "attributes": [
+      "service: ReturnType<typeof createAttendanceRuntimeService>"
+    ],
+    "methods": [
+      "calendar",
+      "constructor",
+      "context",
+      "correct",
+      "create",
+      "list"
+    ]
+  },
+  {
+    "name": "AttendancePage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/attendance/page.tsx",
+    "attributes": [
+      "busy",
+      "calendar",
+      "context",
+      "correctionId",
+      "correctionStatus",
+      "employeeId",
+      "endDate",
+      "entryStatus",
+      "error",
+      "loading",
+      "message",
+      "records",
+      "startDate",
+      "workDate"
+    ],
+    "methods": [
+      "AttendancePage",
+      "load",
+      "save"
+    ]
+  },
+  {
+    "name": "AttendanceRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/attendance/attendance.repository.ts",
+    "attributes": [],
+    "methods": [
+      "findById",
+      "findForPayrollRange",
+      "insert",
+      "updateCorrectable"
+    ]
+  },
+  {
+    "name": "AttendanceService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/attendance/attendance.service.ts",
+    "attributes": [
+      "repository: AttendanceRepository",
+      "access: AttendanceAccess",
+      "payrollLockGuard: PayrollLockGuard"
+    ],
+    "methods": [
+      "assertCanManageWorkDay",
+      "assertCanReadWorkDays",
+      "assertEmployeeAssignedToBranch",
+      "assertWorkDayCanBeCorrected",
+      "constructor",
+      "correctWorkDay",
+      "countWorkedDaysForAdvance",
+      "createManualWorkDay",
+      "findForPayrollRange"
+    ]
+  },
+  {
+    "name": "AuditController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/audit/audit.controller.ts",
+    "attributes": [
+      "injected service"
+    ],
+    "methods": [
+      "list"
+    ]
+  },
+  {
+    "name": "AuditPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/audit/page.tsx",
+    "attributes": [
+      "activeFilters",
+      "error",
+      "loading",
+      "result"
+    ],
+    "methods": [
+      "AuditPage",
+      "Snapshot",
+      "submit"
+    ]
+  },
+  {
+    "name": "AuditRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/audit/audit.repository.ts",
+    "attributes": [],
+    "methods": [
+      "findByRequestId",
+      "findPage",
+      "insert",
+      "validateEvent"
+    ]
+  },
+  {
+    "name": "AuditService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/audit/audit.service.ts",
+    "attributes": [
+      "injected rootExecutor"
+    ],
+    "methods": [
+      "queryAuditLogs"
+    ]
+  },
+  {
+    "name": "BranchScheduleController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/branch-schedule/branch-schedule.controller.ts",
+    "attributes": [
+      "service: Pick<BranchScheduleService"
+    ],
+    "methods": [
+      "constructor",
+      "create",
+      "findApplicable",
+      "list",
+      "update",
+      "upsertOverride"
+    ]
+  },
+  {
+    "name": "BranchScheduleRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/branch-schedule/branch-schedule.repository.ts",
+    "attributes": [],
+    "methods": [
+      "createSuccessor",
+      "findApplicableSchedule",
+      "findOverride",
+      "findScheduleById",
+      "insertSchedule",
+      "listSchedules",
+      "updateSchedule",
+      "upsertOverride"
+    ]
+  },
+  {
+    "name": "BranchScheduleService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/branch-schedule/branch-schedule.service.ts",
+    "attributes": [
+      "repository: BranchScheduleRepository",
+      "access: BranchScheduleAccess"
+    ],
+    "methods": [
+      "Boolean",
+      "assertCanManageBranch",
+      "await",
+      "constructor",
+      "createSchedule",
+      "findApplicableSchedule",
+      "getApplicableSchedule",
+      "listSchedules",
+      "realDate",
+      "updateSchedule",
+      "upsertOverride"
+    ]
+  },
+  {
+    "name": "DatabaseConnection",
+    "kind": "infrastructure / Drizzle + pg.Pool",
+    "source": "backend/src/core/db/client.ts",
+    "attributes": [
+      "db: DrizzleDatabase",
+      "pool: Pool"
+    ],
+    "methods": [
+      "closeDatabase",
+      "db.transaction",
+      "pool.query"
+    ]
+  },
+  {
+    "name": "DebtController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/debt/debt.controller.ts",
+    "attributes": [
+      "service: ReturnType<typeof createDebtRuntimeService>"
+    ],
+    "methods": [
+      "constructor",
+      "list",
+      "managedTypes",
+      "record",
+      "reverse",
+      "saveType",
+      "types"
+    ]
+  },
+  {
+    "name": "DebtRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/debt/debt.repository.ts",
+    "attributes": [],
+    "methods": [
+      "findById",
+      "findByIdForUpdate",
+      "findType",
+      "findTypeForUpdate",
+      "hasReversal",
+      "hasTypeReferences",
+      "insert",
+      "listByEmployee",
+      "listManagedTypes",
+      "listTypes",
+      "saveType"
+    ]
+  },
+  {
+    "name": "DebtService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/debt/debt.service.ts",
+    "attributes": [
+      "repository: DebtRepository",
+      "access: DebtAccess",
+      "today: ("
+    ],
+    "methods": [
+      "assertCanRead",
+      "assertCanRecord",
+      "cents",
+      "constructor",
+      "findCandidatesForPayroll",
+      "getLedger",
+      "record",
+      "reverse"
+    ]
+  },
+  {
+    "name": "DocumentStorage",
+    "kind": "infrastructure / port",
+    "source": "backend/src/core/storage/document-storage.ts",
+    "attributes": [
+      "injected root"
+    ],
+    "methods": [
+      "put",
+      "read"
+    ]
+  },
+  {
+    "name": "DocumentsPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/employees/[employeeId]/documents/page.tsx",
+    "attributes": [],
+    "methods": [
+      "EmployeeDocumentsPage"
+    ]
+  },
+  {
+    "name": "EmployeeController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/employee/employee.controller.ts",
+    "attributes": [
+      "injected service"
+    ],
+    "methods": [
+      "changeStatus",
+      "create",
+      "detail",
+      "list",
+      "onboard",
+      "parseEmployeeId",
+      "update"
+    ]
+  },
+  {
+    "name": "EmployeeDetailPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/employees/[employeeId]/page.tsx",
+    "attributes": [],
+    "methods": [
+      "EmployeeDetailPage"
+    ]
+  },
+  {
+    "name": "EmployeeRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/employee/employee.repository.ts",
+    "attributes": [],
+    "methods": [
+      "eq",
+      "findById",
+      "findIdentityConflict",
+      "insert",
+      "list",
+      "lte",
+      "or",
+      "updateIdentity",
+      "updateStatus"
+    ]
+  },
+  {
+    "name": "EmployeeService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/employee/employee.service.ts",
+    "attributes": [
+      "injected dependencies"
+    ],
+    "methods": [
+      "changeEmployeeStatus",
+      "createEmployee",
+      "getEmployee",
+      "listEmployees",
+      "onboardEmployee",
+      "parseBusinessDate",
+      "updateEmployee"
+    ]
+  },
+  {
+    "name": "EmployeeWeeklyHolidayController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/employee-weekly-holiday/employee-weekly-holiday.controller.ts",
+    "attributes": [
+      "injected s"
+    ],
+    "methods": []
+  },
+  {
+    "name": "EmployeeWeeklyHolidayRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/employee-weekly-holiday/employee-weekly-holiday.repository.ts",
+    "attributes": [],
+    "methods": []
+  },
+  {
+    "name": "EmployeeWeeklyHolidayService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/employee-weekly-holiday/employee-weekly-holiday.service.ts",
+    "attributes": [
+      "injected d"
+    ],
+    "methods": []
+  },
+  {
+    "name": "EmployeesPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/employees/page.tsx",
+    "attributes": [
+      "canManage",
+      "error",
+      "loading",
+      "page",
+      "pageSize",
+      "refresh",
+      "rows",
+      "search",
+      "searchInput",
+      "status",
+      "total"
+    ],
+    "methods": [
+      "EmployeesPage",
+      "submitSearch"
+    ]
+  },
+  {
+    "name": "EmploymentAssignmentController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/employment-assignment/employment-assignment.controller.ts",
+    "attributes": [
+      "injected service"
+    ],
+    "methods": []
+  },
+  {
+    "name": "EmploymentAssignmentRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/employment-assignment/employment-assignment.repository.ts",
+    "attributes": [],
+    "methods": [
+      "close",
+      "employeeIsActive",
+      "findAtDate",
+      "findForTermination",
+      "findLatest",
+      "insert",
+      "list",
+      "truncateForTermination"
+    ]
+  },
+  {
+    "name": "EmploymentAssignmentService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/employment-assignment/employment-assignment.service.ts",
+    "attributes": [
+      "injected d"
+    ],
+    "methods": [
+      "createAssignment",
+      "createAssignmentInTransaction",
+      "endAssignmentsForTermination",
+      "getEmployeeContextAtDate",
+      "listAssignments"
+    ]
+  },
+  {
+    "name": "FinancePage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/finance/page.tsx",
+    "attributes": [
+      "advances",
+      "busy",
+      "canFinance",
+      "debtTypes",
+      "employeeId",
+      "employeeName",
+      "error",
+      "ledger",
+      "loading",
+      "loans",
+      "message"
+    ],
+    "methods": [
+      "FinancePage",
+      "load",
+      "submit"
+    ]
+  },
+  {
+    "name": "LeaveController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/leave/leave.controller.ts",
+    "attributes": [
+      "service: ReturnType<typeof createLeaveRuntimeService>"
+    ],
+    "methods": [
+      "approve",
+      "constructor",
+      "history",
+      "list",
+      "managedTypes",
+      "quotas",
+      "reject",
+      "saveType",
+      "setQuota",
+      "submit",
+      "types",
+      "update"
+    ]
+  },
+  {
+    "name": "LeavePage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/leave/page.tsx",
+    "attributes": [
+      "busy",
+      "canAdmin",
+      "editingId",
+      "employeeContext",
+      "employeeId",
+      "error",
+      "leaveTypes",
+      "loading",
+      "message",
+      "rows"
+    ],
+    "methods": [
+      "LeavePage",
+      "load",
+      "submit"
+    ]
+  },
+  {
+    "name": "LeaveRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/leave/leave.repository.ts",
+    "attributes": [],
+    "methods": [
+      "appendAction",
+      "decide",
+      "findApprovedDays",
+      "findById",
+      "findDays",
+      "findOverlap",
+      "findQuota",
+      "findQuotaForUpdate",
+      "findRequest",
+      "findType",
+      "findTypeForUpdate",
+      "hasAttachment",
+      "hasTypeReferences",
+      "history",
+      "insertDays",
+      "insertRequest",
+      "listActiveTypes",
+      "listByEmployee",
+      "listQuotas",
+      "listTypes",
+      "lockEmployee",
+      "replaceDays",
+      "saveQuota",
+      "saveType",
+      "updateDay",
+      "updatePendingRequest",
+      "updateQuota"
+    ]
+  },
+  {
+    "name": "LeaveService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/leave/leave.service.ts",
+    "attributes": [
+      "repository: LeaveRepository",
+      "access: LeaveAccess",
+      "attendance: LeaveAttendanceEffect",
+      "payrollLock: LeavePayrollLock"
+    ],
+    "methods": [
+      "applyApprovedLeave",
+      "approveLeave",
+      "assertCanDecide",
+      "assertCanRead",
+      "assertCanSubmit",
+      "assertDatesUnlocked",
+      "constructor",
+      "datesInclusive",
+      "findApprovedForPayroll",
+      "listLeaveTypes",
+      "listRequests",
+      "rejectLeave",
+      "submitLeave",
+      "updateLeave"
+    ]
+  },
+  {
+    "name": "LoanController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/loan/loan.controller.ts",
+    "attributes": [
+      "service: Pick<LoanService"
+    ],
+    "methods": [
+      "constructor",
+      "create",
+      "list"
+    ]
+  },
+  {
+    "name": "LoanRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/loan/loan.repository.ts",
+    "attributes": [],
+    "methods": [
+      "create",
+      "findDue",
+      "findInstallmentById",
+      "listByEmployee",
+      "settleInstallment"
+    ]
+  },
+  {
+    "name": "LoanService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/loan/loan.service.ts",
+    "attributes": [
+      "repository: LoanRepository",
+      "access: LoanAccess",
+      "payrollLock: LoanPayrollLock"
+    ],
+    "methods": [
+      "assertCanCreate",
+      "assertCanRead",
+      "assertPayrollLocked",
+      "constructor",
+      "createLoan",
+      "dueMonth",
+      "findDueForPayroll",
+      "listLoans",
+      "markDeducted",
+      "money"
+    ]
+  },
+  {
+    "name": "LoginPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/login/page.tsx",
+    "attributes": [
+      "error",
+      "password",
+      "pending",
+      "showPassword",
+      "username"
+    ],
+    "methods": [
+      "LoginPage",
+      "submit"
+    ]
+  },
+  {
+    "name": "NewEmployeePage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/employees/new/page.tsx",
+    "attributes": [],
+    "methods": [
+      "NewEmployeePage"
+    ]
+  },
+  {
+    "name": "OrganizationPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/organization/page.tsx",
+    "attributes": [],
+    "methods": [
+      "OrganizationPage"
+    ]
+  },
+  {
+    "name": "OvertimeController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/overtime/overtime.controller.ts",
+    "attributes": [
+      "service: ReturnType<typeof createOvertimeRuntimeService>"
+    ],
+    "methods": [
+      "approve",
+      "constructor",
+      "history",
+      "list",
+      "reject",
+      "submit",
+      "update"
+    ]
+  },
+  {
+    "name": "OvertimePage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/overtime/page.tsx",
+    "attributes": [
+      "busy",
+      "editType",
+      "editingId",
+      "employeeContext",
+      "employeeId",
+      "error",
+      "loading",
+      "message",
+      "rows",
+      "type"
+    ],
+    "methods": [
+      "OvertimePage",
+      "load",
+      "submit"
+    ]
+  },
+  {
+    "name": "OvertimeRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/overtime/overtime.repository.ts",
+    "attributes": [],
+    "methods": [
+      "appendAction",
+      "decide",
+      "findApproved",
+      "findById",
+      "findForUpdate",
+      "history",
+      "insert",
+      "listByEmployee",
+      "updatePending"
+    ]
+  },
+  {
+    "name": "OvertimeService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/overtime/overtime.service.ts",
+    "attributes": [
+      "repository: OvertimeRepository",
+      "access: OvertimeAccess",
+      "context: OvertimeContext",
+      "payrollLock: OvertimePayrollLock"
+    ],
+    "methods": [
+      "approveOvertime",
+      "assertCanDecide",
+      "assertCanRead",
+      "assertCanSubmit",
+      "assertDateUnlocked",
+      "assertEligible",
+      "assertOvertimeValue",
+      "constructor",
+      "findApprovedForPayroll",
+      "listRequests",
+      "rejectOvertime",
+      "submitOvertime",
+      "updateOvertime",
+      "validDate"
+    ]
+  },
+  {
+    "name": "PayrollController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/payroll/payroll.controller.ts",
+    "attributes": [
+      "injected service"
+    ],
+    "methods": [
+      "access",
+      "assertPayrollRange",
+      "createConfiguration",
+      "createPayrollConfiguration",
+      "createPayrollPeriod",
+      "createPeriod",
+      "decideAdjustment",
+      "decidePayrollAdjustment",
+      "getPayrollAccess",
+      "getPayrollPeriod",
+      "getPayrollReadiness",
+      "getPayrollRecord",
+      "listAdjustments",
+      "listConfigurations",
+      "listPayrollAdjustments",
+      "listPayrollConfigurations",
+      "listPayrollPeriods",
+      "listPeriods",
+      "lock",
+      "lockPayrollPeriod",
+      "period",
+      "preview",
+      "previewPayrollPeriod",
+      "readiness",
+      "record",
+      "requestAdjustment",
+      "requestPayrollAdjustment",
+      "supersedeConfiguration",
+      "supersedePayrollConfiguration"
+    ]
+  },
+  {
+    "name": "PayrollPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/payroll/page.tsx",
+    "attributes": [
+      "accessChecked",
+      "branches",
+      "busy",
+      "canMutate",
+      "configurationKey",
+      "configurations",
+      "detailLoading",
+      "error",
+      "loading",
+      "notice",
+      "periods",
+      "preview",
+      "readiness",
+      "record",
+      "requestId",
+      "roleCodes",
+      "roster",
+      "selected",
+      "shopId",
+      "shops",
+      "workspaceVersion"
+    ],
+    "methods": [
+      "PayrollPage",
+      "loadWorkspace",
+      "submitConfiguration",
+      "submitPeriod"
+    ]
+  },
+  {
+    "name": "PayrollRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/payroll/payroll.repository.ts",
+    "attributes": [
+      "injected executor"
+    ],
+    "methods": [
+      "configurationRangeIsLocked",
+      "decideAdjustment",
+      "endConfiguration",
+      "findActiveShop",
+      "findAdjustment",
+      "findBranchInShop",
+      "findConfigurationForUpdate",
+      "findConfigurationOverlap",
+      "findDebtSettlement",
+      "findLockedInputPeriod",
+      "findPeriod",
+      "findPeriodByMonth",
+      "findProjectionPeriod",
+      "findRecordBranch",
+      "findRecordDetail",
+      "findRecordState",
+      "hasAssignmentForPeriod",
+      "insertAdjustment",
+      "insertConfiguration",
+      "insertPeriod",
+      "listAdjustments",
+      "listConfigurations",
+      "listPeriodRecords",
+      "listPeriodRoster",
+      "listPeriods",
+      "listReadinessFacts",
+      "load",
+      "replaceCalculatedRecords",
+      "resolveConfiguration",
+      "session",
+      "setLocked",
+      "setPreviewed",
+      "settleFinanceSources"
+    ]
+  },
+  {
+    "name": "PayrollService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/payroll/payroll.service.ts",
+    "attributes": [
+      "injected dependencies"
+    ],
+    "methods": [
+      "assertInputsMutable",
+      "assertPayrollConfigurationValue",
+      "assertPayrollMonthRange",
+      "assertPayrollMutationAccess",
+      "assertPayrollRange",
+      "assertPayrollRecordAccess",
+      "createPayrollConfiguration",
+      "createPayrollPeriod",
+      "decidePayrollAdjustment",
+      "getDebtSettlement",
+      "getPayrollAccess",
+      "getPayrollPeriod",
+      "getPayrollReadiness",
+      "getPayrollRecord",
+      "listPayrollAdjustments",
+      "listPayrollConfigurations",
+      "listPayrollPeriods",
+      "lockPayrollPeriod",
+      "parsePayrollConfigurationKey",
+      "parsePayrollId",
+      "parsePayrollMoney",
+      "payrollReadableBranchIds",
+      "previewPayrollPeriod",
+      "projectAdvance",
+      "record",
+      "requestPayrollAdjustment",
+      "supersedePayrollConfiguration"
+    ]
+  },
+  {
+    "name": "PayslipController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/payslip/payslip.controller.ts",
+    "attributes": [
+      "injected service"
+    ],
+    "methods": [
+      "deliver",
+      "deliveries",
+      "download",
+      "generate",
+      "get",
+      "mine",
+      "resolve",
+      "void"
+    ]
+  },
+  {
+    "name": "PayslipRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/payslip/payslip.repository.ts",
+    "attributes": [],
+    "methods": [
+      "addDelivery",
+      "deliveryForRequest",
+      "find",
+      "findByPayrollRecord",
+      "findDeliveryForUpdate",
+      "findLockedRecord",
+      "finishDelivery",
+      "insert",
+      "listDeliveries",
+      "listForEmployee",
+      "pendingDelivery",
+      "upgradeLegacyFile",
+      "void"
+    ]
+  },
+  {
+    "name": "PayslipService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/payslip/payslip.service.ts",
+    "attributes": [
+      "injected dependencies"
+    ],
+    "methods": [
+      "allScope",
+      "deliver",
+      "deliveries",
+      "download",
+      "generate",
+      "get",
+      "mine",
+      "resolveDelivery",
+      "void"
+    ]
+  },
+  {
+    "name": "PayslipsPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/payslips/page.tsx",
+    "attributes": [
+      "busy",
+      "deliveries",
+      "error",
+      "notice",
+      "period",
+      "recordId",
+      "records",
+      "role",
+      "roster",
+      "rows",
+      "selected"
+    ],
+    "methods": [
+      "EmployeePayslips",
+      "PayslipSummary",
+      "PayslipsPage",
+      "PendingDeliveryResolution"
+    ]
+  },
+  {
+    "name": "ReportController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/reports/report.controller.ts",
+    "attributes": [
+      "injected service"
+    ],
+    "methods": [
+      "details",
+      "download",
+      "summary",
+      "summaryDownload"
+    ]
+  },
+  {
+    "name": "ReportRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/reports/report.repository.ts",
+    "attributes": [],
+    "methods": [
+      "details",
+      "findBranch",
+      "findDepartment",
+      "findPeriod",
+      "lockedRows",
+      "summary"
+    ]
+  },
+  {
+    "name": "ReportService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/reports/report.service.ts",
+    "attributes": [
+      "injected dependencies"
+    ],
+    "methods": [
+      "authorize",
+      "bankTransfer",
+      "details",
+      "socialSecurity",
+      "summary",
+      "summaryExport"
+    ]
+  },
+  {
+    "name": "ReportsPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/reports/page.tsx",
+    "attributes": [
+      "branchId",
+      "branches",
+      "busy",
+      "departmentId",
+      "departments",
+      "detailKind",
+      "error",
+      "message",
+      "period",
+      "summary"
+    ],
+    "methods": [
+      "ReportsPage"
+    ]
+  },
+  {
+    "name": "SchedulesPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/schedules/page.tsx",
+    "attributes": [
+      "canHoliday",
+      "error"
+    ],
+    "methods": [
+      "SchedulesPage"
+    ]
+  },
+  {
+    "name": "ShopController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/shop/shop.controller.ts",
+    "attributes": [
+      "injected service"
+    ],
+    "methods": [
+      "create",
+      "deactivate",
+      "detail",
+      "list",
+      "parseDecimalBigIntId",
+      "update"
+    ]
+  },
+  {
+    "name": "ShopRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/shop/shop.repository.ts",
+    "attributes": [],
+    "methods": [
+      "deactivate",
+      "findById",
+      "hasActiveChildren",
+      "insert",
+      "list",
+      "update"
+    ]
+  },
+  {
+    "name": "ShopService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/shop/shop.service.ts",
+    "attributes": [
+      "injected dependencies"
+    ],
+    "methods": [
+      "createShop",
+      "deactivateShop",
+      "getShop",
+      "listShops",
+      "updateShop"
+    ]
+  },
+  {
+    "name": "SmtpMailer",
+    "kind": "infrastructure / port",
+    "source": "backend/src/core/mail/smtp-mailer.ts",
+    "attributes": [
+      "injected env"
+    ],
+    "methods": [
+      "send"
+    ]
+  },
+  {
+    "name": "UserAccountAdminController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/user-account/user-account.admin.controller.ts",
+    "attributes": [
+      "injected service"
+    ],
+    "methods": [
+      "create",
+      "detail",
+      "linkEmployee",
+      "list",
+      "resetPassword",
+      "status",
+      "unlock"
+    ]
+  },
+  {
+    "name": "UserAccountAdminRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/user-account/user-account.admin.repository.ts",
+    "attributes": [],
+    "methods": [
+      "countActiveOwnerAccounts",
+      "employeeExists",
+      "findActiveGrants",
+      "findByEmployeeId",
+      "findById",
+      "findByUsername",
+      "hasActiveOwnerGrant",
+      "insert",
+      "linkEmployee",
+      "list",
+      "unlock",
+      "updatePassword",
+      "updateStatus"
+    ]
+  },
+  {
+    "name": "UserAccountAdminService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/user-account/user-account.admin.service.ts",
+    "attributes": [
+      "injected dependencies"
+    ],
+    "methods": [
+      "accountAuditSnapshot",
+      "changeStatus",
+      "createAccount",
+      "createActionContext",
+      "getAccount",
+      "linkEmployee",
+      "listAccounts",
+      "requireAdministrator",
+      "resetPassword",
+      "unlockAccount"
+    ]
+  },
+  {
+    "name": "UserAccountController",
+    "kind": "controller / design abstraction",
+    "source": "backend/src/features/user-account/user-account.controller.ts",
+    "attributes": [
+      "injected service"
+    ],
+    "methods": [
+      "changePassword",
+      "getCurrentActor",
+      "login",
+      "logout",
+      "me"
+    ]
+  },
+  {
+    "name": "UserAccountRepository",
+    "kind": "repository / design abstraction",
+    "source": "backend/src/features/user-account/user-account.repository.ts",
+    "attributes": [
+      "executor: DatabaseExecutor = db"
+    ],
+    "methods": [
+      "constructor",
+      "findActiveGrants",
+      "findAuthenticationByIdForUpdate",
+      "findAuthenticationByUsername",
+      "findAuthenticationByUsernameForUpdate",
+      "findCurrentActorAccountById",
+      "findSafeById",
+      "updateFailedLogin",
+      "updatePassword",
+      "updateSuccessfulLogin"
+    ]
+  },
+  {
+    "name": "UserAccountService",
+    "kind": "service / design abstraction",
+    "source": "backend/src/features/user-account/user-account.service.ts",
+    "attributes": [
+      "injected dependencies"
+    ],
+    "methods": [
+      "accountAuditSnapshot",
+      "changePassword",
+      "createActionContext",
+      "getCurrentActor",
+      "login",
+      "logout",
+      "repositoryFactory"
+    ]
+  },
+  {
+    "name": "WeeklyHolidaysPage",
+    "kind": "boundary / React function",
+    "source": "frontend/app/(dashboard)/employees/[employeeId]/weekly-holidays/page.tsx",
+    "attributes": [],
+    "methods": [
+      "EmployeeWeeklyHolidaysPage"
+    ]
+  }
+]

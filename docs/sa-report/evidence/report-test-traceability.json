@@ -1,0 +1,136 @@
+[
+  {
+    "testId": "T01",
+    "uc": [
+      "UC06",
+      "UC14",
+      "UC15",
+      "UC05"
+    ],
+    "expected": "ตารางที่มีผลแสดงได้; preview แสดงผลและ reload แล้วยังอ่านผลเดิมได้",
+    "result": "PASS"
+  },
+  {
+    "testId": "T02",
+    "uc": [
+      "UC01",
+      "UC03"
+    ],
+    "expected": "Employee เข้าหน้า payroll ไม่ได้และได้ข้อความปฏิเสธที่ปลอดภัย",
+    "result": "PASS"
+  },
+  {
+    "testId": "T03",
+    "uc": [
+      "UC01",
+      "UC03"
+    ],
+    "expected": "Supervisor เข้าจัดการบัญชีนอกสิทธิ์ไม่ได้",
+    "result": "PASS"
+  },
+  {
+    "testId": "T04",
+    "uc": [
+      "UC01",
+      "UC19"
+    ],
+    "expected": "Branch Manager เข้าหน้ารายงานส่วนกลางนอกสิทธิ์ไม่ได้",
+    "result": "PASS"
+  },
+  {
+    "testId": "T05",
+    "uc": [
+      "UC12",
+      "UC01"
+    ],
+    "expected": "Employee เห็นคำขอเงินทดรองตน ไม่มีปุ่มอนุมัติ และ API ของคนอื่นคืน403",
+    "result": "PASS"
+  },
+  {
+    "testId": "T06",
+    "uc": [
+      "UC04",
+      "UC01"
+    ],
+    "expected": "HR อ่านรายชื่อได้ HTTP200 และมีรายการ",
+    "result": "PASS"
+  },
+  {
+    "testId": "T07",
+    "uc": [
+      "UC06",
+      "UC10",
+      "UC14",
+      "UC15",
+      "UC16",
+      "UC18",
+      "UC11",
+      "UC13",
+      "UC17",
+      "UC04",
+      "UC07",
+      "UC09",
+      "UC08",
+      "UC12",
+      "UC02",
+      "UC03",
+      "UC19"
+    ],
+    "expected": "onboarding/เอกสาร/อนุมัติ/OT/payroll/PDF/Mailpit/exports สำเร็จ; net2752.91; generateซ้ำได้สลิปIDเดิม; CSVคืน200",
+    "result": "PASS"
+  },
+  {
+    "testId": "T08",
+    "uc": [
+      "UC06",
+      "UC14",
+      "UC05"
+    ],
+    "expected": "สร้าง config successor โดยคงประวัติ; readiness แสดงช่องว่างพร้อมกันครบ",
+    "result": "PASS"
+  },
+  {
+    "testId": "T09",
+    "uc": [
+      "UC07",
+      "UC05"
+    ],
+    "expected": "เปลี่ยนตารางโดยคงช่วงเดิม และแก้ clock record ผ่าน calendar ได้",
+    "result": "PASS"
+  },
+  {
+    "testId": "T10",
+    "uc": [
+      "UC01",
+      "UC03"
+    ],
+    "expected": "บัญชีมี branch scope ที่ระบุ; เปลี่ยน password ได้; ปิดบัญชีแล้วเข้าระบบไม่ได้",
+    "result": "PASS"
+  },
+  {
+    "testId": "T11",
+    "uc": [
+      "UC16",
+      "UC13"
+    ],
+    "expected": "adjustmentอนุมัติใช้ครั้งเดียว; ผลล็อกเดิมไม่เปลี่ยน; สุทธิติดลบไม่ล็อก",
+    "result": "PASS"
+  },
+  {
+    "testId": "T12",
+    "uc": [
+      "UC01"
+    ],
+    "expected": "keyboard/mobileทำงาน; loginผิดกู้คืนได้; logoutแล้วsessionไม่คงสิทธิ์เดิม",
+    "result": "PASS"
+  },
+  {
+    "testId": "T13",
+    "uc": [
+      "UC04",
+      "UC03"
+    ],
+    "expected": "เลือกพนักงานผูกบัญชีได้; concurrent link คงหนึ่งบัญชีต่อพนักงาน",
+    "result": "PASS"
+  }
+]

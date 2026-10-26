@@ -1,0 +1,26 @@
+{
+  "status": "PASS; all four bounded review findings addressed, sole scoped re-review Approved",
+  "changedFiles": {
+    "frontend/e2e/advance-reasons.e2e.ts": {
+      "fullRunSha256": "43cfe35735fd3b6c338a03ad5f190475077df188f558888c93208b5069f1a48b",
+      "currentSha256": "2c3211a8609b42e1ab58263a7d3407a260d69268a4068d5d938beb7dd103dff5"
+    }
+  },
+  "unchangedFiles": 577,
+  "applicationRuntimeChanged": false,
+  "reason": "Test-only actual Bangkok date branch: before20 assert real422/no persisted request, eligibledate retains full positive flows. No server clock change or skip.",
+  "focusedBrowser": {
+    "run": "20261026T122137Z-38962",
+    "passed": 2,
+    "duration": "40.9s",
+    "actualDate": "2026-10-26"
+  },
+  "earlyMonthBrowserObserved": false,
+  "guideSha256": "6c8316d208da67da8be532ef6238bacf8a5e07ed386a972346e11f3df1724fc0",
+  "boundaryTests": {
+    "passed": 29,
+    "failed": 0
+  },
+  "frontendCommit": "eca9ec9ad337bada1a8d3c8249f6cf0cd5c6376c",
+  "review": "docs/superpowers/reports/20-current20-scoped-rereview.md"
+}

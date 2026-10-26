@@ -138,7 +138,9 @@ result alone does not establish acceptance of this catalog.
   Self correction requires a new meaningful reason and an OLD manual ordinary
   row; approved leave, imported rows and holiday exceptions retain staff and
   approval workflows. Independent Task 1 review and focused real-system
-  verification passed; full 20-case actor UAT remains pending.
+  verification passed. Canonical20 automated actor acceptance passed 69 browser
+  scenarios on the disposable stack; human UAT and production checks remain
+  separate. See report19 and the detailed docs/user-guide/README.md.
 
 - UC08 checks every affected year's quota before submitting or editing a
   pending request under the existing employee transaction lock. Submission

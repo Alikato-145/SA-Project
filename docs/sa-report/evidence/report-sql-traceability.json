@@ -1,0 +1,178 @@
+[
+  {
+    "query": "Q001",
+    "useCases": [
+      "UC02"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q002",
+    "useCases": [
+      "UC02"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q003",
+    "useCases": [
+      "UC02"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q004",
+    "useCases": [
+      "UC04"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q005",
+    "useCases": [
+      "UC14",
+      "UC15",
+      "UC16"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q006",
+    "useCases": [
+      "UC16",
+      "UC17"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q007",
+    "useCases": [
+      "UC14",
+      "UC15"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q008",
+    "useCases": [
+      "UC06",
+      "UC15"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q009",
+    "useCases": [
+      "UC02",
+      "UC05"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q010",
+    "useCases": [
+      "UC14"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q011",
+    "useCases": [
+      "UC04",
+      "UC07"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q012",
+    "useCases": [
+      "UC20"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q013",
+    "useCases": [
+      "UC20"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q014",
+    "useCases": [
+      "UC02"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q015",
+    "useCases": [
+      "UC02"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q016",
+    "useCases": [
+      "UC14"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q017",
+    "useCases": [
+      "UC15"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q018",
+    "useCases": [
+      "UC16"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q019",
+    "useCases": [
+      "UC02"
+    ],
+    "verifiedEvidence": "sql/verified-queries.json"
+  },
+  {
+    "query": "Q020",
+    "useCases": [
+      "UC12"
+    ],
+    "verifiedEvidence": "sql/current20-model.json"
+  },
+  {
+    "query": "Q021",
+    "useCases": [
+      "UC18"
+    ],
+    "verifiedEvidence": "sql/current20-model.json"
+  },
+  {
+    "query": "Q022",
+    "useCases": [
+      "UC01"
+    ],
+    "verifiedEvidence": "sql/current20-model.json"
+  },
+  {
+    "query": "Q023",
+    "useCases": [
+      "UC12"
+    ],
+    "verifiedEvidence": "sql/current20-model.json"
+  },
+  {
+    "query": "Q024",
+    "useCases": [
+      "UC15",
+      "UC18"
+    ],
+    "verifiedEvidence": "sql/current20-model.json"
+  }
+]

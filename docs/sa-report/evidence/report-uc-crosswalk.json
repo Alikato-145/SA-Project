@@ -1,0 +1,50 @@
+{
+  "mapping": {
+    "UC27": "UC01",
+    "UC28": "UC02",
+    "UC29": "UC03",
+    "UC19": "UC04",
+    "UC20": "UC04",
+    "UC21": "UC04",
+    "UC22": "UC04",
+    "UC31": "UC04",
+    "UC32": "UC05",
+    "UC01": "UC06",
+    "UC02": "UC06",
+    "UC18": "UC07",
+    "UC23": "UC07",
+    "UC30": "UC07",
+    "UC25": "UC08",
+    "UC24": "UC09",
+    "UC03": "UC10",
+    "UC13": "UC10",
+    "UC14": "UC11",
+    "UC26": "UC12",
+    "UC15": "UC13",
+    "UC04": "UC14",
+    "UC05": "UC14",
+    "UC06": "UC15",
+    "UC12": "UC15",
+    "UC07": "UC16",
+    "UC16": "UC16",
+    "UC17": "UC17",
+    "UC08": "UC18",
+    "UC09": "UC18",
+    "UC10": "UC18",
+    "UC11": "UC18",
+    "UC34": "UC19",
+    "UC33": "UC20"
+  },
+  "note": "Maps prior report IDs to the revised report; raw test and SQL evidence remain unchanged.",
+  "exceptions": {
+    "UC23": {
+      "attendanceCorrection": "UC07",
+      "leaveTypeCorrectionDuringApproval": "UC09"
+    },
+    "UC30": {
+      "employeeDocument": "UC04",
+      "leaveEvidence": "UC08",
+      "attendanceEvidenceRead": "UC07"
+    }
+  }
+}

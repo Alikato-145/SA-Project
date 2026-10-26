@@ -1,0 +1,62 @@
+{
+  "context": "Previous delivered 16 use cases plus standalone Login to current academic canonical20; distinct from academic34-to20 report-uc-crosswalk.json",
+  "mapping": {
+    "Login": [
+      "UC01"
+    ],
+    "UC1": [
+      "UC04"
+    ],
+    "UC2": [
+      "UC04"
+    ],
+    "UC3": [
+      "UC04"
+    ],
+    "UC4": [
+      "UC14"
+    ],
+    "UC5": [
+      "UC13"
+    ],
+    "UC6": [
+      "UC16"
+    ],
+    "UC7": [
+      "UC18"
+    ],
+    "UC8": [
+      "UC18"
+    ],
+    "UC9": [
+      "UC18"
+    ],
+    "UC10": [
+      "UC18"
+    ],
+    "UC11": [
+      "UC18"
+    ],
+    "UC12": [
+      "UC17"
+    ],
+    "UC13": [
+      "UC17"
+    ],
+    "UC14": [
+      "UC18"
+    ],
+    "UC15": [
+      "UC08"
+    ],
+    "UC16": [
+      "UC12"
+    ]
+  },
+  "notes": [
+    "UC15 request has supporting UC09 approval in current catalog.",
+    "Current UC15 payroll calculation is a distinct goal supporting UC16 lock.",
+    "Old49 browser count is historical16 evidence, not current20 actor acceptance.",
+    "UC18 includes prepare/group/channel/registered QR/manual confirmation/cancel/history/summary and report subflows."
+  ]
+}

@@ -1,0 +1,746 @@
+{
+  "catalog": "use-case-catalog.json",
+  "scope": "Canonical20 automated actor UI acceptance, separate from historical13/49 counts; API fixture creation is not claimed as UI evidence",
+  "scenarioRows": 73,
+  "cases": [
+    {
+      "useCase": "UC01",
+      "name": "เข้าสู่ระบบและจัดการรหัสผ่าน",
+      "actor": "EMPLOYEE",
+      "uiAction": "กรอก login, reload session และออกจากระบบจริง",
+      "testFile": "frontend/e2e/auth-session.e2e.ts",
+      "testTitle": "employee logout revokes copied session on auth and business APIs while another session stays valid",
+      "negativeOrBoundary": "Copied session rejected on auth/business APIs; another session remains active",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC01",
+      "name": "เข้าสู่ระบบและจัดการรหัสผ่าน",
+      "actor": "SUPERVISOR",
+      "uiAction": "กรอก login, reload session และออกจากระบบจริง",
+      "testFile": "frontend/e2e/auth-session.e2e.ts",
+      "testTitle": "supervisor logout revokes copied session on auth and business APIs while another session stays valid",
+      "negativeOrBoundary": "Copied session rejected on auth/business APIs; another session remains active",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC01",
+      "name": "เข้าสู่ระบบและจัดการรหัสผ่าน",
+      "actor": "BRANCH_MANAGER",
+      "uiAction": "กรอก login, reload session และออกจากระบบจริง",
+      "testFile": "frontend/e2e/auth-session.e2e.ts",
+      "testTitle": "branch_manager logout revokes copied session on auth and business APIs while another session stays valid",
+      "negativeOrBoundary": "Copied session rejected on auth/business APIs; another session remains active",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC01",
+      "name": "เข้าสู่ระบบและจัดการรหัสผ่าน",
+      "actor": "HR",
+      "uiAction": "กรอก login, reload session และออกจากระบบจริง",
+      "testFile": "frontend/e2e/auth-session.e2e.ts",
+      "testTitle": "hr logout revokes copied session on auth and business APIs while another session stays valid",
+      "negativeOrBoundary": "Copied session rejected on auth/business APIs; another session remains active",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC01",
+      "name": "เข้าสู่ระบบและจัดการรหัสผ่าน",
+      "actor": "OWNER",
+      "uiAction": "กรอก login, reload session และออกจากระบบจริง",
+      "testFile": "frontend/e2e/auth-session.e2e.ts",
+      "testTitle": "admin logout revokes copied session on auth and business APIs while another session stays valid",
+      "negativeOrBoundary": "Copied session rejected on auth/business APIs; another session remains active",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC02",
+      "name": "จัดการโครงสร้างองค์กร",
+      "actor": "HR",
+      "uiAction": "สร้างและแก้ร้าน สาขา แผนก ตำแหน่งด้วยฟอร์ม แล้วอ่าน persisted values",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 hr submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Duplicate codes/child-first archive retained in organization test; role denials in workspace/scope",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC02",
+      "name": "จัดการโครงสร้างองค์กร",
+      "actor": "OWNER",
+      "uiAction": "สร้างและแก้ร้าน สาขา แผนก ตำแหน่งด้วยฟอร์ม แล้วอ่าน persisted values",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 admin submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Duplicate codes/child-first archive retained in organization test; role denials in workspace/scope",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC03",
+      "name": "จัดการบัญชีและสิทธิ์ผู้ใช้",
+      "actor": "HR",
+      "uiAction": "สร้างบัญชีจากฟอร์ม กำหนด manager grant พร้อมสาขา โหลดกลับยืนยัน",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 hr submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "HR direct OWNER grant denied; concurrent employee links and disabled account covered by named existing flow tests",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC03",
+      "name": "จัดการบัญชีและสิทธิ์ผู้ใช้",
+      "actor": "OWNER",
+      "uiAction": "สร้างบัญชีจากฟอร์ม กำหนด manager grant พร้อมสาขา โหลดกลับยืนยัน",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 admin submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "HR direct OWNER grant denied; concurrent employee links and disabled account covered by named existing flow tests",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC04",
+      "name": "จัดการข้อมูลและประวัติพนักงาน",
+      "actor": "BRANCH_MANAGER",
+      "uiAction": "สร้าง แก้ข้อมูลติดต่อ โหลดกลับและสิ้นสุดการจ้างใน UI",
+      "testFile": "frontend/e2e/employee-management.e2e.ts",
+      "testTitle": "branch_manager creates, edits and terminates an employee through UI with persistence",
+      "negativeOrBoundary": "Manager bank/account/global compensation expansion and other-branch create/edit/terminate denied; assignments retained",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC04",
+      "name": "จัดการข้อมูลและประวัติพนักงาน",
+      "actor": "HR",
+      "uiAction": "สร้าง แก้ข้อมูลติดต่อ โหลดกลับและสิ้นสุดการจ้างใน UI",
+      "testFile": "frontend/e2e/employee-management.e2e.ts",
+      "testTitle": "hr creates, edits and terminates an employee through UI with persistence",
+      "negativeOrBoundary": "Manager bank/account/global compensation expansion and other-branch create/edit/terminate denied; assignments retained",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC04",
+      "name": "จัดการข้อมูลและประวัติพนักงาน",
+      "actor": "OWNER",
+      "uiAction": "สร้าง แก้ข้อมูลติดต่อ โหลดกลับและสิ้นสุดการจ้างใน UI",
+      "testFile": "frontend/e2e/employee-management.e2e.ts",
+      "testTitle": "admin creates, edits and terminates an employee through UI with persistence",
+      "negativeOrBoundary": "Manager bank/account/global compensation expansion and other-branch create/edit/terminate denied; assignments retained",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC04",
+      "name": "จัดการข้อมูลและประวัติพนักงาน",
+      "actor": "HR",
+      "uiAction": "สร้างช่วงค่าตอบแทน/สวัสดิการและวันหยุดใหม่ คงช่วงเดิม; เพิ่มบัญชีและอ่านแบบ masked",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 hr submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Prior salary/welfare and end-date preserved; full account/ciphertext absent from response",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC04",
+      "name": "จัดการข้อมูลและประวัติพนักงาน",
+      "actor": "OWNER",
+      "uiAction": "สร้างช่วงค่าตอบแทน/สวัสดิการและวันหยุดใหม่ คงช่วงเดิม; เพิ่มบัญชีและอ่านแบบ masked",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 admin submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Prior salary/welfare and end-date preserved; full account/ciphertext absent from response",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC05",
+      "name": "กำหนดตารางทำงานและวันหยุดสาขา",
+      "actor": "HR",
+      "uiAction": "สร้าง schedule, successor และวันหยุดจริงผ่านฟอร์มแล้ว reload",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 hr submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Old schedule effective_to preserved; locked/date-overlap guards in existing history/database tests",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC05",
+      "name": "กำหนดตารางทำงานและวันหยุดสาขา",
+      "actor": "OWNER",
+      "uiAction": "สร้าง schedule, successor และวันหยุดจริงผ่านฟอร์มแล้ว reload",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 admin submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Old schedule effective_to preserved; locked/date-overlap guards in existing history/database tests",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC05",
+      "name": "กำหนดตารางทำงานและวันหยุดสาขา",
+      "actor": "BRANCH_MANAGER",
+      "uiAction": "สร้างตารางสาขาที่ตนมี grant ผ่าน UI",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 BRANCH_MANAGER records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "Scope limited to own branch; global holiday administration absent",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC06",
+      "name": "กำหนดนโยบายเงินเดือนและการลา",
+      "actor": "HR",
+      "uiAction": "สร้าง config และ successor; เพิ่มประเภทลา/กำหนด quota ทาง UI",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 hr submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Old config preserved, quota used_days stays0 on administration; frozen/overlap tests backend",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC06",
+      "name": "กำหนดนโยบายเงินเดือนและการลา",
+      "actor": "OWNER",
+      "uiAction": "สร้าง config และ successor; เพิ่มประเภทลา/กำหนด quota ทาง UI",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 admin submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Old config preserved, quota used_days stays0 on administration; frozen/overlap tests backend",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC07",
+      "name": "บันทึกและแก้ไขข้อมูลลงเวลา",
+      "actor": "EMPLOYEE",
+      "uiAction": "บันทึกและแก้ own manual ordinary row ผ่าน UI reload",
+      "testFile": "frontend/e2e/attendance-self.e2e.ts",
+      "testTitle": "UC07 EMPLOYEE submits and corrects own manual attendance in UI, reloads persisted result and cannot forge scope",
+      "negativeOrBoundary": "Other employee403; no shared manage expansion; approved/imported/holiday/locked restrictions; meaningful new correction reason",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC07",
+      "name": "บันทึกและแก้ไขข้อมูลลงเวลา",
+      "actor": "SUPERVISOR",
+      "uiAction": "เลือกพนักงานใน scope สร้างและแก้เวลาผ่าน UI reload",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 SUPERVISOR records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "One row/date; persisted correction; existing scope file checks department/branch/global boundaries",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC07",
+      "name": "บันทึกและแก้ไขข้อมูลลงเวลา",
+      "actor": "BRANCH_MANAGER",
+      "uiAction": "เลือกพนักงานใน scope สร้างและแก้เวลาผ่าน UI reload",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 BRANCH_MANAGER records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "One row/date; persisted correction; existing scope file checks department/branch/global boundaries",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC07",
+      "name": "บันทึกและแก้ไขข้อมูลลงเวลา",
+      "actor": "HR",
+      "uiAction": "เลือกพนักงานใน scope สร้างและแก้เวลาผ่าน UI reload",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 HR records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "One row/date; persisted correction; existing scope file checks department/branch/global boundaries",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC07",
+      "name": "บันทึกและแก้ไขข้อมูลลงเวลา",
+      "actor": "OWNER",
+      "uiAction": "เลือกพนักงานใน scope สร้างและแก้เวลาผ่าน UI reload",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 OWNER records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "One row/date; persisted correction; existing scope file checks department/branch/global boundaries",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC08",
+      "name": "ยื่นคำขอลา",
+      "actor": "EMPLOYEE",
+      "uiAction": "ส่งลาเมื่อ quota ผ่าน; reject quota ก่อนสร้างแถว; reload และแก้ pending",
+      "testFile": "frontend/e2e/leave-quota.e2e.ts",
+      "testTitle": "UC08 EMPLOYEE quota rejection leaves no request; valid submit/reload and invalid pending edit preserve facts before approval",
+      "negativeOrBoundary": "No row persisted on rejected quota; invalid pending edit unchanged; no quota consumption before approval; allow_exceed/multi-year/frozen covered backend",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC09",
+      "name": "พิจารณาคำขอลา",
+      "actor": "SUPERVISOR",
+      "uiAction": "อนุมัติคำขอที่พนักงานส่งจาก UI และตรวจประวัติ/ผลที่ requester เห็น",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 SUPERVISOR records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "Duplicate decision rejected; scope enforced; SUP3day/BM4day direct approval with corrected type in approval test",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC09",
+      "name": "พิจารณาคำขอลา",
+      "actor": "BRANCH_MANAGER",
+      "uiAction": "อนุมัติคำขอที่พนักงานส่งจาก UI และตรวจประวัติ/ผลที่ requester เห็น",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 BRANCH_MANAGER records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "Duplicate decision rejected; scope enforced; SUP3day/BM4day direct approval with corrected type in approval test",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC09",
+      "name": "พิจารณาคำขอลา",
+      "actor": "HR",
+      "uiAction": "อนุมัติคำขอที่พนักงานส่งจาก UI และตรวจประวัติ/ผลที่ requester เห็น",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 HR records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "Duplicate decision rejected; scope enforced; SUP3day/BM4day direct approval with corrected type in approval test",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC09",
+      "name": "พิจารณาคำขอลา",
+      "actor": "OWNER",
+      "uiAction": "อนุมัติคำขอที่พนักงานส่งจาก UI และตรวจประวัติ/ผลที่ requester เห็น",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 OWNER records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "Duplicate decision rejected; scope enforced; SUP3day/BM4day direct approval with corrected type in approval test",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC10",
+      "name": "ยื่นและแก้ไขคำขอทำงานล่วงเวลา",
+      "actor": "EMPLOYEE",
+      "uiAction": "ส่งและแก้ hourly OT ด้วย UI reload before decision",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 SUPERVISOR records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "Self decision/other employee403; approved edit409 and no edit action; rest/public holiday calculations verified separately",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC11",
+      "name": "พิจารณาคำขอทำงานล่วงเวลา",
+      "actor": "SUPERVISOR",
+      "uiAction": "อนุมัติ OT จาก UI พร้อม note และตรวจ append history/requester result",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 SUPERVISOR records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "Duplicate decision rejected; approved request immutable; late clock-out alone never counted payable",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC11",
+      "name": "พิจารณาคำขอทำงานล่วงเวลา",
+      "actor": "BRANCH_MANAGER",
+      "uiAction": "อนุมัติ OT จาก UI พร้อม note และตรวจ append history/requester result",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 BRANCH_MANAGER records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "Duplicate decision rejected; approved request immutable; late clock-out alone never counted payable",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC11",
+      "name": "พิจารณาคำขอทำงานล่วงเวลา",
+      "actor": "HR",
+      "uiAction": "อนุมัติ OT จาก UI พร้อม note และตรวจ append history/requester result",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 HR records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "Duplicate decision rejected; approved request immutable; late clock-out alone never counted payable",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC11",
+      "name": "พิจารณาคำขอทำงานล่วงเวลา",
+      "actor": "OWNER",
+      "uiAction": "อนุมัติ OT จาก UI พร้อม note และตรวจ append history/requester result",
+      "testFile": "frontend/e2e/current20-operations.e2e.ts",
+      "testTitle": "UC07/09/10/11 OWNER records scoped attendance and decides employee UI requests with immutable history",
+      "negativeOrBoundary": "Duplicate decision rejected; approved request immutable; late clock-out alone never counted payable",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC12",
+      "name": "จัดการคำขอเงินทดรองและเงินกู้",
+      "actor": "EMPLOYEE",
+      "uiAction": "ส่งเงินทดรองด้วย reason, reload; ทดสอบ blank/overlong/forged person",
+      "testFile": "frontend/e2e/advance-reasons.e2e.ts",
+      "testTitle": "UC12 EMPLOYEE reason survives reload and hr reject persists",
+      "negativeOrBoundary": "New reason required1–1000; actual Asia/Bangkok date>=20, worked days>=20, own-only",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC12",
+      "name": "จัดการคำขอเงินทดรองและเงินกู้",
+      "actor": "HR",
+      "uiAction": "อ่านเหตุผลและ reject พร้อม decision note ทาง UI",
+      "testFile": "frontend/e2e/advance-reasons.e2e.ts",
+      "testTitle": "UC12 EMPLOYEE reason survives reload and hr reject persists",
+      "negativeOrBoundary": "Empty/whitespace/1001 note UI+API rejected; legacy NULL labeled honestly with explicit fixture path",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC12",
+      "name": "จัดการคำขอเงินทดรองและเงินกู้",
+      "actor": "OWNER",
+      "uiAction": "อนุมัติเงินทดรองจาก UI แล้ว requester reload",
+      "testFile": "frontend/e2e/advance-reasons.e2e.ts",
+      "testTitle": "UC12 EMPLOYEE reason survives reload and admin approve persists",
+      "negativeOrBoundary": "Invalid direct reject notes rejected; eligibility/half-salary/nonnegative guards unchanged",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC12",
+      "name": "จัดการคำขอเงินทดรองและเงินกู้",
+      "actor": "EMPLOYEE",
+      "uiAction": "ส่งคำขอเงินกู้และ reload pending",
+      "testFile": "frontend/e2e/loan-requests.e2e.ts",
+      "testTitle": "employee submits own loan request and reloads pending",
+      "negativeOrBoundary": "Forged person and employee decision denied; manager cannot approve",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC12",
+      "name": "จัดการคำขอเงินทดรองและเงินกู้",
+      "actor": "HR",
+      "uiAction": "อนุมัติเงินกู้ที่ employee ส่งจริงพร้อม first due month",
+      "testFile": "frontend/e2e/loan-requests.e2e.ts",
+      "testTitle": "hr approves an employee UI request and employee sees persistent decision",
+      "negativeOrBoundary": "Duplicate409; installments sum100.01 as33.34/33.34/33.33",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC12",
+      "name": "จัดการคำขอเงินทดรองและเงินกู้",
+      "actor": "OWNER",
+      "uiAction": "ปฏิเสธเงินกู้ด้วย reason ทาง UI",
+      "testFile": "frontend/e2e/loan-requests.e2e.ts",
+      "testTitle": "admin rejects an employee UI request and employee sees persistent decision",
+      "negativeOrBoundary": "Requester sees exact decision after reload; no loan created by rejection",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC13",
+      "name": "บันทึกหนี้และรายการปรับปรุงเงินเดือน",
+      "actor": "HR",
+      "uiAction": "สร้างประเภทหนี้ charge และ reversal จากฟอร์ม reload ledger",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 hr submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Two retained entries sum0; prior history never reset/deleted",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC13",
+      "name": "บันทึกหนี้และรายการปรับปรุงเงินเดือน",
+      "actor": "OWNER",
+      "uiAction": "สร้างประเภทหนี้ charge และ reversal จากฟอร์ม reload ledger",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 admin submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Two retained entries sum0; prior history never reset/deleted",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC13",
+      "name": "บันทึกหนี้และรายการปรับปรุงเงินเดือน",
+      "actor": "HR",
+      "uiAction": "สร้างและอนุมัติรายการปรับงวดปัจจุบันจาก UI",
+      "testFile": "frontend/e2e/current-adjustments.e2e.ts",
+      "testTitle": "hr creates period, adjusts, previews and locks through UI with persistent single application",
+      "negativeOrBoundary": "Pending approval blocks lock; adjustment applied once; original record retained in existing locked-correction flow",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC13",
+      "name": "บันทึกหนี้และรายการปรับปรุงเงินเดือน",
+      "actor": "OWNER",
+      "uiAction": "สร้างและอนุมัติรายการปรับงวดปัจจุบันจาก UI",
+      "testFile": "frontend/e2e/current-adjustments.e2e.ts",
+      "testTitle": "admin creates period, adjusts, previews and locks through UI with persistent single application",
+      "negativeOrBoundary": "Pending approval blocks lock; adjustment applied once; original record retained in existing locked-correction flow",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC14",
+      "name": "เปิดงวดเงินเดือน",
+      "actor": "HR",
+      "uiAction": "เปิดรอบจาก UI แล้ว reload",
+      "testFile": "frontend/e2e/current-adjustments.e2e.ts",
+      "testTitle": "hr creates period, adjusts, previews and locks through UI with persistent single application",
+      "negativeOrBoundary": "Unique shop/month; employee/supervisor/manager direct create/lock denied",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC14",
+      "name": "เปิดงวดเงินเดือน",
+      "actor": "OWNER",
+      "uiAction": "เปิดรอบจาก UI แล้ว reload",
+      "testFile": "frontend/e2e/current-adjustments.e2e.ts",
+      "testTitle": "admin creates period, adjusts, previews and locks through UI with persistent single application",
+      "negativeOrBoundary": "Unique shop/month; employee/supervisor/manager direct create/lock denied",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC15",
+      "name": "คำนวณและตรวจสอบเงินเดือน",
+      "actor": "HR",
+      "uiAction": "กดคำนวณตัวอย่างใน UI และตรวจ125.01 แล้ว repeat API checks",
+      "testFile": "frontend/e2e/current-adjustments.e2e.ts",
+      "testTitle": "hr creates period, adjusts, previews and locks through UI with persistent single application",
+      "negativeOrBoundary": "Daily base/earned SS and exact rounding remain covered by history/fullDB tests",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC15",
+      "name": "คำนวณและตรวจสอบเงินเดือน",
+      "actor": "OWNER",
+      "uiAction": "กดคำนวณตัวอย่างใน UI และตรวจ125.01 แล้ว repeat API checks",
+      "testFile": "frontend/e2e/current-adjustments.e2e.ts",
+      "testTitle": "admin creates period, adjusts, previews and locks through UI with persistent single application",
+      "negativeOrBoundary": "Daily base/earned SS and exact rounding remain covered by history/fullDB tests",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC16",
+      "name": "ตรวจความพร้อมและล็อกรอบเงินเดือน",
+      "actor": "HR",
+      "uiAction": "readiness + lock ผ่าน UI reload frozen amount",
+      "testFile": "frontend/e2e/current-adjustments.e2e.ts",
+      "testTitle": "hr creates period, adjusts, previews and locks through UI with persistent single application",
+      "negativeOrBoundary": "Pending approvals blocklock; immutable locked inputs and negative-net guard retained",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC16",
+      "name": "ตรวจความพร้อมและล็อกรอบเงินเดือน",
+      "actor": "OWNER",
+      "uiAction": "readiness + lock ผ่าน UI reload frozen amount",
+      "testFile": "frontend/e2e/current-adjustments.e2e.ts",
+      "testTitle": "admin creates period, adjusts, previews and locks through UI with persistent single application",
+      "negativeOrBoundary": "Pending approvals blocklock; immutable locked inputs and negative-net guard retained",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC17",
+      "name": "ออกและส่งสลิปเงินเดือน",
+      "actor": "HR",
+      "uiAction": "ออก PDF ดาวน์โหลด ส่ง local SMTP ดู individual attempts/reload",
+      "testFile": "frontend/e2e/payslip-delivery.e2e.ts",
+      "testTitle": "HR and OWNER each generate/download/send with frozen decimals and durable attempts",
+      "negativeOrBoundary": "Immutable decimals; duplicate generation; attachment bytes/hash match; each SMTP attempt durable",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC17",
+      "name": "ออกและส่งสลิปเงินเดือน",
+      "actor": "OWNER",
+      "uiAction": "ออก PDF ดาวน์โหลด ส่ง local SMTP ดู individual attempts/reload",
+      "testFile": "frontend/e2e/payslip-delivery.e2e.ts",
+      "testTitle": "HR and OWNER each generate/download/send with frozen decimals and durable attempts",
+      "negativeOrBoundary": "Immutable decimals; duplicate generation; attachment bytes/hash match; each SMTP attempt durable",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC17",
+      "name": "ออกและส่งสลิปเงินเดือน",
+      "actor": "EMPLOYEE",
+      "uiAction": "เปิด own slips และดาวน์โหลด PDF จริง",
+      "testFile": "frontend/e2e/payslip-delivery.e2e.ts",
+      "testTitle": "employees and scoped actors see/download only their own slips and cannot administer",
+      "negativeOrBoundary": "Other slip/read/download/deliveries403; generation/send403; anonymous401",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC17",
+      "name": "ออกและส่งสลิปเงินเดือน",
+      "actor": "SUPERVISOR",
+      "uiAction": "เปิด own slips และดาวน์โหลด PDF จริง",
+      "testFile": "frontend/e2e/payslip-delivery.e2e.ts",
+      "testTitle": "employees and scoped actors see/download only their own slips and cannot administer",
+      "negativeOrBoundary": "Other slip/read/download/deliveries403; generation/send403; anonymous401",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC17",
+      "name": "ออกและส่งสลิปเงินเดือน",
+      "actor": "BRANCH_MANAGER",
+      "uiAction": "เปิด own slips และดาวน์โหลด PDF จริง",
+      "testFile": "frontend/e2e/payslip-delivery.e2e.ts",
+      "testTitle": "employees and scoped actors see/download only their own slips and cannot administer",
+      "negativeOrBoundary": "Other slip/read/download/deliveries403; generation/send403; anonymous401",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC18",
+      "name": "เตรียมและบันทึกการจ่ายเงินเดือน พร้อมรายงานและไฟล์จ่าย",
+      "actor": "HR",
+      "uiAction": "เตรียมกลุ่มสาขาแบบexclusiveและเปิด QR จริง",
+      "testFile": "frontend/e2e/payroll-payments.e2e.ts",
+      "testTitle": "HR and OWNER prepare exclusive branch groups; actual displayed QR retains frozen recipient and cents",
+      "negativeOrBoundary": "Independent jsQR TLV/amount/CRC decode; live destination edits cannot change prepared snapshot; QR not paid",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC18",
+      "name": "เตรียมและบันทึกการจ่ายเงินเดือน พร้อมรายงานและไฟล์จ่าย",
+      "actor": "OWNER",
+      "uiAction": "เตรียมกลุ่มสาขาแบบexclusiveและเปิด QR จริง",
+      "testFile": "frontend/e2e/payroll-payments.e2e.ts",
+      "testTitle": "HR and OWNER prepare exclusive branch groups; actual displayed QR retains frozen recipient and cents",
+      "negativeOrBoundary": "Independent jsQR TLV/amount/CRC decode; live destination edits cannot change prepared snapshot; QR not paid",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC18",
+      "name": "เตรียมและบันทึกการจ่ายเงินเดือน พร้อมรายงานและไฟล์จ่าย",
+      "actor": "HR",
+      "uiAction": "ยืนยัน/ยกเลิกด้วย UI reload history/summary",
+      "testFile": "frontend/e2e/payroll-payment-lifecycle.e2e.ts",
+      "testTitle": "HR and OWNER manually confirm/cancel with retained history, exact totals and reload persistence",
+      "negativeOrBoundary": "Identical replay returns prior result; conflicting transitions rejected; cancellation note required; exact paid/outstanding counts",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC18",
+      "name": "เตรียมและบันทึกการจ่ายเงินเดือน พร้อมรายงานและไฟล์จ่าย",
+      "actor": "OWNER",
+      "uiAction": "ยืนยัน/ยกเลิกด้วย UI reload history/summary",
+      "testFile": "frontend/e2e/payroll-payment-lifecycle.e2e.ts",
+      "testTitle": "HR and OWNER manually confirm/cancel with retained history, exact totals and reload persistence",
+      "negativeOrBoundary": "Identical replay returns prior result; conflicting transitions rejected; cancellation note required; exact paid/outstanding counts",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC18",
+      "name": "เตรียมและบันทึกการจ่ายเงินเดือน พร้อมรายงานและไฟล์จ่าย",
+      "actor": "HR",
+      "uiAction": "ดาวน์โหลด salary/creditor PDF และ bank/SS CSV ผ่าน UI filters/reload",
+      "testFile": "frontend/e2e/payable-reports.e2e.ts",
+      "testTitle": "HR and OWNER download both locked salary PDFs with selected filters, reload and role denials",
+      "negativeOrBoundary": "Unprepared/missing destinations fail export; frozen bank values; earned-base CSV; scoped actor403",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC18",
+      "name": "เตรียมและบันทึกการจ่ายเงินเดือน พร้อมรายงานและไฟล์จ่าย",
+      "actor": "OWNER",
+      "uiAction": "ดาวน์โหลด salary/creditor PDF และ bank/SS CSV ผ่าน UI filters/reload",
+      "testFile": "frontend/e2e/payable-reports.e2e.ts",
+      "testTitle": "HR and OWNER download both locked salary PDFs with selected filters, reload and role denials",
+      "negativeOrBoundary": "Unprepared/missing destinations fail export; frozen bank values; earned-base CSV; scoped actor403",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC19",
+      "name": "ดูภาพรวมและรายงานตามสิทธิ์",
+      "actor": "EMPLOYEE",
+      "uiAction": "เปิดพื้นที่งาน กดลิงก์ที่อนุญาต; ตรวจ audit/report scope",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC19 employee opens permitted workspace links and financial scope stays explicit",
+      "negativeOrBoundary": "Employee/SUP/BM denied financial exports and audit; workspace is navigation, not universal finance dashboard",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC19",
+      "name": "ดูภาพรวมและรายงานตามสิทธิ์",
+      "actor": "SUPERVISOR",
+      "uiAction": "เปิดพื้นที่งาน กดลิงก์ที่อนุญาต; ตรวจ audit/report scope",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC19 supervisor opens permitted workspace links and financial scope stays explicit",
+      "negativeOrBoundary": "Employee/SUP/BM denied financial exports and audit; workspace is navigation, not universal finance dashboard",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC19",
+      "name": "ดูภาพรวมและรายงานตามสิทธิ์",
+      "actor": "BRANCH_MANAGER",
+      "uiAction": "เปิดพื้นที่งาน กดลิงก์ที่อนุญาต; ตรวจ audit/report scope",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC19 branch_manager opens permitted workspace links and financial scope stays explicit",
+      "negativeOrBoundary": "Employee/SUP/BM denied financial exports and audit; workspace is navigation, not universal finance dashboard",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC19",
+      "name": "ดูภาพรวมและรายงานตามสิทธิ์",
+      "actor": "HR",
+      "uiAction": "เปิดพื้นที่งาน กดลิงก์ที่อนุญาต; ตรวจ audit/report scope",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC19 hr opens permitted workspace links and financial scope stays explicit",
+      "negativeOrBoundary": "Employee/SUP/BM denied financial exports and audit; workspace is navigation, not universal finance dashboard",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC19",
+      "name": "ดูภาพรวมและรายงานตามสิทธิ์",
+      "actor": "OWNER",
+      "uiAction": "เปิดพื้นที่งาน กดลิงก์ที่อนุญาต; ตรวจ audit/report scope",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC19 admin opens permitted workspace links and financial scope stays explicit",
+      "negativeOrBoundary": "Employee/SUP/BM denied financial exports and audit; workspace is navigation, not universal finance dashboard",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC20",
+      "name": "ตรวจสอบประวัติการดำเนินงาน",
+      "actor": "HR",
+      "uiAction": "กรอก audit table/record filters อ่าน old/new/actor ใน UI",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 hr submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Exactly2 shop create/update events; role denials; sensitive metadata redaction tests backend",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC20",
+      "name": "ตรวจสอบประวัติการดำเนินงาน",
+      "actor": "OWNER",
+      "uiAction": "กรอก audit table/record filters อ่าน old/new/actor ใน UI",
+      "testFile": "frontend/e2e/current20-administration.e2e.ts",
+      "testTitle": "UC02/03/04/05/06/13/20 admin submits administration forms and audits persisted changes",
+      "negativeOrBoundary": "Exactly2 shop create/update events; role denials; sensitive metadata redaction tests backend",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC01",
+      "name": "เข้าสู่ระบบและจัดการรหัสผ่าน",
+      "actor": "EMPLOYEE",
+      "uiAction": "บัญชีใหม่บทบาทเดียว: เปลี่ยนรหัสผ่านใน Settings, ออกจากระบบ และ login ใหม่ด้วยรหัสใหม่; identity/scope คงเดิม",
+      "testFile": "frontend/e2e/current20-password.e2e.ts",
+      "testTitle": "UC01 EMPLOYEE changes own password through UI and reauthenticates with unchanged scope",
+      "negativeOrBoundary": "Wrong current password 422; copied session rejected after logout; old password login401, new password succeeds; no forced session revocation on password change",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC01",
+      "name": "เข้าสู่ระบบและจัดการรหัสผ่าน",
+      "actor": "SUPERVISOR",
+      "uiAction": "บัญชีใหม่บทบาทเดียว: เปลี่ยนรหัสผ่านใน Settings, ออกจากระบบ และ login ใหม่ด้วยรหัสใหม่; identity/scope คงเดิม",
+      "testFile": "frontend/e2e/current20-password.e2e.ts",
+      "testTitle": "UC01 SUPERVISOR changes own password through UI and reauthenticates with unchanged scope",
+      "negativeOrBoundary": "Wrong current password 422; copied session rejected after logout; old password login401, new password succeeds; no forced session revocation on password change",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC01",
+      "name": "เข้าสู่ระบบและจัดการรหัสผ่าน",
+      "actor": "BRANCH_MANAGER",
+      "uiAction": "บัญชีใหม่บทบาทเดียว: เปลี่ยนรหัสผ่านใน Settings, ออกจากระบบ และ login ใหม่ด้วยรหัสใหม่; identity/scope คงเดิม",
+      "testFile": "frontend/e2e/current20-password.e2e.ts",
+      "testTitle": "UC01 BRANCH_MANAGER changes own password through UI and reauthenticates with unchanged scope",
+      "negativeOrBoundary": "Wrong current password 422; copied session rejected after logout; old password login401, new password succeeds; no forced session revocation on password change",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC01",
+      "name": "เข้าสู่ระบบและจัดการรหัสผ่าน",
+      "actor": "HR",
+      "uiAction": "บัญชีใหม่บทบาทเดียว: เปลี่ยนรหัสผ่านใน Settings, ออกจากระบบ และ login ใหม่ด้วยรหัสใหม่; identity/scope คงเดิม",
+      "testFile": "frontend/e2e/current20-password.e2e.ts",
+      "testTitle": "UC01 HR changes own password through UI and reauthenticates with unchanged scope",
+      "negativeOrBoundary": "Wrong current password 422; copied session rejected after logout; old password login401, new password succeeds; no forced session revocation on password change",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    },
+    {
+      "useCase": "UC01",
+      "name": "เข้าสู่ระบบและจัดการรหัสผ่าน",
+      "actor": "OWNER",
+      "uiAction": "บัญชีใหม่บทบาทเดียว: เปลี่ยนรหัสผ่านใน Settings, ออกจากระบบ และ login ใหม่ด้วยรหัสใหม่; identity/scope คงเดิม",
+      "testFile": "frontend/e2e/current20-password.e2e.ts",
+      "testTitle": "UC01 OWNER changes own password through UI and reauthenticates with unchanged scope",
+      "negativeOrBoundary": "Wrong current password 422; copied session rejected after logout; old password login401, new password succeeds; no forced session revocation on password change",
+      "acceptance": "PASS in final unfiltered69 run20261026T052214Z-27083; no retries or skips"
+    }
+  ],
+  "result": {
+    "run": "20261026T052214Z-27083",
+    "tests": 69,
+    "passed": 69,
+    "failed": 0,
+    "skipped": 0,
+    "retries": 0,
+    "matrixRowsVerified": 73
+  }
+}
