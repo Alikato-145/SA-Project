@@ -24,7 +24,7 @@ jobs:
         working-directory: frontend
       - run: sh scripts/verify.sh
       - name: WebKit payroll and mobile journeys
-        run: bun run test:e2e --browser=webkit --output=test-results-webkit --grep 'fresh organization|mobile keyboard|organization duplicate'
+        run: bun run test:e2e e2e/flow.e2e.ts e2e/organization.e2e.ts --browser=webkit --output=test-results-webkit --grep 'fresh organization|mobile keyboard|organization duplicate'
         working-directory: frontend
         env:
           E2E_BASE_URL: http://localhost:18083
