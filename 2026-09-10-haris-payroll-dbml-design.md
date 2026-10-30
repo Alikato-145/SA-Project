@@ -119,3 +119,7 @@ Root pre/post migration fingerprints matched138locked payroll records and9150ite
 ## Current 20-use-case alignment 26 October 2026 advance reason
 
 The user-authorized UC12 repair adds only nullable `advance_requests.reason text` in migration0006. New request service/API/UI writes require a trimmed nonblank reason with at most1,000 characters; legacy NULL remains an honest absence of recorded reason. New rejection decisions require a similarly bounded nonblank decision note; existing decisions are not rewritten. No new tables, enums or FKs, no backfill of fictional historic reasons, and no eligibility/loan/payroll rule changes. Root schema-owner review of generated SQL/meta/logical parity and disposable pre/post historic fingerprints is required before applying the migration. Application is authorized only to the existing disposable verification database; no production application, reset or historic payroll mutation.
+
+### Employee-selected payment category (30 October 2026)
+
+The schema owner authorized an exception to the sprint schema freeze for migration `0007_payment_category`. The employee selects cash, PromptPay transfer, or social_security bank transfer independently of membership. Nullable category fields preserve legacy grouping, while a newly prepared payment freezes its selected category. See `docs/superpowers/specs/2026-10-30-employee-payment-selection-proposal.md` and the executable migration for destination and immutable-history rules.

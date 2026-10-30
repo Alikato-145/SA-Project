@@ -159,6 +159,13 @@ result alone does not establish acceptance of this catalog.
 
 ## Authorization and data safety
 
+On 30 October 2026 the schema owner authorized a narrow exception to the sprint
+schema freeze for employee-selected payment categories. Employees may select
+cash, PromptPay transfer, or social-security bank transfer for themselves; HR
+and owners may update a destination on their behalf. This selection is separate
+from statutory membership. Preserve null legacy categories and immutable
+prepared-payment snapshots, and report branch totals using exact decimals.
+
 Apply role scope server-side—never rely on hidden frontend controls:
 
 - Employee: own data only.

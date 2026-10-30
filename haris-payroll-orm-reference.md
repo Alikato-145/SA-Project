@@ -917,3 +917,7 @@ Payroll owns `payroll_payments` and prepared/paid/cancelled status. Required rec
 Checks enforce canonical phone, complete-or-absent bank tuple, cash without destination, a usable transfer destination and consistent status/decision actor/time/reason. Migration0005 trigger enforces full locked net and frozen assignment branch, member-bank/nonmember-phone transfer requirements, immutable snapshot/preparation fields, no deletes and only prepared→paid/cancelled transitions. Idempotent APIs must return existing rows without a no-op UPDATE. Task7 exposes preparation/groups/QR; Task8 adds lifecycle endpoints, so schema presence does not imply paid confirmation UI is complete.
 
 Root pre/post migration fingerprints matched138locked payroll records and9150items on disposable verificationDB; no historical results changed. Generation/scanning QR never confirms payment or triggers a bank transfer.
+
+## Employee-selected payment category (30 October 2026)
+
+`employees.payment_category` is nullable for legacy rows; non-null values are `cash`, `transfer`, or `social_security`. This selection is independent of statutory social-security membership. `payroll_payments.payment_category_snapshot` captures the selected category on preparation; null retains the legacy membership-based grouping for historical payments. Cash is paid externally, transfer uses the registered PromptPay phone, and social_security uses the employee's primary bank account. Existing immutable payment snapshots are not backfilled or rewritten.

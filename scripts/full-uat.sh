@@ -20,6 +20,7 @@ compose exec -T -e RELEASE_DISPOSABLE_DB=1 -e UAT_FIXTURE_DIR="$container_dir" -
 compose cp "backend:$container_dir/." "$evidence/fixtures" >> "$evidence/fixtures.log" 2>&1
 export UAT_SCOPE_FIXTURE_FILE="$evidence/fixtures/scope.json"
 export PAYMENT_FIXTURE_FILE="$evidence/fixtures/payments.json"
+export PAYMENT_CATEGORY_FIXTURE_FILE="$evidence/fixtures/payment-categories.json"
 export PAYMENT_LIFECYCLE_FIXTURE_FILE="$evidence/fixtures/lifecycle.json"
 export PAYABLE_REPORT_FIXTURE_FILE="$evidence/fixtures/reports.json"
 export PAYSLIP_FIXTURE_FILE="$evidence/fixtures/payslips/fixture.json"

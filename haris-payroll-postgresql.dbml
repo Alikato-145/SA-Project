@@ -79,6 +79,7 @@ Table employees {
   first_name varchar(100) [not null]
   last_name varchar(100) [not null]
   payment_method payment_method [not null, default: 'cash']
+  payment_category varchar(20) [note: 'Nullable legacy; otherwise cash, transfer or social_security chosen by employee; social_security pays to bank']
   promptpay_phone varchar(10) [note: 'Separate from contact phone; null or canonical 0[689] followed by eight digits']
   phone varchar(30)
   personal_email varchar(255)
@@ -483,6 +484,7 @@ Table payroll_payments {
   payroll_record_id bigint [not null]
   branch_id_snapshot bigint [not null]
   payment_method payment_method [not null]
+  payment_category_snapshot varchar(20) [note: 'Nullable legacy; otherwise immutable selected category when payment is prepared']
   amount numeric(12,2) [not null]
   status payroll_payment_status [not null, default: 'prepared']
   employee_bank_account_id bigint
