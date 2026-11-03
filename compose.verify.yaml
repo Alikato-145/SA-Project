@@ -1,6 +1,7 @@
 services:
   backend:
     environment:
+      PRESENTATION_SEED: "0"
       SMTP_HOST: mailpit
       SMTP_PORT: 1025
       SMTP_SECURE: "false"

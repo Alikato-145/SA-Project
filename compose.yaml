@@ -26,6 +26,7 @@ services:
       dockerfile: Dockerfile.dev
     environment:
       NODE_ENV: development
+      PRESENTATION_SEED: ${PRESENTATION_SEED:-1}
       ELYSIA_HOST: 0.0.0.0
       ELYSIA_PORT: 3000
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-haris_payroll}
@@ -37,15 +38,17 @@ services:
       EMPLOYEE_BANK_ENCRYPTION_KEY_VERSION: ${EMPLOYEE_BANK_ENCRYPTION_KEY_VERSION:-v1}
       EMPLOYEE_BANK_ENCRYPTION_KEYS: '${EMPLOYEE_BANK_ENCRYPTION_KEYS:-{"v1":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="}}'
       DOCUMENT_STORAGE_PATH: /var/lib/haris/documents
-      SMTP_HOST: ${SMTP_HOST:-}
-      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_HOST: ${SMTP_HOST:-mailpit}
+      SMTP_PORT: ${SMTP_PORT:-1025}
       SMTP_SECURE: ${SMTP_SECURE:-false}
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASSWORD: ${SMTP_PASSWORD:-}
-      SMTP_FROM: ${SMTP_FROM:-}
+      SMTP_FROM: ${SMTP_FROM:-payroll@example.test}
     depends_on:
       postgres:
         condition: service_healthy
+      mailpit:
+        condition: service_started
     volumes:
       - ./backend:/app
       - backend_node_modules:/app/node_modules
@@ -102,6 +105,13 @@ services:
       timeout: 3s
       retries: 10
     restart: unless-stopped
+    networks:
+      - app_network
+
+  mailpit:
+    image: axllent/mailpit:v1.27.4
+    ports:
+      - "127.0.0.1::8025"
     networks:
       - app_network
 
