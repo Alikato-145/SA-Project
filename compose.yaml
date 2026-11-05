@@ -27,6 +27,8 @@ services:
     environment:
       NODE_ENV: development
       PRESENTATION_SEED: ${PRESENTATION_SEED:-1}
+      ADVANCE_REQUEST_DAY: ${ADVANCE_REQUEST_DAY:-20}
+      ADVANCE_MIN_WORKED_DAYS: ${ADVANCE_MIN_WORKED_DAYS:-20}
       ELYSIA_HOST: 0.0.0.0
       ELYSIA_PORT: 3000
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-haris_payroll}
